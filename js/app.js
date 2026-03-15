@@ -1,6 +1,207 @@
 /* ================================================
    MANUAL OPERACIONAL CRV — Scripts
    Polícia Penal de Santa Catarina
+
+// ================================================
+// CADASTRO COMPLETO DAS UNIDADES PRISIONAIS
+// Fonte: DPP/SEJURI — dados conforme seção "Unidades"
+// ================================================
+const UNIDADES = [
+  // SR01 — Grande Florianópolis
+  { nome: 'Penitenciária de Florianópolis',              cidade: 'Florianópolis', sr: 'SR01', diretor: 'Max Cleber Orth',                    email: 'pe01@pp.sc.gov.br', tel: '(48) 3665‑9123' },
+  { nome: 'Complexo Penitenciário do Estado',            cidade: 'São Pedro de Alcântara', sr: 'SR01', diretor: 'Flávio Brasil Ganciné',      email: 'pe02@pp.sc.gov.br', tel: '(48) 3664‑2750' },
+  { nome: 'Presídio Regional de Tijucas',                cidade: 'Tijucas',        sr: 'SR01', diretor: 'Nathasha Daberkow Vieira',           email: 'pr03@pp.sc.gov.br', tel: '(48) 3665‑9280' },
+  { nome: 'Hospital de Custódia e Tratamento Psiquiátrico – HCTP', cidade: 'Florianópolis', sr: 'SR01', diretor: 'Fábio Medeiros Wiese',     email: 'hctp@pp.sc.gov.br', tel: '(48) 3665‑9191' },
+  { nome: 'Presídio Regional de Biguaçu',                cidade: 'Biguaçu',        sr: 'SR01', diretor: 'Fabiano Oliveira Suares',            email: 'pr04@pp.sc.gov.br', tel: '(48) 3664‑2700' },
+  { nome: 'Presídio Masculino Regional de Florianópolis',cidade: 'Florianópolis',  sr: 'SR01', diretor: 'Joana Mahfuz Vicini',                email: 'pr01@pp.sc.gov.br', tel: '(48) 3665‑9256' },
+  { nome: 'Presídio Feminino Regional de Florianópolis', cidade: 'Florianópolis',  sr: 'SR01', diretor: 'Marina Pamplona Coelho',             email: 'pr02@pp.sc.gov.br', tel: '(48) 3665‑9107' },
+  { nome: 'Unidade de Monitoramento Eletrônico',         cidade: 'Florianópolis',  sr: 'SR01', diretor: 'Gustavo Costa Vieira',               email: 'ume@pp.sc.gov.br',  tel: '(48) 3665‑7327' },
+  { nome: 'Colônia Agroindustrial de Palhoça',           cidade: 'Palhoça',        sr: 'SR01', diretor: 'Renata de Souza de Oliveira',         email: 'cogri@pp.sc.gov.br',tel: '(48) 3664‑5580' },
+  // SR02 — Sul
+  { nome: 'Penitenciária Feminina de Criciúma',          cidade: 'Criciúma',       sr: 'SR02', diretor: 'Virginia Gabriela Gonzales',         email: 'pe04@pp.sc.gov.br', tel: '(48) 3403‑1737' },
+  { nome: 'Penitenciária Masculina de Tubarão',          cidade: 'Tubarão',        sr: 'SR02', diretor: 'Deiveison Querino Batista',           email: 'pe05@pp.sc.gov.br', tel: '(48) 3631‑9777' },
+  { nome: 'Penitenciária Sul',                           cidade: 'Criciúma',       sr: 'SR02', diretor: 'Alexandre Ferreira',                  email: 'pe03@pp.sc.gov.br', tel: '(48) 3403‑1485' },
+  { nome: 'Presídio Regional de Araranguá',              cidade: 'Araranguá',      sr: 'SR02', diretor: 'Daniel Possamai Vieira',              email: 'pr08@pp.sc.gov.br', tel: '(48) 3529‑0441' },
+  { nome: 'Presídio Regional de Criciúma',               cidade: 'Criciúma',       sr: 'SR02', diretor: 'Júnior Rodrigo Fagundes',             email: 'pr05@pp.sc.gov.br', tel: '(48) 3403‑1516' },
+  { nome: 'Presídio Regional de Imbituba',               cidade: 'Imbituba',       sr: 'SR02', diretor: 'Filipe Gonzaga Lopes',                email: 'pr09@pp.sc.gov.br', tel: '(48) 3647‑7409' },
+  { nome: 'Presídio Regional de Laguna',                 cidade: 'Laguna',         sr: 'SR02', diretor: 'Rafael Nunes de Oliveira',            email: 'pr10@pp.sc.gov.br', tel: '(48) 3647‑7425' },
+  { nome: 'Presídio Regional de Tubarão',                cidade: 'Tubarão',        sr: 'SR02', diretor: 'Gladson Antônio da Silva',            email: 'pr06@pp.sc.gov.br', tel: '(48) 3631‑9780' },
+  // SR03 — Norte Catarinense
+  { nome: 'Penitenciária Industrial de Joinville',       cidade: 'Joinville',      sr: 'SR03', diretor: 'Márcio Simbalista',                   email: 'pe06@pp.sc.gov.br', tel: '(47) 3481‑3948' },
+  { nome: 'Presídio Feminino Regional de Joinville',     cidade: 'Joinville',      sr: 'SR03', diretor: 'Eliana Eloi',                         email: 'pr12@pp.sc.gov.br', tel: '(47) 3481‑2369' },
+  { nome: 'Presídio Regional de Joinville',              cidade: 'Joinville',      sr: 'SR03', diretor: 'André Felippe Dias',                  email: 'pr11@pp.sc.gov.br', tel: '(47) 3481‑3900' },
+  { nome: 'Presídio Regional de Barra Velha',            cidade: 'Barra Velha',    sr: 'SR03', diretor: 'Léia Cristina Steffen Fuck',          email: 'pr14@pp.sc.gov.br', tel: '(47) 3481‑2885' },
+  { nome: 'Presídio Regional de São Francisco do Sul',   cidade: 'São Francisco do Sul', sr: 'SR03', diretor: 'Lamartine Ximenes Fernandes',   email: 'pr13@pp.sc.gov.br', tel: '(47) 3481‑3932' },
+  // SR04 — Vale do Itajaí
+  { nome: 'Penitenciária Masculina do Vale do Itajaí',   cidade: 'Itajaí',         sr: 'SR04', diretor: 'Genivaldo Nazareno de Oliveira',       email: 'pe07@pp.sc.gov.br', tel: '(47) 3398‑6700' },
+  { nome: 'Presídio Feminino Regional de Itajaí',        cidade: 'Itajaí',         sr: 'SR04', diretor: 'Michele Rebello de Mesquita',          email: 'pr16@pp.sc.gov.br', tel: '(47) 3398‑6185' },
+  { nome: 'Presídio Regional de Brusque',                cidade: 'Brusque',        sr: 'SR04', diretor: 'Giovani Manfredini Queiroz',           email: 'pr17@pp.sc.gov.br', tel: '(47) 3251‑8280' },
+  { nome: 'Presídio Regional de Itajaí',                 cidade: 'Itajaí',         sr: 'SR04', diretor: 'Rogério José Bizatto',                 email: 'pr15@pp.sc.gov.br', tel: '(47) 3398‑6750' },
+  { nome: 'Presídio Regional de Itapema',                cidade: 'Itapema',        sr: 'SR04', diretor: 'Eduardo Weber Xavier',                 email: 'pr18@pp.sc.gov.br', tel: '(47) 3398‑6684' },
+  // SR05 — Serrana
+  { nome: 'Penitenciária Industrial de São Cristóvão do Sul', cidade: 'São Cristóvão do Sul', sr: 'SR05', diretor: 'Giselle Cordeiro Demeneck Remor', email: 'pe09@pp.sc.gov.br', tel: '(49) 3412‑3190' },
+  { nome: 'Penitenciária Regional de Curitibanos',       cidade: 'São Cristóvão do Sul', sr: 'SR05', diretor: 'Fabio Marcelo Palhano',          email: 'pe08@pp.sc.gov.br', tel: '(49) 3412‑3300' },
+  { nome: 'Presídio Masculino de Lages',                 cidade: 'Lages',          sr: 'SR05', diretor: 'Rodrigo Barroso',                      email: 'pr19@pp.sc.gov.br', tel: '(49) 3289‑8467' },
+  { nome: 'Presídio Regional de Lages',                  cidade: 'Lages',          sr: 'SR05', diretor: 'Ricardo Fernando Moreira Floriani',    email: 'pr20@pp.sc.gov.br', tel: '(49) 3289‑8403' },
+  { nome: 'Presídio Regional de Caçador',                cidade: 'Caçador',        sr: 'SR05', diretor: 'André Luiz Pierdoná',                  email: 'pr21@pp.sc.gov.br', tel: '(49) 3561‑6945' },
+  { nome: 'Presídio Regional de Campos Novos',           cidade: 'Campos Novos',   sr: 'SR05', diretor: 'Evalcir Morais dos Santos',            email: 'pr22@pp.sc.gov.br', tel: '(49) 3541‑3588' },
+  { nome: 'Presídio Regional de Videira',                cidade: 'Videira',        sr: 'SR05', diretor: 'Marcus Vinicius Lorenzetti',           email: 'pr23@pp.sc.gov.br', tel: '(49) 3533‑5915' },
+  { nome: 'Unidade de Segurança Máxima de São Cristóvão do Sul', cidade: 'São Cristóvão do Sul', sr: 'SR05', diretor: 'Daniel de Sena',         email: 'umax@pp.sc.gov.br', tel: '(49) 3412‑3241' },
+  // SR06 — Oeste
+  { nome: 'Penitenciária Agrícola de Chapecó',           cidade: 'Chapecó',        sr: 'SR06', diretor: 'Itacir Ricieri Cella',                 email: 'pe10@pp.sc.gov.br', tel: '(49) 2049‑9760' },
+  { nome: 'Penitenciária Industrial de Chapecó',         cidade: 'Chapecó',        sr: 'SR06', diretor: 'Iuri Elias Berwanger',                 email: 'pe11@pp.sc.gov.br', tel: '(49) 2049‑9713' },
+  { nome: 'Presídio Feminino Regional de Chapecó',       cidade: 'Chapecó',        sr: 'SR06', diretor: 'Agda Remus',                           email: 'pr25@pp.sc.gov.br', tel: '(49) 2049‑9813' },
+  { nome: 'Presídio Regional de Chapecó',                cidade: 'Chapecó',        sr: 'SR06', diretor: 'José Lauri Pelizzari',                 email: 'pr24@pp.sc.gov.br', tel: '(49) 2049‑9602' },
+  { nome: 'Presídio Regional de Concórdia',              cidade: 'Concórdia',      sr: 'SR06', diretor: 'Rafael Schlegel Rodrigues Salgado',    email: 'pr26@pp.sc.gov.br', tel: '(49) 3482‑6222' },
+  { nome: 'Presídio Regional de Joaçaba',                cidade: 'Joaçaba',        sr: 'SR06', diretor: 'Liliam Wiest',                         email: 'pr27@pp.sc.gov.br', tel: '(49) 3527‑9829' },
+  { nome: 'Presídio Regional de Maravilha',              cidade: 'Maravilha',      sr: 'SR06', diretor: 'Marcelo Rodrigo Langaro',              email: 'pr29@pp.sc.gov.br', tel: '(49) 3664‑6672' },
+  { nome: 'Presídio Regional de São José do Cedro',      cidade: 'São José do Cedro', sr: 'SR06', diretor: 'Rejane Birci Schrader de Mattos',  email: 'pr30@pp.sc.gov.br', tel: '(49) 3644‑3436' },
+  { nome: 'Presídio Regional de São Miguel do Oeste',    cidade: 'São Miguel do Oeste', sr: 'SR06', diretor: 'Eduardo Francisco Bregola Junior', email: 'pr31@pp.sc.gov.br', tel: '(49) 3631‑3754' },
+  { nome: 'Presídio Regional de Xanxerê',                cidade: 'Xanxerê',        sr: 'SR06', diretor: 'Vitor Matte',                          email: 'pr28@pp.sc.gov.br', tel: '(49) 3382‑2269' },
+  // SR07 — Médio Vale do Itajaí
+  { nome: 'Penitenciária Industrial de Blumenau',        cidade: 'Blumenau',       sr: 'SR07', diretor: 'Luciano Cardoso',                      email: 'pe12@pp.sc.gov.br', tel: '(47) 3378‑8600' },
+  { nome: 'Presídio Regional de Blumenau',               cidade: 'Blumenau',       sr: 'SR07', diretor: 'Augusto Gregory Hilgenberg Ijaille',   email: 'pr32@pp.sc.gov.br', tel: '(47) 3378‑8716' },
+  { nome: 'Presídio Regional de Indaial',                cidade: 'Indaial',        sr: 'SR07', diretor: 'Ivã Carlos Fuck',                      email: 'pr34@pp.sc.gov.br', tel: '(47) 3399‑3193' },
+  { nome: 'Presídio Regional de Ituporanga',             cidade: 'Ituporanga',     sr: 'SR07', diretor: 'Marisoni dos Santos',                  email: 'pr35@pp.sc.gov.br', tel: '(47) 3533‑8797' },
+  { nome: 'Presídio Regional de Rio do Sul',             cidade: 'Rio do Sul',     sr: 'SR07', diretor: 'Victor Hugo Vanelli',                  email: 'pr33@pp.sc.gov.br', tel: '(47) 3526‑3308' },
+  // SR08 — Planalto Norte
+  { nome: 'Penitenciária Industrial de São Bento do Sul',cidade: 'São Bento do Sul', sr: 'SR08', diretor: 'Leó Da Silva Feliciano',            email: 'pe13@pp.sc.gov.br', tel: '(47) 3647‑0240' },
+  { nome: 'Presídio Regional de Canoinhas',              cidade: 'Canoinhas',      sr: 'SR08', diretor: 'Alexander Marcelo Costa',              email: 'pr38@pp.sc.gov.br', tel: '(47) 3627‑4352' },
+  { nome: 'Presídio Regional de Jaraguá do Sul',         cidade: 'Jaraguá do Sul', sr: 'SR08', diretor: 'Carlos de Almeida Rossato',           email: 'pr36@pp.sc.gov.br', tel: '(47) 3276‑9409' },
+  { nome: 'Presídio Regional de Mafra',                  cidade: 'Mafra',          sr: 'SR08', diretor: 'Gabriel Henning',                      email: 'pr37@pp.sc.gov.br', tel: '(47) 3647‑0222' },
+  { nome: 'Presídio Regional de Porto União',            cidade: 'Porto União',    sr: 'SR08', diretor: 'Josmar Mattos e Santos',               email: 'pr39@pp.sc.gov.br', tel: '(47) 3627‑4340' },
+];
+
+// Preenche os selects de origem e destino ao abrir o modal
+function popularSelectsUnidades() {
+  const selOri = document.getElementById('sel-origem');
+  const selDes = document.getElementById('sel-destino');
+  if (!selOri || !selDes) return;
+  if (selOri.options.length > 1) return; // já populado
+
+  // Agrupa por SR para optgroup
+  const grupos = {};
+  UNIDADES.forEach(u => {
+    if (!grupos[u.sr]) grupos[u.sr] = [];
+    grupos[u.sr].push(u);
+  });
+
+  const srNomes = {
+    SR01: 'SR01 — Grande Florianópolis',
+    SR02: 'SR02 — Sul',
+    SR03: 'SR03 — Norte Catarinense',
+    SR04: 'SR04 — Vale do Itajaí',
+    SR05: 'SR05 — Serrana',
+    SR06: 'SR06 — Oeste',
+    SR07: 'SR07 — Médio Vale do Itajaí',
+    SR08: 'SR08 — Planalto Norte',
+  };
+
+  [selOri, selDes].forEach(sel => {
+    Object.keys(grupos).sort().forEach(sr => {
+      const grp = document.createElement('optgroup');
+      grp.label = srNomes[sr] || sr;
+      grupos[sr].forEach((u, idx) => {
+        const opt = document.createElement('option');
+        // Value = index in UNIDADES array
+        opt.value = UNIDADES.indexOf(u);
+        opt.textContent = u.nome;
+        grp.appendChild(opt);
+      });
+      sel.appendChild(grp);
+    });
+  });
+}
+
+// Estado das unidades selecionadas
+let unidadeOrigemSel = null;
+let unidadeDestinoSel = null;
+
+function selecionarUnidadeOrigem() {
+  const idx = document.getElementById('sel-origem').value;
+  if (!idx && idx !== 0) { unidadeOrigemSel = null; atualizarInfoUnidade('origem', null); atualizarDocumentoComUnidades(); return; }
+  unidadeOrigemSel = UNIDADES[parseInt(idx)];
+  atualizarInfoUnidade('origem', unidadeOrigemSel);
+  atualizarDocumentoComUnidades();
+}
+
+function selecionarUnidadeDestino() {
+  const idx = document.getElementById('sel-destino').value;
+  if (!idx && idx !== 0) { unidadeDestinoSel = null; atualizarInfoUnidade('destino', null); atualizarDocumentoComUnidades(); return; }
+  unidadeDestinoSel = UNIDADES[parseInt(idx)];
+  atualizarInfoUnidade('destino', unidadeDestinoSel);
+  atualizarDocumentoComUnidades();
+}
+
+function atualizarInfoUnidade(tipo, u) {
+  const el = document.getElementById('info-' + tipo);
+  if (!el) return;
+  if (!u) { el.innerHTML = ''; el.classList.remove('preenchido'); return; }
+  el.innerHTML = `<strong>${u.nome}</strong>${u.cidade} · ${u.sr} · ${u.tel}`;
+  el.classList.add('preenchido');
+}
+
+function atualizarDocumentoComUnidades() {
+  const ori = unidadeOrigemSel;
+  const des = unidadeDestinoSel;
+
+  // Atualiza cidade na data
+  const cidadeEl = document.getElementById('ofc-cidade-txt');
+  if (cidadeEl) cidadeEl.textContent = ori ? ori.cidade : '[CIDADE]';
+
+  // Atualiza parágrafos com nomes das unidades
+  document.querySelectorAll('#ofc-paragrafos textarea').forEach(ta => {
+    let txt = ta.value;
+    if (ori) {
+      txt = txt.replace(/\[UNIDADE PRISIONAL DE ORIGEM\]/g, ori.nome);
+      txt = txt.replace(/\[CIDADE\]/g, ori.cidade);
+    }
+    if (des) txt = txt.replace(/\[UNIDADE PRISIONAL DE DESTINO\]/g, des.nome);
+    ta.value = txt;
+  });
+
+  // Atualiza assinaturas
+  const assEl = document.getElementById('ofc-assinaturas');
+  if (!assEl) return;
+
+  const m = modelosTexto[modeloAtual];
+  if (!m) return;
+
+  // Reconstrói assinaturas com dados das unidades
+  const assinaturas = construirAssinaturas(m, ori, des);
+  assEl.innerHTML = assinaturas.map(a =>
+    `<div class="oficio-assinatura-bloco">
+      <div class="ass-digital">(documento assinado digitalmente)</div>
+      <div class="ass-nome"><input class="campo-edit" value="${a.nome}" style="font-weight:bold;width:340px;max-width:100%;"/></div>
+      <div class="ass-cargo"><input class="campo-edit" value="${a.cargo}" style="width:340px;max-width:100%;"/></div>
+    </div>`
+  ).join('');
+}
+
+function construirAssinaturas(m, ori, des) {
+  // Usa dados reais se disponíveis, senão placeholder
+  const nomeOri   = ori ? ori.diretor : '[NOME DO DIRETOR — ORIGEM]';
+  const cargoOri  = ori ? `Diretor(a) — ${ori.nome}` : 'Diretor(a) — [UNIDADE DE ORIGEM]';
+  const nomeDes   = des ? des.diretor : '[NOME DO DIRETOR — DESTINO]';
+  const cargoDes  = des ? `Diretor(a) — ${des.nome}` : 'Diretor(a) — [UNIDADE DE DESTINO]';
+  const srOri     = ori ? `Superintendente — ${ori.sr}` : 'Superintendente — [SR DE ORIGEM]';
+  const srDes     = des ? `Superintendente — ${des.sr}` : 'Superintendente — [SR DE DESTINO]';
+
+  if (m.assinaturas.length === 2) {
+    // Modelo USM — só origem + SR origem
+    return [
+      { nome: nomeOri,  cargo: cargoOri },
+      { nome: '[NOME DO SUPERINTENDENTE REGIONAL — ORIGEM]', cargo: srOri },
+    ];
+  }
+  return [
+    { nome: nomeOri,  cargo: cargoOri },
+    { nome: nomeDes,  cargo: cargoDes },
+    { nome: '[NOME DO SUPERINTENDENTE REGIONAL — ORIGEM]', cargo: srOri },
+    { nome: '[NOME DO SUPERINTENDENTE REGIONAL — DESTINO — SE FOR O CASO]', cargo: srDes },
+  ];
+}
+
    ================================================ */
 
 // ================================================
@@ -334,13 +535,14 @@ function selecionarModelo(id) {
     Math.max(2, Math.ceil(p.length / 90)) + '">' + p + '</textarea></div>'
   ).join('');
 
-  // Assinaturas
+  // Assinaturas — usa dados reais das unidades selecionadas se disponíveis
   const assEl = document.getElementById('ofc-assinaturas');
-  assEl.innerHTML = m.assinaturas.map(a =>
+  const assigs = construirAssinaturas(m, unidadeOrigemSel, unidadeDestinoSel);
+  assEl.innerHTML = assigs.map(a =>
     '<div class="oficio-assinatura-bloco">' +
     '<div class="ass-digital">(documento assinado digitalmente)</div>' +
-    '<div class="ass-nome"><input class="campo-edit" value="' + a.nome + '" style="font-weight:bold;width:320px;max-width:100%;"/></div>' +
-    '<div class="ass-cargo"><input class="campo-edit" value="' + a.cargo + '" style="width:320px;max-width:100%;"/></div>' +
+    '<div class="ass-nome"><input class="campo-edit" value="' + a.nome + '" style="font-weight:bold;width:340px;max-width:100%;"/></div>' +
+    '<div class="ass-cargo"><input class="campo-edit" value="' + a.cargo + '" style="width:340px;max-width:100%;"/></div>' +
     '</div>'
   ).join('');
 
@@ -385,8 +587,8 @@ function atualizarSaudacao() {
 // EXPORTAÇÃO — Texto puro do ofício
 // ================================================
 function coletarTextoOficio() {
-  const cidade   = document.getElementById('ofc-cidade')?.value || '';
-  const data     = document.getElementById('ofc-data')?.value || '';
+  const cidade   = document.getElementById('ofc-cidade-txt')?.textContent || '';
+  const data     = document.getElementById('ofc-data-txt')?.textContent || '';
   const saudSel  = document.getElementById('ofc-saudacao');
   const saudCustom = document.getElementById('ofc-saudacao-custom');
   const saudacao = saudSel?.value === 'outro'
@@ -576,6 +778,24 @@ function abrirModalOficio(modeloId) {
   if (!modal) return;
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  popularSelectsUnidades();
+  // Data automática
+  const hoje = new Date();
+  const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const dataFmt = `${hoje.getDate()} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()}`;
+  const dataEl = document.getElementById('ofc-data-txt');
+  if (dataEl) { dataEl.textContent = dataFmt; dataEl.contentEditable = 'true'; }
+  // Torna cidade editável
+  const cidEl = document.getElementById('ofc-cidade-txt');
+  if (cidEl) cidEl.contentEditable = 'true';
+  // Reset seleções
+  unidadeOrigemSel = null; unidadeDestinoSel = null;
+  const sOri = document.getElementById('sel-origem');
+  const sDes = document.getElementById('sel-destino');
+  if (sOri) sOri.value = '';
+  if (sDes) sDes.value = '';
+  atualizarInfoUnidade('origem', null);
+  atualizarInfoUnidade('destino', null);
   selecionarModelo(modeloId);
 }
 
