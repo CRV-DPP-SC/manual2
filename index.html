@@ -24,7 +24,8 @@
   </div>
   <div class="header-principal">
     <div class="logo-area">
-      <img src="assets/brasao-pp-sc.png" alt="Polícia Penal SC" class="logo-brasao-img" />
+      <img src="assets/brasao-pp-sc.png" alt="Polícia Penal SC — Página Inicial" class="logo-brasao-img"
+           onclick="navegarPara('inicio')" title="Voltar à página inicial" />
       <div class="logo-separador"></div>
       <div class="logo-textos">
         <h1>Manual Operacional CRV</h1>
@@ -96,11 +97,11 @@
     <p class="section-subtitulo">Acesse o procedimento necessário conforme a situação da unidade prisional.</p>
 
     <div class="atalhos-grid">
-      <a class="atalho-btn atalho-emergencial fade-up fade-up-delay-1" href="#" onclick="navegarPara('emergencial');return false;">
+      <a class="atalho-btn atalho-emergencial fade-up fade-up-delay-1" href="#" onclick="abrirModeloDireto('emergencial');return false;">
         <div class="icone">🚨</div>
         <span class="titulo">Segurança / Emergência</span>
         <span class="desc">Risco imediato à integridade física, ameaça à vida ou necessidade de isolamento urgente.</span>
-        <span class="atalho-arrow">→</span>
+        <span class="atalho-arrow">→ ver modelo</span>
       </a>
       <a class="atalho-btn atalho-pedido fade-up fade-up-delay-2" href="#" onclick="navegarPara('pedido-preso');return false;">
         <div class="icone">👤</div>
@@ -108,29 +109,29 @@
         <span class="desc">Requerimento do custodiado ou familiar. Vinculado ao Programa de Permutas.</span>
         <span class="atalho-arrow">→</span>
       </a>
-      <a class="atalho-btn atalho-equalizacao fade-up fade-up-delay-3" href="#" onclick="navegarPara('equalizacao');return false;">
+      <a class="atalho-btn atalho-equalizacao fade-up fade-up-delay-3" href="#" onclick="abrirModeloDireto('equalizacao');return false;">
         <div class="icone">⚖️</div>
         <span class="titulo">Adequação da Capacidade de Ocupação</span>
         <span class="desc">Redistribuição administrativa para adequação da capacidade das unidades (Art. 21, III).</span>
-        <span class="atalho-arrow">→</span>
+        <span class="atalho-arrow">→ ver modelo</span>
       </a>
-      <a class="atalho-btn atalho-mandado fade-up fade-up-delay-4" href="#" onclick="navegarPara('mandado-comarca');return false;">
+      <a class="atalho-btn atalho-mandado fade-up fade-up-delay-4" href="#" onclick="abrirModeloDireto('mandado');return false;">
         <div class="icone">🏛️</div>
         <span class="titulo">Mandado de Prisão de Comarca Diversa</span>
         <span class="desc">Preso capturado em comarca diferente da que expediu a ordem de prisão.</span>
-        <span class="atalho-arrow">→</span>
+        <span class="atalho-arrow">→ ver modelo</span>
       </a>
-      <a class="atalho-btn atalho-pernoite fade-up fade-up-delay-4" href="#" onclick="navegarPara('pernoite');return false;">
+      <a class="atalho-btn atalho-pernoite fade-up fade-up-delay-4" href="#" onclick="abrirModeloDireto('pernoite');return false;">
         <div class="icone">🌙</div>
         <span class="titulo">Pernoite</span>
         <span class="desc">Custodiado que necessita permanecer temporariamente em unidade diversa da sua.</span>
-        <span class="atalho-arrow">→</span>
+        <span class="atalho-arrow">→ ver modelo</span>
       </a>
-      <a class="atalho-btn atalho-segmax fade-up fade-up-delay-5" href="#" onclick="navegarPara('seguranca-maxima');return false;">
+      <a class="atalho-btn atalho-segmax fade-up fade-up-delay-5" href="#" onclick="abrirModeloDireto('umax');return false;">
         <div class="icone">🔒</div>
         <span class="titulo">Unidade de Seg. Máxima / RDD</span>
         <span class="desc">Inclusão via Comissão Deliberativa + DPP. Requer RDD deferido pelo Juízo competente.</span>
-        <span class="atalho-arrow">→</span>
+        <span class="atalho-arrow">→ ver modelo</span>
       </a>
     </div>
 
@@ -183,9 +184,15 @@
           <div class="sidebar-card-header">🏛️ Estrutura Institucional</div>
           <div class="sidebar-card-body">
             <div class="hierarquia">
-              <div class="hierarquia-item nivel-1">SEJURI</div>
-              <div class="hierarquia-item nivel-2">DPP — Depto. de Polícia Penal</div>
-              <div class="hierarquia-item nivel-3 ativo">CRV — Central de Reg. de Vagas</div>
+              <a href="https://www.sap.sc.gov.br/" target="_blank" rel="noopener" style="text-decoration:none;">
+                <div class="hierarquia-item nivel-1">SEJURI ↗</div>
+              </a>
+              <a href="https://www.sap.sc.gov.br/dpp/" target="_blank" rel="noopener" style="text-decoration:none;">
+                <div class="hierarquia-item nivel-2">DPP — Depto. de Polícia Penal ↗</div>
+              </a>
+              <a href="https://crv.ppsc.com.br" target="_blank" rel="noopener" style="text-decoration:none;">
+                <div class="hierarquia-item nivel-3 ativo">CRV — Central de Reg. de Vagas ↗</div>
+              </a>
             </div>
             <p class="text-sm text-muted mt-2">Res. Conjunta nº 1/2026 · TJSC + SEJURI<br>Pub. DJ nº 4.661 · 04/02/2026</p>
           </div>
@@ -358,61 +365,252 @@
 <section id="fluxo" class="page-section">
   <div class="page-hero">
     <div class="page-hero-inner">
-      <h2>🔄 Fluxo Operacional</h2>
-      <p>Etapas do processo de transferência, da identificação da hipótese até a comunicação ao juízo de execução.</p>
+      <h2>🔄 Fluxo Operacional Passo a Passo</h2>
+      <p>Etapas do processo de transferência — do pedido à comunicação ao Judiciário. Clique em cada etapa para expandir.</p>
     </div>
   </div>
   <div class="main-wrapper">
-    <div class="alerta alerta-info mb-3">
-      <span class="alerta-icone">ℹ️</span>
-      <div>Para o detalhamento do fluxo operacional no sistema i-PEN e nas ferramentas informatizadas, consulte a Policial Penal Jéssica (CRV), responsável pelo refinamento dos procedimentos de sistema.</div>
+
+    <div class="alerta alerta-urgente mb-3">
+      <span class="alerta-icone">🚨</span>
+      <div><strong class="alerta-titulo">Emergenciais — Fluxo Abreviado</strong>
+      Ligue imediatamente para a CRV: <strong>(48) 3665-7330</strong>. Anote o protocolo verbal. O ofício deve chegar em até 2h. Execução em até 24h.</div>
     </div>
-    <div class="conteudo-grid">
-      <div>
-        <h2 class="section-titulo mb-2">Fluxo Padrão — Todas as Hipóteses</h2>
-        <div class="card">
-          <div class="card-body">
-            <div class="fluxo-lista">
-              <div class="fluxo-item"><div class="fluxo-num">01</div><div class="fluxo-conteudo"><h4>Identificar a hipótese e reunir documentação</h4><p>Diretor ou Policial Penal enquadra a situação na hipótese correta (I a VI) e reúne todos os documentos exigidos antes de protocolar.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">02</div><div class="fluxo-conteudo"><h4>Obter anuência do Diretor de destino e do(s) SR(s)</h4><p>Antes do envio à CRV, o ofício deve ser subscrito ou anunciado pelo Diretor da unidade de destino e pelos Superintendentes Regionais envolvidos.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">03</div><div class="fluxo-conteudo"><h4>Enviar ofício à CRV com todos os anexos</h4><p>Ofício conforme modelo correspondente à hipótese, com todos os documentos obrigatórios anexados.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">04</div><div class="fluxo-conteudo"><h4>CRV: autuação e análise de admissibilidade</h4><p>Verificação de documentação completa, enquadramento na hipótese e inexistência de vedações. Pedidos incompletos são devolvidos com prazo de regularização.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">05</div><div class="fluxo-conteudo"><h4>CRV: consulta de vagas e deferimento</h4><p>Verificação de disponibilidade no sistema i-PEN. Despacho deferindo ou indeferindo com fundamentação.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">06</div><div class="fluxo-conteudo"><h4>Expedição da Guia de Recolhimento/Transferência</h4><p>CRV expede a GR. Comunicação simultânea às unidades de origem, destino e ao juízo de execução.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">07</div><div class="fluxo-conteudo"><h4>Execução — escolta e transporte</h4><p>Unidade de origem organiza escolta. Unidade de destino confirma recebimento no sistema da CRV.</p></div></div>
-              <div class="fluxo-item"><div class="fluxo-num">08</div><div class="fluxo-conteudo"><h4>Comunicação ao Juízo de Execução — até 24h</h4><p>Ofício ao juízo competente informando data, hora, matrícula, unidade de destino e nº do despacho CRV.</p></div></div>
-            </div>
-          </div>
+
+    <div class="flow-wrapper">
+
+      <!-- PASSO 1 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">1</div>
+          <div class="flow-line"></div>
         </div>
-        <div class="alerta alerta-urgente mt-2">
-          <span class="alerta-icone">🚨</span>
-          <div><strong class="alerta-titulo">Emergenciais — Fluxo Abreviado</strong>
-          Acionar a CRV por telefone <strong>(48) 3665-7330</strong> imediatamente. Anotar o protocolo verbal. O ofício chega em até 2h. Execução em até 24h.</div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">Unidade Prisional de Origem</div>
+          <div class="flow-title">Identificação da necessidade e elaboração do Ofício</div>
+          <div class="flow-desc">O responsável pelo cadastro deverá identificar a hipótese que justifica o pedido de transferência e elaborar o ofício endereçado à CRV, com justificativa e documentação.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>Identificar claramente a hipótese: transferência emergencial, pedido voluntário apresentado pelo reeducando, familiar ou advogado, necessidade de equalização/regulação de vagas, ou cumprimento de mandado de prisão de comarca diversa</li>
+              <li>Elaborar ofício com justificativa detalhada conforme modelo correspondente</li>
+            </ul>
+            <div class="flow-alert flow-alert-info">ℹ️ &nbsp;A análise do perfil do preso é determinante para garantir que a transferência seja segura, justa e adequada à unidade de destino.</div>
+          </div>
         </div>
       </div>
-      <aside class="sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">⚡ Fluxos por Hipótese</div>
-          <div class="sidebar-card-body">
-            <div class="link-lista">
-              <a href="#" onclick="navegarPara('emergencial');return false;"><span class="bullet">●</span> Segurança / Emergência</a>
-              <a href="#" onclick="navegarPara('pedido-preso');return false;"><span class="bullet">●</span> Pedido do Preso / Família</a>
-              <a href="#" onclick="navegarPara('equalizacao');return false;"><span class="bullet">●</span> Adequação de Capacidade</a>
-              <a href="#" onclick="navegarPara('mandado-comarca');return false;"><span class="bullet">●</span> Mandado de Comarca Diversa</a>
-              <a href="#" onclick="navegarPara('pernoite');return false;"><span class="bullet">●</span> Pernoite</a>
-              <a href="#" onclick="navegarPara('seguranca-maxima');return false;"><span class="bullet">●</span> Seg. Máxima / RDD</a>
+
+      <!-- PASSO 2 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">2</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">Unidade Prisional de Origem</div>
+          <div class="flow-title">No SGPe — Processo único e permanente</div>
+          <div class="flow-desc">Cada Unidade Prisional deverá possuir um <strong>Processo SGPe único e permanente</strong>, destinado exclusivamente à tramitação de pedidos de transferência. Nesse processo serão inseridos todos os pedidos formulados pela unidade ao longo do tempo.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <div class="flow-alert flow-alert-info">ℹ️ &nbsp;<strong>O processo SGPe é único por unidade prisional e permanente</strong>, acumulando todos os pedidos de transferência ao longo do tempo.</div>
+            <ul>
+              <li><strong>1) Criação do processo SGPe:</strong> MENU → CADASTRO DE PROCESSO DIGITAL</li>
+              <li><strong>Assunto:</strong> 2850 — Movimentação Penitenciária</li>
+              <li><strong>Classe:</strong> 2 — Solicitação de Transferência da Pessoa Presa</li>
+              <li><strong>Setor de Abertura e de Origem:</strong> Unidade Prisional de Origem</li>
+              <li><strong>Setor de Competência:</strong> Central de Regulação de Vagas (PPSC/CRV)</li>
+              <li><strong>Interessado:</strong> Diretor da Unidade Prisional de Origem</li>
+              <li><strong>Detalhamento do assunto:</strong> "SGPe Único Para Transferência de Pessoas Privadas de Liberdade - NOME DA UNIDADE PRISIONAL"</li>
+              <li><strong>Município:</strong> Município em que a Unidade Prisional está localizada</li>
+              <li><strong>2) Inserção dos documentos</strong> respeitando a ordem cronológica obrigatória: <strong>Ofício → BPI → Formulário de Saúde → demais documentos</strong></li>
+              <li><strong>3) Atualização dos Documentos Setoriais:</strong> BPI e Formulário de Saúde devem estar atualizados e confeccionados pelos respectivos responsáveis</li>
+              <li><strong>4) Documentos complementares:</strong> memorando do preso, carta ou e-mail de familiar, petição de advogado, decisão judicial, relatório de inteligência, BOI ou qualquer outro documento pertinente</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 3 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">3</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-title">Assinaturas</div>
+          <div class="flow-desc">O ofício deve ser assinado pelo Diretor da Unidade de Origem e pelo Diretor da Unidade de Destino, confirmando ciência e aceite da movimentação.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>Assinatura do Diretor da Unidade de Origem: <strong>obrigatória em todos os casos</strong></li>
+              <li>Assinatura do Diretor da Unidade de Destino: <strong>obrigatória em todos os casos</strong></li>
+              <li>Ambas as assinaturas devem constar no mesmo documento antes do encaminhamento à SR</li>
+              <li>O <strong>BPI</strong> deverá ser assinado pelo <strong>Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional)</strong>, atestando a veracidade do documento</li>
+              <li>O <strong>Formulário de Saúde</strong> deverá ser assinado pelo <strong>Responsável Técnico</strong> (médico ou enfermeiro) ou pelo <strong>Coordenador de Saúde</strong>. Em assinatura física: nome, matrícula e cargo/função obrigatórios</li>
+            </ul>
+            <div class="flow-alert flow-alert-warn">⚠️ &nbsp;Ofício sem as duas assinaturas não deve ser encaminhado à Superintendência Regional.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 4 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">4</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">Superintendência(s) Regional(is)</div>
+          <div class="flow-title">Anuência do(s) Superintendente(s) Regional(is)</div>
+          <div class="flow-desc">O Superintendente Regional da origem é sempre obrigatório. Se a transferência envolver outra Superintendência, o Superintendente de destino também deve anuir.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>Transferência <strong>dentro da mesma SR</strong>: anuência apenas do Superintendente da SR de origem</li>
+              <li>Transferência <strong>entre SRs diferentes</strong>: anuência do Superintendente da SR de origem <em>e</em> do Superintendente da SR de destino</li>
+              <li>O Superintendente deve verificar se a equalização dentro da sua SR já foi esgotada antes de envolver outra regional</li>
+              <li>Todas as partes devem <strong>assinar o ofício de solicitação</strong> formulado pelo Diretor da Unidade de Origem, que deve <strong>consignar o nome de todos os subscritores no corpo do ofício</strong></li>
+            </ul>
+            <div class="flow-alert flow-alert-info">ℹ️ &nbsp;A equalização interna da SR tem prioridade. A CRV só é acionada quando a questão não pode ser resolvida dentro da própria Superintendência Regional.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 5 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">5</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-title">Materialização dos Documentos no SGPe</div>
+          <div class="flow-desc">Com todos os documentos devidamente assinados e inseridos no SGPe, o servidor seleciona as peças pertinentes ao pedido e executa a materialização, gerando um único arquivo PDF consolidado.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>Verificar se <strong>todos os documentos estão devidamente assinados</strong> pelos responsáveis antes de materializar</li>
+              <li>Selecionar apenas as peças pertinentes ao pedido — o processo SGPe é único e acumulativo</li>
+              <li>Respeitar a <strong>ordem cronológica obrigatória:</strong> Ofício → BPI → Formulário de Saúde → demais documentos</li>
+              <li><strong>Selecionar as Peças:</strong> Autuação (primeiro documento) → Ofício → BPI → Formulário de Saúde → Demais Documentos</li>
+            </ul>
+            <div class="flow-alert flow-alert-info">ℹ️ &nbsp;O PDF gerado pela materialização é o documento formal do pedido que seguirá para a Superintendência Regional.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 6 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">6</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-title">Cadastro do pedido no i-PEN</div>
+          <div class="flow-desc">Após a materialização, o servidor deverá cadastrar o pedido de transferência no i-PEN, inserindo o arquivo PDF materializado no respectivo pedido.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>O cadastro no i-PEN deve ser realizado após a conclusão da materialização no SGPe</li>
+              <li>Na fundamentação do pedido no i-PEN, mencionar: <strong>"Conforme documentos em Anexo"</strong></li>
+              <li>Anexar o arquivo PDF materializado ao pedido de transferência correspondente no i-PEN</li>
+              <li>O "Nome" do documento deverá ser o <strong>Nome do Reeducando</strong> e a Descrição: <strong>"Documentos para Transferência"</strong></li>
+              <li>Verificar se os dados do reeducando e da unidade de destino estão corretos antes de finalizar</li>
+            </ul>
+            <div class="flow-alert flow-alert-warn">⚠️ &nbsp;O cadastro no i-PEN é etapa obrigatória antes do encaminhamento à CRV — sem ele, o pedido não será processado.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 7 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">7</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">CRV — Central de Regulação de Vagas</div>
+          <div class="flow-title">Recebimento e análise pela CRV</div>
+          <div class="flow-desc">Com o pedido instruído, assinado e anuído, é encaminhado à CRV, que analisa a viabilidade, verifica a lotação do sistema e decide a destinação final.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>A CRV irá analisar o pedido e todos os documentos, verificando a regularidade formal e a viabilidade da transferência</li>
+              <li>Verificar disponibilidade real de vaga na unidade de destino</li>
+              <li>Confirmar compatibilidade do perfil do preso com a unidade de destino</li>
+              <li>Checar se há restrições de segurança ou judiciais que impeçam a movimentação</li>
+            </ul>
+            <div class="flow-decisoes">
+              <div class="flow-decisao flow-dec-ok">
+                <div class="flow-dec-label">✅ APROVADO</div>
+                <div class="flow-dec-desc">O pedido atende todos os requisitos. A transferência é autorizada e segue para execução pela SEJURI/DPP.</div>
+              </div>
+              <div class="flow-decisao flow-dec-neg">
+                <div class="flow-dec-label">❌ NEGADO</div>
+                <div class="flow-dec-desc">O pedido não atende os requisitos necessários ou há impedimento identificado. A unidade de origem será comunicada com a fundamentação da decisão.</div>
+              </div>
+              <div class="flow-decisao flow-dec-can">
+                <div class="flow-dec-label">⚠️ CANCELADO</div>
+                <div class="flow-dec-desc">O pedido foi cancelado antes da conclusão da análise, seja por solicitação da unidade de origem, decisão judicial superveniente ou outro motivo que torne a transferência desnecessária.</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">📞 CRV Plantão 24h</div>
-          <div class="sidebar-card-body"><a href="tel:+554836657330" style="font-size:1rem;font-weight:700;color:var(--azul-4);">(48) 3665-7330</a></div>
+      </div>
+
+      <!-- PASSO 8 -->
+      <div class="flow-step">
+        <div class="flow-step-left">
+          <div class="flow-circle">8</div>
+          <div class="flow-line"></div>
         </div>
-      </aside>
-    </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">SEJURI / Departamento de Polícia Penal</div>
+          <div class="flow-title">Execução da transferência</div>
+          <div class="flow-desc">Autorizada pela CRV, o DPP, através de seus operadores (Policiais Penais), executam a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes</span>
+          <div class="flow-details">
+            <ul>
+              <li>A execução é feita conforme decisão da CRV, com fundamento na Res. nº 1/2026 e na Lei nº 7.210/84</li>
+              <li>A unidade de destino confirma recepção e atualiza o sistema de banco de dados</li>
+              <li>Transferências não podem ser usadas como punição, represália ou discriminação</li>
+              <li>Não é permitida transferência em condições que causem sofrimento físico ou mental</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 9 — FINAL -->
+      <div class="flow-step flow-step-final">
+        <div class="flow-step-left">
+          <div class="flow-circle flow-circle-final">✓</div>
+        </div>
+        <div class="flow-step-body" onclick="toggleFlowStep(this)">
+          <div class="flow-actor">Unidade de Destino · CRV · Judiciário</div>
+          <div class="flow-title">Comunicação ao Judiciário em até 24 horas</div>
+          <div class="flow-desc">Após a transferência, a movimentação deve ser informada nos autos do processo respectivo, pelas Unidades Prisionais, no prazo máximo de 24 horas.</div>
+          <span class="flow-toggle-btn">▶ Ver detalhes e modelos de ofícios</span>
+          <div class="flow-details">
+            <ul>
+              <li>Prazo: <strong>24 horas corridas</strong> a partir da conclusão da transferência</li>
+              <li>Em finais de semana ou feriados: comunicação no primeiro dia útil seguinte</li>
+              <li>O juízo que receber o preso pode comunicar à CRV se identificar violação de regra constitucional ou legal</li>
+              <li>Transferência não comunicada no prazo presume-se irregular e sujeita ao procedimento de apuração</li>
+              <li>O juízo de origem encaminha o processo de execução criminal ao juízo competente da nova localidade</li>
+            </ul>
+            <div class="flow-alert flow-alert-danger">🔴 &nbsp;Transferência não comunicada ao juiz em 24h presume-se irregular. O GMF poderá determinar o retorno do preso à unidade de origem.</div>
+            <div style="margin-top:1rem;">
+              <p style="font-size:.82rem;color:var(--cinza-3);margin-bottom:.5rem;">Modelos de Ofício de Comunicação:</p>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <button class="btn-oficio btn-oficio-copiar" onclick="event.stopPropagation();abrirModeloDireto('comunicacao')">📄 Comunicação ao Juízo → ver modelo completo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /flow-wrapper -->
   </div>
 </section>
-
 
 <!-- ====================================================  DOCUMENTOS  ==================================================== -->
 <section id="documentos" class="page-section">
@@ -507,291 +705,122 @@
   <div class="page-hero">
     <div class="page-hero-inner">
       <h2>📝 Modelos de Ofícios</h2>
-      <p>Modelos padronizados conforme a Res. nº 1/2026 e a PN 2189/2025. Preencha todos os campos antes do envio.</p>
+      <p>Clique no modelo desejado para abrir o editor. Preencha os campos em destaque e exporte em PDF ou Word.</p>
     </div>
   </div>
   <div class="main-wrapper">
-    <div class="alerta alerta-atencao mb-3">
-      <span class="alerta-icone">⚠️</span>
-      <div>Os campos em <span style="background:#fef9c3;border:1px dashed #ca8a04;border-radius:3px;padding:0 4px;font-weight:700;color:#92400e">LETRAS MAIÚSCULAS</span> devem ser preenchidos. Nunca envie ofício com campos em branco. O BPI deve estar atualizado no i-PEN antes do envio.</div>
+
+    <div class="alerta alerta-info mb-3">
+      <span class="alerta-icone">ℹ️</span>
+      <div>Clique em um dos cartões abaixo para abrir o modelo em um painel flutuante. Edite os campos, escolha a saudação e despedida, e exporte com formatação oficial (Arial 11, justificado, recuos corretos).</div>
     </div>
 
-    <!-- MODELO 1 — EMERGENCIAL -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>🚨 Modelo 005/2026 — Segurança / Emergência</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
+    <!-- Grade de cartões de modelos -->
+    <div class="modelos-grade">
+
+      <div class="modelo-tile atalho-emergencial" onclick="abrirModalOficio('emergencial')">
+        <div class="modelo-tile-icone">🚨</div>
+        <div class="modelo-tile-titulo">Segurança / Emergência</div>
+        <div class="modelo-tile-sub">Modelo 005/2026</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
 
-Prezados(as),
-
-Encaminho para análise urgente dessa Central de Regulação de Vagas pedido de transferência excepcional do(a) reeducando(a) NOME COMPLETO, IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) UNIDADE PRISIONAL DE ORIGEM, em razão de situação de crise/emergência identificada pelas equipes deste estabelecimento penal, conforme passo a detalhar.
-
-A solicitação fundamenta-se na existência de [DESCREVER DETALHADAMENTE A SITUAÇÃO: risco iminente à integridade física, ameaça de morte, envolvimento em crise interna, motim, rebelião ou outro fator de segurança], que torna inviável a manutenção do(a) reeducando(a) nesta unidade prisional sem prejuízo à sua integridade física ou à ordem e segurança do estabelecimento, nos termos do art. 21, inciso I, da Resolução Conjunta Interinstitucional n. 01/2026.
-
-Diante da urgência da situação, solicita-se a transferência do(a) reeducando(a) para o(a) UNIDADE PRISIONAL DE DESTINO, onde há condições adequadas para sua custódia em segurança.
-
-Destaca-se que a transferência em análise não deve ser considerada como sanção disciplinar de 30 (trinta) dias, uma vez que não constitui efetivamente eventual sanção a ser aplicada, cabível somente após a regular tramitação do PAD, nos termos do art. 57 e 58 da Lei de Execução Penal e art. 73 da Lei Complementar 529/11.
-
-Deste modo, os direitos inerentes à pessoa presa deverão ser preservados, não se excluindo a possibilidade de isolamento preventivo, instituto diverso da sanção disciplinar, cuja disciplina encontra-se no art. 60 da Lei nº 7.210/1984 (LEP):
-
-    Art. 60. A autoridade administrativa poderá decretar o isolamento preventivo do faltoso pelo prazo de até dez dias. [...].
-
-Para subsidiar a análise, encaminho, anexos, o Boletim Penal Informativo da pessoa presa devidamente atualizado no sistema i-PEN, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor. Encaminho ainda: boletim de ocorrência interno, relatório da equipe de segurança e demais documentos que subsidiam a presente solicitação.
-
-Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja em até 24 horas.
-
-Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o Diretor do estabelecimento penal de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem o presente expediente.
-
-Diante do exposto, solicita-se análise e célere deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.
-
-Atenciosamente,
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM
-Diretor(a) do(a) UNIDADE DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO
-Diretor(a) do(a) UNIDADE DE DESTINO
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — ORIGEM
-Superintendente do(a) SR DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — DESTINO (SE FOR O CASO)
-Superintendente do(a) SR DE DESTINO
-
-À
-Central de Regulação de Vagas
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC</div>
+      <div class="modelo-tile atalho-equalizacao" onclick="abrirModalOficio('equalizacao')">
+        <div class="modelo-tile-icone">⚖️</div>
+        <div class="modelo-tile-titulo">Adequação da Capacidade de Ocupação</div>
+        <div class="modelo-tile-sub">Art. 21, III — Res. nº 1/2026</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-    </div>
 
-    <!-- MODELO 2 — ADEQUAÇÃO DE CAPACIDADE -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>⚖️ Modelo — Adequação da Capacidade de Ocupação (Art. 21, III)</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
+      <div class="modelo-tile atalho-mandado" onclick="abrirModalOficio('mandado')">
+        <div class="modelo-tile-icone">🏛️</div>
+        <div class="modelo-tile-titulo">Mandado de Prisão de Comarca Diversa</div>
+        <div class="modelo-tile-sub">Art. 24 — PN 2189/2025</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
 
-Prezados(as),
-
-Considerando a necessidade de gestão e equalização da ocupação carcerária no âmbito do(a) UNIDADE PRISIONAL DE ORIGEM, bem como a adequada distribuição das pessoas privadas de liberdade entre as diferentes estruturas de estabelecimentos penais, encaminho para análise dessa Central de Regulação de Vagas pedido de transferência do(a) reeducando(a) NOME COMPLETO, IPEN Nº [NÚMERO], atualmente custodiado(a) nesta unidade prisional, para o(a) UNIDADE PRISIONAL DE DESTINO.
-
-A solicitação fundamenta-se na necessidade de adequação da capacidade de ocupação entre as unidades do sistema prisional catarinense, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.
-
-Para subsidiar a análise, informo a devida atualização no sistema i-PEN do Boletim Penal Informativo, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como anexo o Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.
-
-Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado no prazo legal de até 24 horas.
-
-Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o Diretor do estabelecimento penal de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.
-
-Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.
-
-Atenciosamente,
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM
-Diretor(a) do(a) UNIDADE DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO
-Diretor(a) do(a) UNIDADE DE DESTINO
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — ORIGEM
-Superintendente do(a) SR DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — DESTINO (SE FOR O CASO)
-Superintendente do(a) SR DE DESTINO
-
-À
-Central de Regulação de Vagas
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC</div>
+      <div class="modelo-tile atalho-pernoite" onclick="abrirModalOficio('pernoite')">
+        <div class="modelo-tile-icone">🌙</div>
+        <div class="modelo-tile-titulo">Pernoite</div>
+        <div class="modelo-tile-sub">Permanência temporária em unidade diversa</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-    </div>
 
-    <!-- MODELO 3 — MANDADO COMARCA DIVERSA -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>🏛️ Modelo — Mandado de Prisão de Comarca Diversa</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
+      <div class="modelo-tile atalho-segmax" onclick="abrirModalOficio('umax')">
+        <div class="modelo-tile-icone">🔒</div>
+        <div class="modelo-tile-titulo">Segurança Máxima / RDD</div>
+        <div class="modelo-tile-sub">Após RDD deferido pelo Juízo</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
 
-Prezados(as),
-
-Encaminho para análise pedido de transferência do(a) reeducando(a) NOME COMPLETO, IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) UNIDADE PRISIONAL DE ORIGEM, para o(a) UNIDADE PRISIONAL DE DESTINO, em razão do cumprimento de Mandado de Prisão expedido pelo(a) JUÍZO EXPEDIDOR (ex.: Vara Regional de Execuções Penais da Comarca de XXXXX / 2ª Vara Criminal da Comarca de XXX).
-
-Considerando que o(a) referido(a) custodiado(a) foi preso(a) em comarca diversa daquela que expediu a ordem de prisão, bem como que o(a) UNIDADE PRISIONAL DE DESTINO é a unidade responsável pela circunscrição da autoridade judiciária expedidora, a transferência mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III, bem como em cumprimento ao Art. 24 da Portaria Normativa nº 2.189/2025 do Departamento de Polícia Penal.
-
-Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o(a) Diretor(a) da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.
-
-Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.
-
-Respeitosamente,
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM
-Diretor(a) do(a) UNIDADE DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO
-Diretor(a) do(a) UNIDADE DE DESTINO
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — ORIGEM
-Superintendente do(a) SR DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — DESTINO (SE FOR O CASO)
-Superintendente do(a) SR DE DESTINO
-
-À
-CENTRAL DE REGULAÇÃO DE VAGAS
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC</div>
+      <div class="modelo-tile atalho-comunicacao" onclick="abrirModalOficio('comunicacao')">
+        <div class="modelo-tile-icone">⚖️</div>
+        <div class="modelo-tile-titulo">Comunicação ao Juízo de Execução</div>
+        <div class="modelo-tile-sub">Prazo: até 24h após a transferência</div>
+        <span class="modelo-tile-btn">Abrir modelo →</span>
       </div>
-    </div>
 
-    <!-- MODELO 4 — PERNOITE -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>🌙 Modelo — Pernoite</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
-      </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
-
-Prezados(as),
-
-Encaminho para análise pedido de PERNOITE do(a) reeducando(a) NOME COMPLETO, IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) UNIDADE PRISIONAL DE ORIGEM, no estabelecimento penal UNIDADE PRISIONAL DE DESTINO, em razão de [FUNDAMENTAR A RAZÃO].
-
-Informo, por fim, que fora realizado contato prévio com a gestão da unidade de destino, que subscreve também o presente expediente, bem como com o(s) respectivo(s) Superintendente(s) Regional(is).
-
-Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade do pleito administrativo.
-
-Respeitosamente,
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM
-Diretor(a) do(a) UNIDADE DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO
-Diretor(a) do(a) UNIDADE DE DESTINO
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — ORIGEM
-Superintendente do(a) SR DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — DESTINO (SE FOR O CASO)
-Superintendente do(a) SR DE DESTINO
-
-À
-CENTRAL DE REGULAÇÃO DE VAGAS
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC</div>
-      </div>
-    </div>
-
-    <!-- MODELO 5 — SEGURANÇA MÁXIMA / RDD -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>🔒 Modelo — Inclusão na Unidade de Segurança Máxima (após RDD deferido)</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
-      </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
-
-Prezados(as),
-
-Encaminho para análise e deliberação dessa Comissão Deliberativa para inclusão de presos na Unidade de Segurança Máxima do Estado e Central de Regulação de Vagas quanto à inclusão do(a) reeducando(a) NOME COMPLETO, IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) UNIDADE PRISIONAL DE ORIGEM.
-
-A presente solicitação fundamenta-se nos documentos e informações que seguem anexos, os quais demonstram a necessidade da medida, especialmente diante das circunstâncias que envolvem o referido custodiado e os riscos à ordem, à disciplina e à segurança do estabelecimento prisional.
-
-Para subsidiar a análise dessa Comissão e CRV, encaminham-se os seguintes documentos:
-
-    - Ofício de solicitação de inclusão em Regime Disciplinar Diferenciado (RDD) encaminhado ao r. Juízo competente;
-    - Decisão judicial que determina a inclusão do apenado em RDD;
-    - Boletim de Ocorrência, PAD, Relatórios e/ou demais informações pertinentes à avaliação da medida.
-
-Para subsidiar a análise, informo a devida atualização no sistema i-PEN do Boletim Penal Informativo, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como anexo o Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.
-
-Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado no prazo legal de até 24 horas.
-
-Diante do exposto, solicita-se a urgente apreciação do presente pedido, com vistas à deliberação acerca da inclusão do apenado na Unidade de Segurança Máxima do Estado.
-
-Respeitosamente,
-
-(documento assinado digitalmente)
-NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM
-Diretor(a) do(a) UNIDADE DE ORIGEM
-
-(documento assinado digitalmente)
-NOME DO SUPERINTENDENTE REGIONAL — ORIGEM
-Superintendente do(a) SR DE ORIGEM
-
-À
-COMISSÃO DELIBERATIVA — UNIDADE DE SEGURANÇA MÁXIMA
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC
-
-À
-CENTRAL DE REGULAÇÃO DE VAGAS
-Departamento de Polícia Penal — DPP
-Secretaria de Estado de Justiça e Reintegração Social
-Florianópolis/SC</div>
-      </div>
-    </div>
-
-    <!-- MODELO 6 — COMUNICAÇÃO AO JUÍZO -->
-    <div class="modelo-card">
-      <div class="modelo-card-header">
-        <h4>🏛️ Modelo — Comunicação de Transferência ao Juízo de Execução</h4>
-        <button class="btn-copiar" onclick="copiarModelo(this)">📋 Copiar</button>
-      </div>
-      <div class="modelo-card-body">
-        <div class="modelo-texto">UNIDADE PRISIONAL DE ORIGEM, [DIA] de [MÊS] de [ANO].
-
-Excelentíssimo(a) Senhor(a) Juiz(a) da
-[VARA DE EXECUÇÕES PENAIS — COMARCA DE [COMARCA]]
-
-ASSUNTO: Comunicação de Transferência de Custodiado(a)
-
-Excelência,
-
-Comunicamos que o(a) custodiado(a) NOME COMPLETO, IPEN nº [NÚMERO], foi transferido(a) para [NOME DA UNIDADE DE DESTINO] — [CIDADE]/SC, em [DATA], às [HORA]h, em razão de [MOTIVO: segurança/emergência / adequação de capacidade / mandado de comarca diversa].
-
-A transferência foi autorizada pela Central de Regulação de Vagas — CRV/DPP/SEJURI, mediante despacho nº [Nº DO DESPACHO], de [DATA].
-
-Respeitosamente,
-
-(documento assinado digitalmente)
-NOME DO(A) DIRETOR(A)
-Diretor(a) do(a) UNIDADE DE ORIGEM</div>
-      </div>
-    </div>
+    </div><!-- /modelos-grade -->
 
   </div>
 </section>
 
+<!-- ====================================================  MODAL DO EDITOR DE OFÍCIO  ==================================================== -->
+<div id="modalOficio" class="oficio-modal" style="display:none;" onclick="fecharModalOficioFora(event)">
+  <div class="oficio-modal-box">
+
+    <!-- Cabeçalho do modal -->
+    <div class="oficio-modal-header">
+      <span class="oficio-modal-titulo" id="oficioTitulo">Modelo</span>
+      <div style="display:flex;gap:.5rem;align-items:center;">
+        <button class="btn-oficio btn-oficio-copiar" onclick="copiarOficio()">📋 Copiar</button>
+        <button class="btn-oficio btn-oficio-pdf"   onclick="gerarPDF()">📄 PDF</button>
+        <button class="btn-oficio btn-oficio-word"  onclick="gerarWord()">📘 Word</button>
+        <button class="oficio-modal-fechar" onclick="fecharModalOficio()" title="Fechar">✕</button>
+      </div>
+    </div>
+
+    <!-- Folha do ofício -->
+    <div class="oficio-folha" id="oficioFolha">
+
+      <div class="oficio-data">
+        <input class="campo-edit" id="ofc-cidade" value="[CIDADE]" size="20" />,
+        <input class="campo-edit" id="ofc-data"   value="[DIA de MÊS de ANO]" size="22" />.
+      </div>
+
+      <div class="oficio-saudacao-wrap">
+        <select class="campo-select" id="ofc-saudacao" onchange="atualizarSaudacao()">
+          <option>Senhor(a) Coordenador(a),</option>
+          <option>Senhor(a) Juiz(a),</option>
+          <option>Senhor(a) Superintendente,</option>
+          <option>Senhor(a) Diretor(a),</option>
+          <option value="outro">Outro...</option>
+        </select>
+        <input class="campo-edit" id="ofc-saudacao-custom" placeholder="Digite a saudação..." style="display:none;width:80%;" />
+      </div>
+
+      <div id="ofc-paragrafos"></div>
+
+      <div class="oficio-despedida-wrap">
+        <select class="campo-select" id="ofc-despedida">
+          <option>Atenciosamente,</option>
+          <option>Respeitosamente,</option>
+        </select>
+      </div>
+
+      <div class="oficio-assinaturas" id="ofc-assinaturas"></div>
+
+      <div class="oficio-destinatario" id="ofc-destinatario">
+        <p>À</p>
+        <p><strong>CENTRAL DE REGULAÇÃO DE VAGAS — CRV</strong></p>
+        <p>Departamento de Polícia Penal — DPP</p>
+        <p>Secretaria de Estado de Justiça e Reintegração Social — SEJURI</p>
+        <p>Florianópolis/SC</p>
+      </div>
+
+    </div><!-- /oficio-folha -->
+  </div><!-- /oficio-modal-box -->
+</div><!-- /modal -->
 
 <!-- ====================================================  PRAZOS  ==================================================== -->
 <section id="prazos" class="page-section">
@@ -928,39 +957,384 @@ Diretor(a) do(a) UNIDADE DE ORIGEM</div>
   <div class="page-hero">
     <div class="page-hero-inner">
       <h2>🏢 Unidades Prisionais</h2>
-      <p>Cadastro das unidades do sistema prisional catarinense. Use o filtro para localizar.</p>
+      <p>8 Superintendências Regionais · 50 unidades prisionais. Clique na SR para expandir e na unidade para ver os dados completos.</p>
     </div>
   </div>
   <div class="main-wrapper">
+
+    <!-- Filtro por SR + busca livre -->
     <div class="filtro-bar">
-      <input type="text" id="buscaUnidade" placeholder="🔍 Buscar por nome, cidade ou sigla..." oninput="filtrarUnidades()" />
-      <select id="filtroTipo" onchange="filtrarUnidades()">
-        <option value="">Todos os regimes</option>
-        <option value="fechado">Regime Fechado</option>
-        <option value="semiaberto">Regime Semiaberto</option>
-        <option value="aberto">Regime Aberto</option>
-        <option value="maxima">Segurança Máxima</option>
-        <option value="feminino">Feminino</option>
-        <option value="provisorio">Provisório / CDP</option>
+      <input type="text" id="buscaUnidade" placeholder="🔍 Buscar por nome, cidade, diretor ou e-mail..." oninput="filtrarUnidades()" />
+      <select id="filtroSR" onchange="filtrarUnidades()">
+        <option value="">Todas as Superintendências Regionais</option>
+        <option value="sr01">SR01 — Grande Florianópolis</option>
+        <option value="sr02">SR02 — Sul</option>
+        <option value="sr03">SR03 — Norte Catarinense</option>
+        <option value="sr04">SR04 — Vale do Itajaí</option>
+        <option value="sr05">SR05 — Serrana</option>
+        <option value="sr06">SR06 — Oeste</option>
+        <option value="sr07">SR07 — Médio Vale do Itajaí</option>
+        <option value="sr08">SR08 — Planalto Norte</option>
       </select>
     </div>
-    <div class="unidade-grid" id="unidadeGrid">
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Penitenciária de Florianópolis</div><div class="unidade-sigla">PEFLO</div><div class="unidade-info"><span>📍 Florianópolis</span><span>🔒 Regime Fechado Masculino</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="fechado maxima"><div class="unidade-nome">Penitenciária de Segurança Máxima</div><div class="unidade-sigla">PSM-SC</div><div class="unidade-info"><span>📍 São Pedro de Alcântara</span><span>🔒 Segurança Máxima Masculino</span></div><div class="unidade-tipo"><span class="badge badge-roxo">Seg. Máxima</span></div></div>
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Presídio Regional de Joinville</div><div class="unidade-sigla">PRJ</div><div class="unidade-info"><span>📍 Joinville</span><span>🔒 Provisório / Fechado</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Presídio Regional de Blumenau</div><div class="unidade-sigla">PRB</div><div class="unidade-info"><span>📍 Blumenau</span><span>🔒 Provisório / Fechado</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Presídio Regional de Chapecó</div><div class="unidade-sigla">PRCHP</div><div class="unidade-info"><span>📍 Chapecó</span><span>🔒 Provisório / Fechado</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="semiaberto"><div class="unidade-nome">Centro de Progressão Penitenciária — Norte</div><div class="unidade-sigla">CPP-NORTE</div><div class="unidade-info"><span>📍 Joinville</span><span>🔓 Semiaberto Masculino</span></div><div class="unidade-tipo"><span class="badge badge-amarelo">Semiaberto</span></div></div>
-      <div class="unidade-card" data-tipo="semiaberto"><div class="unidade-nome">Centro de Progressão Penitenciária — Sul</div><div class="unidade-sigla">CPP-SUL</div><div class="unidade-info"><span>📍 Criciúma</span><span>🔓 Semiaberto Masculino</span></div><div class="unidade-tipo"><span class="badge badge-amarelo">Semiaberto</span></div></div>
-      <div class="unidade-card" data-tipo="feminino fechado"><div class="unidade-nome">Presídio Feminino de Florianópolis</div><div class="unidade-sigla">PFF</div><div class="unidade-info"><span>📍 Florianópolis</span><span>🔒 Feminino Fechado / Provisório</span></div><div class="unidade-tipo"><span class="badge badge-verde">Feminino</span></div></div>
-      <div class="unidade-card" data-tipo="provisorio"><div class="unidade-nome">Centro de Triagem e Inclusão Penitenciária</div><div class="unidade-sigla">CTIP</div><div class="unidade-info"><span>📍 São José</span><span>🏠 Triagem e Inclusão</span></div><div class="unidade-tipo"><span class="badge badge-cinza">Provisório</span></div></div>
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Presídio Regional de Lages</div><div class="unidade-sigla">PRL</div><div class="unidade-info"><span>📍 Lages</span><span>🔒 Provisório / Fechado</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="fechado"><div class="unidade-nome">Presídio Regional de Itajaí</div><div class="unidade-sigla">PRI</div><div class="unidade-info"><span>📍 Itajaí</span><span>🔒 Provisório / Fechado</span></div><div class="unidade-tipo"><span class="badge badge-azul">Fechado</span></div></div>
-      <div class="unidade-card" data-tipo="aberto"><div class="unidade-nome">Casa do Albergado de Florianópolis</div><div class="unidade-sigla">CAF</div><div class="unidade-info"><span>📍 Florianópolis</span><span>🏠 Aberto / Albergado</span></div><div class="unidade-tipo"><span class="badge badge-cinza">Aberto</span></div></div>
-    </div>
+
+    <div id="srContainer">
+
+      <!-- ══ SR01 ══ -->
+      <div class="sr-bloco" data-sr="sr01">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left">
+            <span class="sr-tag">SR01</span>
+            <span class="sr-titulo">Superintendência Regional da Grande Florianópolis</span>
+          </div>
+          <div class="sr-header-right">
+            <span class="sr-count">9 unidades</span>
+            <span class="sr-chevron-icon">▶</span>
+          </div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Kelvyn Diehl</strong></span>
+          <span>📞 <a href="tel:+554836659131">(48) 3665‑9131</a></span>
+          <span>📧 <a href="mailto:sr01@pp.sc.gov.br">sr01@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Penitenciária de Florianópolis</div><div class="up-diretor">Dir.: Max Cleber Orth</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Delminda da Silveira, 960 – Agronômica – Florianópolis/SC – CEP 88025‑500</span>
+                <span>📞 <a href="tel:+554836659123">(48) 3665‑9123</a></span>
+                <span>📧 <a href="mailto:pe01@pp.sc.gov.br">pe01@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Complexo Penitenciário do Estado</div><div class="up-diretor">Dir.: Flávio Brasil Ganciné</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Adriano Enning, s/n – Bairro Santa Tereza – São Pedro de Alcântara/SC – CEP 88125‑000</span>
+                <span>📞 <a href="tel:+554836642750">(48) 3664‑2750</a> / <a href="tel:+554836642732">(48) 3664‑2732</a></span>
+                <span>📧 <a href="mailto:pe02@pp.sc.gov.br">pe02@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Presídio Regional de Tijucas</div><div class="up-diretor">Dir.: Nathasha Daberkow Vieira</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Alberto Tomazi, s/n – Bairro Itinga – Tijucas/SC – CEP 88200‑000</span>
+                <span>📞 <a href="tel:+554836659280">(48) 3665‑9280</a></span>
+                <span>📧 <a href="mailto:pr03@pp.sc.gov.br">pr03@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Hospital de Custódia e Tratamento Psiquiátrico – HCTP</div><div class="up-diretor">Dir.: Fábio Medeiros Wiese</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Delminda da Silveira, s/n – Agronômica – Florianópolis/SC – CEP 88025‑500</span>
+                <span>📞 <a href="tel:+554836659191">(48) 3665‑9191</a> / <a href="tel:+554836659188">(48) 3665‑9188</a> / <a href="tel:+554836659208">(48) 3665‑9208</a></span>
+                <span>📧 <a href="mailto:hctp@pp.sc.gov.br">hctp@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Presídio Regional de Biguaçu</div><div class="up-diretor">Dir.: Fabiano Oliveira Suares</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Hermógenes Prazeres, 49 – Centro – Biguaçu/SC – CEP 88160‑152</span>
+                <span>📞 <a href="tel:+554836642700">(48) 3664‑2700</a></span>
+                <span>📧 <a href="mailto:pr04@pp.sc.gov.br">pr04@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Presídio Masculino Regional de Florianópolis</div><div class="up-diretor">Dir.: Joana Mahfuz Vicini</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Delminda da Silveira, 900 – Agronômica – Florianópolis/SC – CEP 88025‑500</span>
+                <span>📞 <a href="tel:+554836659256">(48) 3665‑9256</a></span>
+                <span>📧 <a href="mailto:pr01@pp.sc.gov.br">pr01@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Presídio Feminino Regional de Florianópolis</div><div class="up-diretor">Dir.: Marina Pamplona Coelho</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Lauro Linhares, s/n – Trindade – Florianópolis/SC – CEP 88036‑001</span>
+                <span>📞 <a href="tel:+554836659107">(48) 3665‑9107</a></span>
+                <span>📧 <a href="mailto:pr02@pp.sc.gov.br">pr02@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Unidade de Monitoramento Eletrônico</div><div class="up-diretor">Dir.: Gustavo Costa Vieira</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua Fúlvio Aducci, 1214 – Estreito – Florianópolis/SC</span>
+                <span>📞 <a href="tel:+554836657327">(48) 3665‑7327</a></span>
+                <span>📧 <a href="mailto:ume@pp.sc.gov.br">ume@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+            <div class="up-card">
+              <div class="up-header" onclick="toggleUP(this)">
+                <div><div class="up-nome">Colônia Agroindustrial de Palhoça</div><div class="up-diretor">Dir.: Renata de Souza de Oliveira</div></div>
+                <span class="up-chevron">▶</span>
+              </div>
+              <div class="up-detalhe" style="display:none;">
+                <span>📍 Rua José João Barcelos, s/n – Bela Vista – Palhoça/SC – CEP 88132‑770</span>
+                <span>📞 <a href="tel:+554836645580">(48) 3664‑5580</a></span>
+                <span>📧 <a href="mailto:cogri@pp.sc.gov.br">cogri@pp.sc.gov.br</a></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR02 ══ -->
+      <div class="sr-bloco" data-sr="sr02">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR02</span><span class="sr-titulo">Superintendência Regional Sul</span></div>
+          <div class="sr-header-right"><span class="sr-count">8 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Hélio Damian Filho</strong></span>
+          <span>📞 <a href="tel:+554834031501">(48) 3403‑1501</a></span>
+          <span>📧 <a href="mailto:sr02@pp.sc.gov.br">sr02@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Feminina de Criciúma</div><div class="up-diretor">Dir.: Virginia Gabriela Gonzales</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua José Marinho Teixeira, s/n – São Domingos – Criciúma/SC – CEP 88812‑680</span><span>📞 <a href="tel:+554834031737">(48) 3403‑1737</a> / <a href="tel:+554834031731">(48) 3403‑1731</a></span><span>📧 <a href="mailto:pe04@pp.sc.gov.br">pe04@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Masculina de Tubarão</div><div class="up-diretor">Dir.: Deiveison Querino Batista</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Maria Menegaz, 735 – São João – Tubarão/SC – CEP 88708‑570</span><span>📞 <a href="tel:+554836319777">(48) 3631‑9777</a></span><span>📧 <a href="mailto:pe05@pp.sc.gov.br">pe05@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Sul</div><div class="up-diretor">Dir.: Alexandre Ferreira</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua José Marinho Teixeira, 5005 – São Domingos – Criciúma/SC – CEP 88812‑680</span><span>📞 <a href="tel:+554834031485">(48) 3403‑1485</a> / <a href="tel:+554834031506">(48) 3403‑1506</a></span><span>📧 <a href="mailto:pe03@pp.sc.gov.br">pe03@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Araranguá</div><div class="up-diretor">Dir.: Daniel Possamai Vieira</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Renato Carbonera, 500 – Bairro Polícia Rodoviária – Araranguá/SC – CEP 88900‑000</span><span>📞 <a href="tel:+554835290441">(48) 3529‑0441</a></span><span>📧 <a href="mailto:pr08@pp.sc.gov.br">pr08@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Criciúma</div><div class="up-diretor">Dir.: Júnior Rodrigo Fagundes</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Odonel Bianchi, 330 – Santa Augusta – Criciúma/SC – CEP 88805‑265</span><span>📞 <a href="tel:+554834031516">(48) 3403‑1516</a></span><span>📧 <a href="mailto:pr05@pp.sc.gov.br">pr05@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Imbituba</div><div class="up-diretor">Dir.: Filipe Gonzaga Lopes</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua 13 de Setembro, s/n – Vila Nova Alvorada – Imbituba/SC – CEP 88780‑000</span><span>📞 <a href="tel:+554836477409">(48) 3647‑7409</a></span><span>📧 <a href="mailto:pr09@pp.sc.gov.br">pr09@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Laguna</div><div class="up-diretor">Dir.: Rafael Nunes de Oliveira</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Idelfonso Batista, s/n – Progresso – Laguna/SC – CEP 88790‑000</span><span>📞 <a href="tel:+554836477425">(48) 3647‑7425</a></span><span>📧 <a href="mailto:pr10@pp.sc.gov.br">pr10@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Tubarão</div><div class="up-diretor">Dir.: Gladson Antônio da Silva</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Maria Menegaz, 635 – São João – Tubarão/SC – CEP 88708‑570</span><span>📞 <a href="tel:+554836319780">(48) 3631‑9780</a></span><span>📧 <a href="mailto:pr06@pp.sc.gov.br">pr06@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR03 ══ -->
+      <div class="sr-bloco" data-sr="sr03">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR03</span><span class="sr-titulo">Superintendência Regional do Norte Catarinense</span></div>
+          <div class="sr-header-right"><span class="sr-count">5 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Efraym Ben José Falcão</strong></span>
+          <span>📞 <a href="tel:+554734813993">(47) 3481‑3993</a></span>
+          <span>📧 <a href="mailto:sr03@pp.sc.gov.br">sr03@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Industrial de Joinville</div><div class="up-diretor">Dir.: Márcio Simbalista</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Servidão Antônio Deglmann Júnior, 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</span><span>📞 <a href="tel:+554734813948">(47) 3481‑3948</a></span><span>📧 <a href="mailto:pe06@pp.sc.gov.br">pe06@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Feminino Regional de Joinville</div><div class="up-diretor">Dir.: Eliana Eloi</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Servidão Antônio Deglmann Júnior, 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</span><span>📞 <a href="tel:+554734812369">(47) 3481‑2369</a></span><span>📧 <a href="mailto:pr12@pp.sc.gov.br">pr12@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Joinville</div><div class="up-diretor">Dir.: André Felippe Dias</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Servidão Antônio Deglmann Júnior, 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</span><span>📞 <a href="tel:+554734813900">(47) 3481‑3900</a></span><span>📧 <a href="mailto:pr11@pp.sc.gov.br">pr11@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Barra Velha</div><div class="up-diretor">Dir.: Léia Cristina Steffen Fuck</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua João Anselmo Breniensen, s/n – Vila Nova – Barra Velha/SC – CEP 88390‑000</span><span>📞 <a href="tel:+554734812885">(47) 3481‑2885</a></span><span>📧 <a href="mailto:pr14@pp.sc.gov.br">pr14@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de São Francisco do Sul</div><div class="up-diretor">Dir.: Lamartine Ximenes Fernandes</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral da Pedreira – Bairro Miranda – São Francisco do Sul/SC – CEP 89240‑000</span><span>📞 <a href="tel:+554734813932">(47) 3481‑3932</a></span><span>📧 <a href="mailto:pr13@pp.sc.gov.br">pr13@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR04 ══ -->
+      <div class="sr-bloco" data-sr="sr04">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR04</span><span class="sr-titulo">Superintendência Regional do Vale do Itajaí</span></div>
+          <div class="sr-header-right"><span class="sr-count">5 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Anderson Luiz Teodoro</strong></span>
+          <span>📞 <a href="tel:+554733986704">(47) 3398‑6704</a></span>
+          <span>📧 <a href="mailto:sr04@pp.sc.gov.br">sr04@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Masculina do Vale do Itajaí</div><div class="up-diretor">Dir.: Genivaldo Nazareno de Oliveira</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</span><span>📞 <a href="tel:+554733986700">(47) 3398‑6700</a></span><span>📧 <a href="mailto:pe07@pp.sc.gov.br">pe07@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Feminino Regional de Itajaí</div><div class="up-diretor">Dir.: Michele Rebello de Mesquita</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</span><span>📞 <a href="tel:+554733986185">(47) 3398‑6185</a> / <a href="tel:+554733986182">(47) 3398‑6182</a></span><span>📧 <a href="mailto:pr16@pp.sc.gov.br">pr16@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Brusque</div><div class="up-diretor">Dir.: Giovani Manfredini Queiroz</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rod. SC‑408, km 02 – Bairro Santa Luzia – Brusque/SC – CEP 88357‑340</span><span>📞 <a href="tel:+554732518280">(47) 3251‑8280</a> / <a href="tel:+554732518279">(47) 3251‑8279</a></span><span>📧 <a href="mailto:pr17@pp.sc.gov.br">pr17@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Itajaí</div><div class="up-diretor">Dir.: Rogério José Bizatto</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</span><span>📞 <a href="tel:+554733986750">(47) 3398‑6750</a></span><span>📧 <a href="mailto:pr15@pp.sc.gov.br">pr15@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Itapema</div><div class="up-diretor">Dir.: Eduardo Weber Xavier</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua 440, s/n – Bairro Morretes – Itapema/SC – CEP 88220‑000</span><span>📞 <a href="tel:+554733986684">(47) 3398‑6684</a></span><span>📧 <a href="mailto:pr18@pp.sc.gov.br">pr18@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR05 ══ -->
+      <div class="sr-bloco" data-sr="sr05">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR05</span><span class="sr-titulo">Superintendência Regional Serrana</span></div>
+          <div class="sr-header-right"><span class="sr-count">8 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>André Isidoro de Oliveira Martarello</strong></span>
+          <span>📞 <a href="tel:+554934123300">(49) 3412‑3300</a></span>
+          <span>📧 <a href="mailto:sr05@pp.sc.gov.br">sr05@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Industrial de São Cristóvão do Sul</div><div class="up-diretor">Dir.: Giselle Cordeiro Demeneck Remor</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral Paredão, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</span><span>📞 <a href="tel:+554934123190">(49) 3412‑3190</a> / <a href="tel:+554934123174">(49) 3412‑3174</a></span><span>📧 <a href="mailto:pe09@pp.sc.gov.br">pe09@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Regional de Curitibanos</div><div class="up-diretor">Dir.: Fabio Marcelo Palhano</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Juventino França de Moraes, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</span><span>📞 <a href="tel:+554934123300">(49) 3412‑3300</a></span><span>📧 <a href="mailto:pe08@pp.sc.gov.br">pe08@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Masculino de Lages</div><div class="up-diretor">Dir.: Rodrigo Barroso</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Ricardo Marin, s/n – Bairro Santa Clara – Lages/SC – CEP 88513‑210</span><span>📞 <a href="tel:+554932898467">(49) 3289‑8467</a></span><span>📧 <a href="mailto:pr19@pp.sc.gov.br">pr19@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Lages</div><div class="up-diretor">Dir.: Ricardo Fernando Moreira Floriani</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Mato Grosso, 247 – Bairro São Cristóvão – Lages/SC – CEP 88509‑220</span><span>📞 <a href="tel:+554932898403">(49) 3289‑8403</a> / <a href="tel:+554932898404">(49) 3289‑8404</a></span><span>📧 <a href="mailto:pr20@pp.sc.gov.br">pr20@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Caçador</div><div class="up-diretor">Dir.: André Luiz Pierdoná</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Av. Albino Felipe Potrick, 50 – Bom Sucesso – Caçador/SC – CEP 89501‑335</span><span>📞 <a href="tel:+554935616945">(49) 3561‑6945</a></span><span>📧 <a href="mailto:pr21@pp.sc.gov.br">pr21@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Campos Novos</div><div class="up-diretor">Dir.: Evalcir Morais dos Santos</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral Usina Velha, s/n – Interior – Campos Novos/SC – CEP 89620‑000</span><span>📞 <a href="tel:+554935413588">(49) 3541‑3588</a> / <a href="tel:+554935413589">(49) 3541‑3589</a></span><span>📧 <a href="mailto:pr22@pp.sc.gov.br">pr22@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Videira</div><div class="up-diretor">Dir.: Marcus Vinicius Lorenzetti</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rodovia SC‑303, Linha Scussiato, Interior – Videira/SC – CEP 89560‑000</span><span>📞 <a href="tel:+554935335915">(49) 3533‑5915</a> / <a href="tel:+554935335918">(49) 3533‑5918</a></span><span>📧 <a href="mailto:pr23@pp.sc.gov.br">pr23@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Unidade de Segurança Máxima de São Cristóvão do Sul</div><div class="up-diretor">Dir.: Daniel de Sena</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Juventino França de Moraes, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</span><span>📞 <a href="tel:+554934123241">(49) 3412‑3241</a></span><span>📧 <a href="mailto:umax@pp.sc.gov.br">umax@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR06 ══ -->
+      <div class="sr-bloco" data-sr="sr06">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR06</span><span class="sr-titulo">Superintendência Regional Oeste</span></div>
+          <div class="sr-header-right"><span class="sr-count">10 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Guimorvan Boita</strong></span>
+          <span>📞 <a href="tel:+554920499768">(49) 2049‑9768</a></span>
+          <span>📧 <a href="mailto:sr06@pp.sc.gov.br">sr06@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Agrícola de Chapecó</div><div class="up-diretor">Dir.: Itacir Ricieri Cella</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</span><span>📞 <a href="tel:+554920499760">(49) 2049‑9760</a> / <a href="tel:+554920499770">(49) 2049‑9770</a></span><span>📧 <a href="mailto:pe10@pp.sc.gov.br">pe10@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Industrial de Chapecó</div><div class="up-diretor">Dir.: Iuri Elias Berwanger</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</span><span>📞 <a href="tel:+554920499713">(49) 2049‑9713</a></span><span>📧 <a href="mailto:pe11@pp.sc.gov.br">pe11@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Feminino Regional de Chapecó</div><div class="up-diretor">Dir.: Agda Remus</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</span><span>📞 <a href="tel:+554920499813">(49) 2049‑9813</a></span><span>📧 <a href="mailto:pr25@pp.sc.gov.br">pr25@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Chapecó</div><div class="up-diretor">Dir.: José Lauri Pelizzari</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</span><span>📞 <a href="tel:+554920499602">(49) 2049‑9602</a></span><span>📧 <a href="mailto:pr24@pp.sc.gov.br">pr24@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Concórdia</div><div class="up-diretor">Dir.: Rafael Schlegel Rodrigues Salgado</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Adílio Hilário Mutzemberg, s/n – Guilherme Reich – Concórdia/SC – CEP 89709‑132</span><span>📞 <a href="tel:+554934826222">(49) 3482‑6222</a></span><span>📧 <a href="mailto:pr26@pp.sc.gov.br">pr26@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Joaçaba</div><div class="up-diretor">Dir.: Liliam Wiest</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 BR‑282, km 391 – Vila Remor – Joaçaba/SC – CEP 89600‑000</span><span>📞 <a href="tel:+554935279829">(49) 3527‑9829</a></span><span>📧 <a href="mailto:pr27@pp.sc.gov.br">pr27@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Maravilha</div><div class="up-diretor">Dir.: Marcelo Rodrigo Langaro</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Av. Sul Brasil, 1607 – Centro – Maravilha/SC – CEP 89874‑000</span><span>📞 <a href="tel:+554936646672">(49) 3664‑6672</a></span><span>📧 <a href="mailto:pr29@pp.sc.gov.br">pr29@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de São José do Cedro</div><div class="up-diretor">Dir.: Rejane Birci Schrader de Mattos</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Amambuy esq. Dom Pedro, 673 – Jardim – São José do Cedro/SC – CEP 89930‑000</span><span>📞 <a href="tel:+554936443436">(49) 3644‑3436</a></span><span>📧 <a href="mailto:pr30@pp.sc.gov.br">pr30@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de São Miguel do Oeste</div><div class="up-diretor">Dir.: Eduardo Francisco Bregola Junior</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Oiapoc, 1795 – Centro – São Miguel do Oeste/SC – CEP 89900‑000</span><span>📞 <a href="tel:+554936313754">(49) 3631‑3754</a></span><span>📧 <a href="mailto:pr31@pp.sc.gov.br">pr31@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Xanxerê</div><div class="up-diretor">Dir.: Vitor Matte</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Maranhão, 1780 – Castelo Branco – Xanxerê/SC – CEP 89820‑000</span><span>📞 <a href="tel:+554933822269">(49) 3382‑2269</a></span><span>📧 <a href="mailto:pr28@pp.sc.gov.br">pr28@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR07 ══ -->
+      <div class="sr-bloco" data-sr="sr07">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR07</span><span class="sr-titulo">Superintendência Regional do Médio Vale do Itajaí</span></div>
+          <div class="sr-header-right"><span class="sr-count">5 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Ricardo da Silva Morlo</strong></span>
+          <span>📞 <a href="tel:+554733788594">(47) 3378‑8594</a></span>
+          <span>📧 <a href="mailto:sr07@pp.sc.gov.br">sr07@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Industrial de Blumenau</div><div class="up-diretor">Dir.: Luciano Cardoso</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Silvano Candido da Silva, 4601 – Ponta Aguda – Blumenau/SC – CEP 89050‑287</span><span>📞 <a href="tel:+554733788600">(47) 3378‑8600</a></span><span>📧 <a href="mailto:pe12@pp.sc.gov.br">pe12@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Blumenau</div><div class="up-diretor">Dir.: Augusto Gregory Hilgenberg Ijaille</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua General Osório, 4585 – Passo Manso – Blumenau/SC – CEP 89032‑239</span><span>📞 <a href="tel:+554733788716">(47) 3378‑8716</a></span><span>📧 <a href="mailto:pr32@pp.sc.gov.br">pr32@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Indaial</div><div class="up-diretor">Dir.: Ivã Carlos Fuck</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Otto Stange, 127 – Bairro Estados – Indaial/SC – CEP 89086‑045</span><span>📞 <a href="tel:+554733993193">(47) 3399‑3193</a></span><span>📧 <a href="mailto:pr34@pp.sc.gov.br">pr34@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Ituporanga</div><div class="up-diretor">Dir.: Marisoni dos Santos</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Governador Jorge Lacerda, 72 – Centro – Ituporanga/SC – CEP 88400‑000</span><span>📞 <a href="tel:+554735338797">(47) 3533‑8797</a></span><span>📧 <a href="mailto:pr35@pp.sc.gov.br">pr35@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Rio do Sul</div><div class="up-diretor">Dir.: Victor Hugo Vanelli</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Estrada Geral Serra Canoas, s/n – Fundo Canoas – Rio do Sul/SC</span><span>📞 <a href="tel:+554735263308">(47) 3526‑3308</a> / <a href="tel:+554735263309">(47) 3526‑3309</a></span><span>📧 <a href="mailto:pr33@pp.sc.gov.br">pr33@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SR08 ══ -->
+      <div class="sr-bloco" data-sr="sr08">
+        <div class="sr-header" onclick="toggleSR(this)">
+          <div class="sr-header-left"><span class="sr-tag">SR08</span><span class="sr-titulo">Superintendência Regional do Planalto Norte</span></div>
+          <div class="sr-header-right"><span class="sr-count">5 unidades</span><span class="sr-chevron-icon">▶</span></div>
+        </div>
+        <div class="sr-info-strip">
+          <span>👤 <strong>Edenilson Schelbauer</strong></span>
+          <span>📞 <a href="tel:+554736470229">(47) 3647‑0229</a></span>
+          <span>📧 <a href="mailto:sr08@pp.sc.gov.br">sr08@pp.sc.gov.br</a></span>
+        </div>
+        <div class="sr-unidades" style="display:none;">
+          <div class="unidade-grid">
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Penitenciária Industrial de São Bento do Sul</div><div class="up-diretor">Dir.: Leó Da Silva Feliciano</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Miguel Hubl, 400 – Lençol – São Bento do Sul/SC – CEP 89289‑580</span><span>📞 <a href="tel:+554736470240">(47) 3647‑0240</a></span><span>📧 <a href="mailto:pe13@pp.sc.gov.br">pe13@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Canoinhas</div><div class="up-diretor">Dir.: Alexander Marcelo Costa</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Catarina de Souza Hubner, 1035 – Bairro Piedade – Canoinhas/SC – CEP 89460‑613</span><span>📞 <a href="tel:+554736274352">(47) 3627‑4352</a> / <a href="tel:+554736274358">(47) 3627‑4358</a></span><span>📧 <a href="mailto:pr38@pp.sc.gov.br">pr38@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Jaraguá do Sul</div><div class="up-diretor">Dir.: Carlos de Almeida Rossato</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Alvino Flor da Silva, 901 – Jaraguá do Sul/SC – CEP 89260‑875</span><span>📞 <a href="tel:+554732769409">(47) 3276‑9409</a></span><span>📧 <a href="mailto:pr36@pp.sc.gov.br">pr36@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Mafra</div><div class="up-diretor">Dir.: Gabriel Henning</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Getúlio Vargas, 604 – Centro – Mafra/SC – CEP 89300‑210</span><span>📞 <a href="tel:+554736470222">(47) 3647‑0222</a></span><span>📧 <a href="mailto:pr37@pp.sc.gov.br">pr37@pp.sc.gov.br</a></span></div></div>
+
+            <div class="up-card"><div class="up-header" onclick="toggleUP(this)"><div><div class="up-nome">Presídio Regional de Porto União</div><div class="up-diretor">Dir.: Josmar Mattos e Santos</div></div><span class="up-chevron">▶</span></div><div class="up-detalhe" style="display:none;"><span>📍 Rua Matos Costa, 772 – Centro – Porto União/SC – CEP 89400‑000</span><span>📞 <a href="tel:+554736274340">(47) 3627‑4340</a></span><span>📧 <a href="mailto:pr39@pp.sc.gov.br">pr39@pp.sc.gov.br</a></span></div></div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /srContainer -->
+
     <div class="alerta alerta-info mt-3">
       <span class="alerta-icone">ℹ️</span>
-      <div>O cadastro completo e as vagas disponíveis em tempo real são consultados no sistema i-PEN / CRV. Em caso de divergência, prevalece o sistema oficial (conf. Art. 28 da Res. nº 1/2026).</div>
+      <div>Dados conforme cadastro oficial do DPP/SEJURI. Vagas disponíveis em tempo real: consultar o sistema i-PEN / CRV. Em caso de divergência, prevalece o sistema oficial (conf. Art. 28 da Res. nº 1/2026).</div>
     </div>
   </div>
 </section>
@@ -1016,23 +1390,79 @@ Diretor(a) do(a) UNIDADE DE ORIGEM</div>
   <div class="page-hero" style="background:linear-gradient(135deg,#0c1e4a,#1d4ed8);">
     <div class="page-hero-inner">
       <h2>👤 Pedido do Preso ou Família</h2>
-      <p>Transferências por interesse do custodiado são atendidas pelo Programa de Permutas da CRV.</p>
+      <p>Transferências por interesse do custodiado são atendidas pelo Programa de Permutas da CRV. Advogados podem protocolar pedidos diretamente pelo portal da Polícia Penal SC.</p>
     </div>
   </div>
   <div class="main-wrapper">
+
     <div class="alerta alerta-info mb-3">
       <span class="alerta-icone">ℹ️</span>
       <div><strong class="alerta-titulo">Situação atual — sem vagas disponíveis</strong>
       Como não há vagas disponíveis em unidades do Estado, transferências por pedido do preso ou familiar serão atendidas exclusivamente pelo <strong>Programa de Permutas</strong>, coordenado pela equipe da CRV. O envio de memorandos diretamente à CRV solicitando vaga será indeferido por inexistência de vaga.</div>
     </div>
-    <div class="card">
-      <div class="card-header"><span>🔗</span><h3>Programa de Permutas — CRV</h3></div>
-      <div class="card-body">
-        <p class="text-sm mb-2">O Programa de Permutas permite que dois presos de unidades diferentes troquem de estabelecimento sem necessidade de vaga nova, desde que o perfil de ambos seja compatível com a troca.</p>
-        <p class="text-sm mb-2"><strong>Responsável:</strong> Equipe CRV (Policial Penal Jéssica).</p>
-        <p class="text-sm"><strong>Contato:</strong> <a href="mailto:crv@pp.sc.gov.br">crv@pp.sc.gov.br</a> | <a href="tel:+554836657330">(48) 3665-7330</a></p>
+
+    <div class="conteudo-grid">
+      <div>
+
+        <!-- Programa de Permutas -->
+        <div class="card mb-2">
+          <div class="card-header"><span>🔗</span><h3>Programa de Permutas — CRV</h3></div>
+          <div class="card-body">
+            <p class="text-sm mb-2">O Programa de Permutas permite que dois custodiados de unidades diferentes troquem de estabelecimento <strong>sem necessidade de vaga nova</strong>, desde que o perfil de ambos seja compatível com a troca e haja interesse recíproco devidamente manifestado.</p>
+            <p class="text-sm mb-2">O pedido deve ser formulado pela Direção da unidade prisional junto à CRV, instruído com a documentação de ambos os custodiados envolvidos.</p>
+            <p class="text-sm"><strong>Contato CRV:</strong> <a href="mailto:crv@pp.sc.gov.br">crv@pp.sc.gov.br</a> &nbsp;|&nbsp; <a href="tel:+554836657330">(48) 3665-7330</a></p>
+          </div>
+        </div>
+
+        <!-- Portal do Advogado -->
+        <div class="card">
+          <div class="card-header"><span>⚖️</span><h3>Pedido por Advogado — Portal Online</h3></div>
+          <div class="card-body">
+            <p class="text-sm mb-2">Advogados constituídos nos autos podem protocolar pedidos de transferência diretamente pelo <strong>Portal da Polícia Penal de Santa Catarina</strong>, sem necessidade de comparecimento presencial ou envio físico de documentos.</p>
+            <p class="text-sm mb-2">O portal centraliza os requerimentos e permite o acompanhamento do status do pedido. Para utilizar, acesse:</p>
+
+            <a href="https://ppsc.com.br" target="_blank" rel="noopener" class="portal-link-btn">
+              <span class="portal-link-icone">🌐</span>
+              <span class="portal-link-texto">
+                <strong>Portal da Polícia Penal SC</strong>
+                <span>ppsc.com.br → Serviços → Pedido de Transferência</span>
+              </span>
+              <span class="portal-link-seta">↗</span>
+            </a>
+
+            <div class="alerta alerta-atencao mt-2" style="margin-bottom:0;">
+              <span class="alerta-icone">⚠️</span>
+              <div>O pedido eletrônico <strong>não substitui</strong> a análise da CRV e está condicionado à disponibilidade de vagas via Programa de Permutas. Pedidos que não se enquadrem nos critérios serão indeferidos com fundamentação.</div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">📋 Quem pode pedir</div>
+          <div class="sidebar-card-body">
+            <div class="text-sm" style="line-height:2;">
+              <div style="margin-bottom:.5rem;">✅ <strong>Advogado constituído</strong> — via portal online ou petição física na unidade</div>
+              <div style="margin-bottom:.5rem;">✅ <strong>Familiar de 1º grau</strong> — mediante requerimento à Direção da unidade</div>
+              <div>✅ <strong>Próprio custodiado</strong> — mediante requerimento escrito à Direção</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">🔗 Links úteis</div>
+          <div class="sidebar-card-body">
+            <div class="link-lista">
+              <a href="https://ppsc.com.br" target="_blank" rel="noopener"><span class="bullet">●</span> Portal PPSC — ppsc.com.br ↗</a>
+              <a href="https://crv.ppsc.com.br" target="_blank" rel="noopener"><span class="bullet">●</span> Sistema CRV ↗</a>
+              <a href="mailto:crv@pp.sc.gov.br"><span class="bullet">●</span> crv@pp.sc.gov.br</a>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
+
   </div>
 </section>
 
@@ -1209,10 +1639,14 @@ Diretor(a) do(a) UNIDADE DE ORIGEM</div>
       <p class="footer-aviso-texto">Uso exclusivo de Policiais Penais autorizados.<br>Proibida reprodução ou divulgação não autorizada.</p>
     </div>
   </div>
-  <div class="footer-rodape-linha">
-    © 2026 SEJURI / DPP / CRV — Polícia Penal de Santa Catarina · Documento Interno
+  <div class="footer-rodape-linha" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
+    <span>© 2026 SEJURI / DPP / CRV — Polícia Penal de Santa Catarina · Documento Interno</span>
+    <button class="btn-darkmode" onclick="toggleDarkMode()" id="btnDarkMode">🌙 Modo Escuro</button>
   </div>
 </footer>
+
+<!-- Botão voltar ao topo -->
+<button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">▲</button>
 
 <script src="js/app.js"></script>
 
@@ -1226,8 +1660,6 @@ Diretor(a) do(a) UNIDADE DE ORIGEM</div>
 .nivel-3.ativo { background:#1d4ed8; border-color:#1e40af; color:#fff; }
 .atalho-pernoite { --cor-destaque: #0f172a; --bg-icone: #e2e8f0; }
 </style>
-
-<script src="js/app.js" defer></script>
 
 </body>
 </html>
