@@ -270,6 +270,44 @@ function limparBusca() {
 // ================================================
 // DARK MODE
 // ================================================
+
+// ================================================
+// COMUNICAÇÃO AO JUÍZO — SELETOR SAÍDA / ENTRADA
+// ================================================
+function _aplicarVarianteComunicacao(tipo) {
+  const m = modelosTexto['comunicacao'];
+  if (!m || !m.variantes) return;
+  const variante = m.variantes[tipo];
+  if (!variante) return;
+
+  // Atualiza título
+  document.getElementById('oficioTitulo').textContent = variante.titulo;
+
+  // Atualiza parágrafos
+  const cont = document.getElementById('ofc-paragrafos');
+  cont.innerHTML = variante.paragrafos.map((p, pIdx) => {
+    const texto = typeof p === 'object' ? p.texto : p;
+    const htmlTexto = texto.replace(/\[([^\]]+)\]/g, (match, fieldName) => {
+      const inputId = `campo-${pIdx}-${fieldName.replace(/[^a-zA-Z0-9]/g,'_')}`;
+      const w = Math.max(120, Math.min(400, fieldName.length * 9 + 40));
+      return `<input type="text" class="campo-inline-editavel campo-inline-negrito" id="${inputId}" placeholder="${fieldName}" data-original="${fieldName}" style="width:${w}px;" />`;
+    });
+    return `<div class="oficio-paragrafo oficio-paragrafo-inline" data-texto-original="${texto.replace(/"/g,'&quot;')}">
+      <p class="oficio-paragrafo-texto">${htmlTexto}</p>
+    </div>`;
+  }).join('');
+}
+
+function selecionarTipoComunicacao(tipo) {
+  const seletorEl = document.getElementById('ofc-tipo-seletor');
+  if (seletorEl) {
+    seletorEl.querySelectorAll('.tipo-btn').forEach(b => {
+      b.classList.toggle('ativo', b.dataset.tipo === tipo);
+    });
+  }
+  _aplicarVarianteComunicacao(tipo);
+}
+
 function toggleDarkMode() {
   const isDark = document.body.classList.toggle('dark-mode');
   const btn = document.getElementById('btnDarkMode');
@@ -406,6 +444,17 @@ function atualizarOficioComUnidades() {
 // ================================================
 function construirListaAssinaturas(ori, des, isUSM) {
   const assinaturas = [];
+
+  // Modelos que assinam somente o Diretor da unidade que comunica
+  const somenteDiretorOrigem = ['comunicacao', 'mandado-comarca'].includes(modeloAtual);
+  if (somenteDiretorOrigem) {
+    assinaturas.push({
+      nome:  ori ? ori.diretor   : '[NOME DO DIRETOR]',
+      cargo: ori ? `Diretor(a)
+${ori.nome}` : 'Diretor(a) — [UNIDADE PRISIONAL]',
+    });
+    return assinaturas;
+  }
 
   // 1. Diretor origem
   assinaturas.push({
@@ -636,12 +685,33 @@ const modelosTexto = {
 
   /* ── COMUNICAÇÃO AO JUÍZO ───────────────────────── */
   comunicacao: {
-    titulo: '🏛️ Modelo — Comunicação de Transferência ao Juízo de Execução',
+    titulo: '🏛️ Comunicação ao Juízo de Execução — Saída e Entrada',
     saudacaoInicial: 'Senhor(a) Juiz(a),',
-    destinatarioJuizo: true,
+    destinatarioJuizo: false,
+    destinatarioCustom: true,
+    tipoSeletor: 'saida_entrada',
+    variantes: {
+      saida: {
+        titulo: '🏛️ Comunicação ao Juízo de Execução — Saída',
+        paragrafos: [
+          { texto: 'Comunicamos a Vossa Excelência que o(a) custodiado(a) [NOME COMPLETO], IPEN nº [NÚMERO], foi transferido(a) desta Unidade Prisional para a [UNIDADE PRISIONAL DE DESTINO], localizada em [CIDADE DE DESTINO]/SC, no dia [DATA].', editavel: false },
+          { texto: 'A transferência foi devidamente autorizada pela Central de Regulação de Vagas — CRV/DPP, mediante despacho nº [Nº DO DESPACHO], de [DATA DO DESPACHO], em razão de [FUNDAMENTAÇÃO].', editavel: false },
+          { texto: 'Nada mais havendo a comunicar, ficamos à disposição de Vossa Excelência para quaisquer esclarecimentos que se façam necessários.', editavel: false },
+        ],
+      },
+      entrada: {
+        titulo: '🏛️ Comunicação ao Juízo de Execução — Entrada',
+        paragrafos: [
+          { texto: 'Comunicamos a Vossa Excelência que o(a) custodiado(a) [NOME COMPLETO], IPEN nº [NÚMERO], ingressou nesta Unidade Prisional, oriundo(a) da [UNIDADE PRISIONAL DE ORIGEM], localizada em [CIDADE DE ORIGEM]/SC, no dia [DATA].', editavel: false },
+          { texto: 'A transferência foi devidamente autorizada pela Central de Regulação de Vagas — CRV/DPP, mediante despacho nº [Nº DO DESPACHO], de [DATA DO DESPACHO], em razão de [FUNDAMENTAÇÃO].', editavel: false },
+          { texto: 'Nada mais havendo a comunicar, ficamos à disposição de Vossa Excelência para quaisquer esclarecimentos que se façam necessários.', editavel: false },
+        ],
+      },
+    },
     paragrafos: [
-      'Comunicamos que o(a) custodiado(a) [NOME COMPLETO], IPEN nº [NÚMERO], foi transferido(a) para [NOME DA UNIDADE DE DESTINO] — [CIDADE]/SC, em [DATA], às [HORA]h, em razão de [MOTIVO: segurança/emergência / adequação de capacidade / mandado de comarca diversa].',
-      'A transferência foi autorizada pela Central de Regulação de Vagas — CRV/DPP/SEJURI, mediante despacho nº [Nº DO DESPACHO], de [DATA].',
+      { texto: 'Comunicamos a Vossa Excelência que o(a) custodiado(a) [NOME COMPLETO], IPEN nº [NÚMERO], foi transferido(a) desta Unidade Prisional para a [UNIDADE PRISIONAL DE DESTINO], localizada em [CIDADE DE DESTINO]/SC, no dia [DATA].', editavel: false },
+      { texto: 'A transferência foi devidamente autorizada pela Central de Regulação de Vagas — CRV/DPP, mediante despacho nº [Nº DO DESPACHO], de [DATA DO DESPACHO], em razão de [FUNDAMENTAÇÃO].', editavel: false },
+      { texto: 'Nada mais havendo a comunicar, ficamos à disposição de Vossa Excelência para quaisquer esclarecimentos que se façam necessários.', editavel: false },
     ],
   },
 
@@ -684,7 +754,7 @@ function selecionarModelo(id) {
     const htmlTexto = texto.replace(/\[([^\]]+)\]/g, (match, fieldName) => {
       const inputId = `campo-${pIdx}-${fieldName.replace(/[^a-zA-Z0-9]/g,'_')}`;
       const w = Math.max(120, Math.min(400, fieldName.length * 9 + 40));
-      return `<input type="text" class="campo-inline-editavel" id="${inputId}" placeholder="${fieldName}" data-original="${fieldName}" style="width:${w}px;" />`;
+      return `<input type="text" class="campo-inline-editavel campo-inline-negrito" id="${inputId}" placeholder="${fieldName}" data-original="${fieldName}" style="width:${w}px;" />`;
     });
 
     return `<div class="oficio-paragrafo oficio-paragrafo-inline" data-texto-original="${texto.replace(/"/g,'&quot;')}">
@@ -694,7 +764,15 @@ function selecionarModelo(id) {
 
   // Destinatário
   const destEl = document.getElementById('ofc-destinatario');
-  if (m.destinatarioJuizo) {
+  if (m.destinatarioCustom) {
+    // Campos editáveis: Juiz(a), Vara, Cidade
+    destEl.innerHTML =
+      '<p>Ao(À) Senhor(a)</p>' +
+      '<p><strong>Dr(a). <input type="text" class="campo-dest-inline" id="dest-juiz" placeholder="NOME DO(A) JUIZ(A)" style="width:280px;" /></strong></p>' +
+      '<p>Juiz(a) de Direito</p>' +
+      '<p><input type="text" class="campo-dest-inline" id="dest-vara" placeholder="VARA / JUÍZO" style="width:300px;" /></p>' +
+      '<p><input type="text" class="campo-dest-inline" id="dest-cidade" placeholder="CIDADE" style="width:200px;" /></p>';
+  } else if (m.destinatarioJuizo) {
     destEl.innerHTML = '<p>A</p><p><strong>[VARA DE EXECUÇÕES PENAIS — COMARCA DE [COMARCA]]</strong></p><p>[CIDADE]/SC</p>';
   } else if (m.destinatarioExtra) {
     destEl.innerHTML =
@@ -713,6 +791,22 @@ function selecionarModelo(id) {
       '<p>Secretaria de Estado de Justiça e Reintegração Social — SEJURI</p>' +
       '<p>Florianópolis/SC</p>';
   }
+
+  // Seletor Saída/Entrada para comunicacao
+  const seletorEl = document.getElementById('ofc-tipo-seletor');
+  if (m.tipoSeletor === 'saida_entrada') {
+    if (seletorEl) {
+      seletorEl.style.display = 'flex';
+      seletorEl.querySelectorAll('.tipo-btn').forEach(b => {
+        b.classList.toggle('ativo', b.dataset.tipo === 'saida');
+      });
+    }
+    // Load saida by default
+    _aplicarVarianteComunicacao('saida');
+  } else {
+    if (seletorEl) seletorEl.style.display = 'none';
+  }
+
 
   // Renderiza assinaturas com unidades já selecionadas (ou placeholders)
   renderizarAssinaturas(unidadeOrigemSel, unidadeDestinoSel);
@@ -746,7 +840,24 @@ function coletarTextoOficio() {
     const cargos = [...b.querySelectorAll('.ass-cargo input')].map(i => i.value).filter(Boolean);
     return { nome, cargo: cargos.join('\n') };
   });
-  const destHTML = document.getElementById('ofc-destinatario')?.innerText || '';
+  // Coleta destinatário — campos editáveis ou texto fixo
+  const destEl2 = document.getElementById('ofc-destinatario');
+  let destHTML = '';
+  if (destEl2) {
+    const juiz = destEl2.querySelector('#dest-juiz');
+    const vara = destEl2.querySelector('#dest-vara');
+    const cidade = destEl2.querySelector('#dest-cidade');
+    if (juiz) {
+      // Montagem linha a linha do destinatário editável
+      destHTML = 'Ao(À) Senhor(a)\n' +
+        'Dr(a). ' + (juiz.value || juiz.placeholder) + '\n' +
+        'Juiz(a) de Direito\n' +
+        (vara.value || vara.placeholder) + '\n' +
+        (cidade.value || cidade.placeholder);
+    } else {
+      destHTML = destEl2.innerText || '';
+    }
+  }
   return { cidade, data, saudacao, paras, despedida, asss, destHTML };
 }
 
