@@ -124,11 +124,14 @@ const nomesPagina = {
   'legislacao':      'Legislação',
   'unidades':        'Unidades Prisionais',
   'emergencial':     'Segurança / Emergência',
-  'pedido-preso':    'Pedido do Preso ou Família',
+  'pedido-preso':    'Programa de Permutas',
   'equalizacao':     'Adequação da Capacidade de Ocupação',
   'mandado-comarca': 'Mandado de Prisão de Comarca Diversa',
   'pernoite':        'Pernoite',
   'seguranca-maxima':'Segurança Máxima / RDD',
+  'faq':             'Perguntas Frequentes',
+  'erros-comuns':    'Erros Mais Comuns',
+  'comece-por-aqui': 'Comece por Aqui',
 };
 
 function atualizarBreadcrumb(paginaId) {
@@ -221,25 +224,35 @@ function buscarManual() {
     return;
   }
   const hits = [];
+  // Fix: use textContent on a cloned visible version to search hidden sections too
   document.querySelectorAll('.page-section').forEach(sec => {
     sec.style.display = 'none';
-    const textoSec = sec.innerText.toLowerCase();
+    // Create a temporary clone to extract text even if element is hidden
+    const clone = sec.cloneNode(true);
+    clone.style.display = 'block';
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    document.body.appendChild(clone);
+    const textoSec = clone.textContent.toLowerCase();
+    document.body.removeChild(clone);
     if (textoSec.includes(termo)) {
       const id = sec.id, nome = nomesPagina[id] || id;
       const idx = textoSec.indexOf(termo);
-      const ini = Math.max(0, idx - 60), fim = Math.min(textoSec.length, idx + termo.length + 100);
-      let trecho = sec.innerText.substring(ini, fim).replace(/\n+/g, ' ').trim();
+      const ini = Math.max(0, idx - 60), fim = Math.min(textoSec.length, idx + termo.length + 120);
+      let trecho = textoSec.substring(ini, fim).replace(/\s+/g, ' ').trim();
       if (ini > 0) trecho = '…' + trecho;
       if (fim < textoSec.length) trecho += '…';
       const regex = new RegExp('(' + termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-      hits.push({ id, nome, trecho: trecho.replace(regex, '<mark>$1</mark>') });
+      // Escape HTML before highlighting
+      const trechoSeguro = trecho.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      hits.push({ id, nome, trecho: trechoSeguro.replace(regex, '<mark class="busca-mark">$1</mark>') });
     }
   });
   if (!hits.length) {
-    resultado.innerHTML = '<p class="busca-sem-resultado">Nenhum resultado para <strong>"' + input.value + '"</strong>.</p>';
+    resultado.innerHTML = '<p class="busca-sem-resultado">Nenhum resultado para <strong>"' + input.value.replace(/</g,'&lt;') + '"</strong>.</p>';
   } else {
     resultado.innerHTML =
-      '<p class="busca-contagem">' + hits.length + ' seção(ões) encontrada(s) para <strong>"' + input.value + '"</strong>:</p>' +
+      '<p class="busca-contagem">🔍 ' + hits.length + ' seção(ões) encontrada(s) para <strong>"' + input.value.replace(/</g,'&lt;') + '"</strong>:</p>' +
       hits.map(h => '<a class="busca-item" href="#" onclick="limparBusca();navegarPara(\'' + h.id + '\');return false;"><span class="busca-item-nome">📄 ' + h.nome + '</span><span class="busca-item-trecho">' + h.trecho + '</span></a>').join('');
   }
   resultado.style.display = 'block';
@@ -359,7 +372,7 @@ function atualizarOficioComUnidades() {
   const cidEl = document.getElementById('ofc-cidade-txt');
   if (cidEl) cidEl.textContent = ori ? ori.cidade : '[CIDADE]';
 
-  // Parágrafos — substitui placeholders
+  // Parágrafos — substitui placeholders (só nos campos editáveis)
   document.querySelectorAll('#ofc-paragrafos textarea').forEach(ta => {
     let txt = ta.dataset.original || ta.value;
     ta.dataset.original = txt; // guarda original para re-substituição
@@ -367,6 +380,8 @@ function atualizarOficioComUnidades() {
                       .replace(/\[CIDADE\]/g, ori.cidade);
     if (des) txt = txt.replace(/\[UNIDADE PRISIONAL DE DESTINO\]/g, des.nome);
     ta.value = txt;
+    // Se readonly, atualizar também o dataset.original para não desfazer
+    if (ta.readOnly) ta.dataset.original = txt;
   });
 
   // Reconstrói assinaturas
@@ -504,13 +519,15 @@ const modelosTexto = {
     titulo: '🚨 Modelo 005/2026 — Segurança / Emergência',
     saudacaoInicial: 'Senhor(a) Coordenador(a),',
     paragrafos: [
-      'Encaminho para análise urgente dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em razão de situação de risco identificada pelas equipes desta unidade prisional.',
-      'A solicitação fundamenta-se na existência de [DESCREVER BREVEMENTE A SITUAÇÃO: risco iminente à integridade física, ameaça de morte, envolvimento em crise interna, motim, rebelião ou outro fator de segurança], que torna inviável a manutenção do reeducando nesta unidade sem prejuízo à sua integridade ou à ordem e segurança do estabelecimento, nos termos do art. 21, inciso I, da Resolução Conjunta Interinstitucional n. 01/2026.',
-      'Diante da urgência da situação, solicita-se a transferência do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde há condições adequadas para sua custódia em segurança.',
-      'Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorrência interno, relatório da equipe de segurança, etc.], que subsidiam a presente solicitação.',
-      'Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.',
-      'Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.',
-      'Diante do exposto, solicita-se análise e deliberação célere da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.',
+      { texto: 'Encaminho para análise urgente dessa Central de Regulação de Vagas pedido de transferência excepcional do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) [UNIDADE PRISIONAL DE ORIGEM], em razão de situação de crise/emergência identificada pelas equipes deste estabelecimento penal, conforme passo a detalhar.', editavel: false },
+      { texto: 'A solicitação fundamenta-se na existência de [DESCREVER DETALHADAMENTE A SITUAÇÃO: risco iminente à integridade física, ameaça de morte, envolvimento em crise interna, motim, rebelião ou outro fator de segurança], que torna inviável a manutenção do(a) reeducando(a) nesta unidade prisional sem prejuízo à sua integridade física ou à ordem e segurança do estabelecimento, nos termos do art. 21, inciso I, da Resolução Conjunta Interinstitucional n. 01/2026.', editavel: true, label: 'Fundamentação' },
+      { texto: 'Diante da urgência da situação, solicita-se a transferência do(a) reeducando(a) para o(a) [UNIDADE PRISIONAL DE DESTINO], onde há condições adequadas para sua custódia em segurança.', editavel: false },
+      { texto: 'Destaca-se que a transferência em análise não deve ser considerada como sanção disciplinar de 30 (trinta) dias, uma vez que não constitui efetivamente eventual sanção a ser aplicada, cabível somente após a regular tramitação do PAD, nos termos do art. 57 e 58 da Lei de Execução Penal e art. 73 da Lei Complementar 529/11.', editavel: false },
+      { texto: 'Deste modo, os direitos inerentes à pessoa presa deverão ser preservados, não se excluindo a possibilidade de isolamento preventivo, instituto diverso da sanção disciplinar, cuja disciplina encontra-se no art. 60 da Lei nº 7.210/1984 (Lei de Execução Penal).', editavel: false },
+      { texto: 'Para subsidiar a análise, encaminho, anexos, o Boletim Penal Informativo da pessoa presa devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorrência interno, relatório da equipe de segurança, etc.], que subsidiam a presente solicitação.', editavel: false },
+      { texto: 'Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja em até 24 horas.', editavel: false },
+      { texto: 'Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o Diretor do estabelecimento penal de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem o presente expediente.', editavel: false },
+      { texto: 'Diante do exposto, solicita-se análise e célere deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.', editavel: false },
     ],
   },
 
@@ -561,12 +578,12 @@ const modelosTexto = {
     titulo: '⚖️ Modelo — Adequação da Capacidade de Ocupação (Art. 21, III)',
     saudacaoInicial: 'Senhor(a) Coordenador(a),',
     paragrafos: [
-      'Considerando a necessidade de gestão e equalização da ocupação carcerária no âmbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribuição das pessoas privadas de liberdade entre as unidades prisionais, encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].',
-      'A solicitação fundamenta-se na necessidade de equalização da lotação entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.',
-      'Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.',
-      'Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.',
-      'Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.',
-      'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.',
+      { texto: 'Considerando a necessidade de gestão e equalização da ocupação carcerária no âmbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribuição das pessoas privadas de liberdade entre as diferentes estruturas de estabelecimentos penais, encaminho para análise dessa Central de Regulação de Vagas pedido de transferência do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].', editavel: false },
+      { texto: 'A solicitação fundamenta-se na necessidade de equalização da lotação entre as unidades do sistema prisional catarinense, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.', editavel: false },
+      { texto: 'Para subsidiar a análise, informo a devida atualização no sistema i-PEN do Boletim Penal Informativo, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como anexo o Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.', editavel: false },
+      { texto: 'Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja em até 24 horas.', editavel: false },
+      { texto: 'Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o Diretor do estabelecimento penal de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.', editavel: false },
+      { texto: 'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.', editavel: false },
     ],
   },
 
@@ -575,12 +592,10 @@ const modelosTexto = {
     titulo: '🏛️ Modelo — Mandado de Prisão de Comarca Diversa',
     saudacaoInicial: 'Senhor(a) Coordenador(a),',
     paragrafos: [
-      'Encaminho para análise pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em razão do cumprimento de Mandado de Prisão expedido pelo(a) [JUÍZO EXPEDIDOR — Ex.: Vara Regional de Execuções Penais da Comarca de XXXXX / 2ª Vara Criminal da Comarca de XXX].',
-      'Considerando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de prisão, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] é a unidade responsável pela circunscrição da autoridade judiciária expedidora, a transferência mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.',
-      'Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor, e cópia do Mandado de Prisão.',
-      'Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.',
-      'Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.',
-      'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.',
+      { texto: 'Encaminho para análise pedido de transferência do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em razão do cumprimento de Mandado de Prisão expedido pelo(a) [JUÍZO EXPEDIDOR — Ex.: Vara Regional de Execuções Penais da Comarca de XXXXX / 2ª Vara Criminal da Comarca de XXX].', editavel: false },
+      { texto: 'Considerando que o(a) referido(a) custodiado(a) foi preso(a) em comarca diversa daquela que expediu a ordem de prisão, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] é a unidade responsável pela circunscrição da autoridade judiciária expedidora, a transferência mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III, bem como em cumprimento ao Art. 24 da Portaria Normativa nº. 2189/2025 do Departamento de Polícia Penal.', editavel: false },
+      { texto: 'Informo, por fim, que foram realizados contatos prévios com as autoridades pertinentes, quais sejam, o(a) Diretor(a) da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.', editavel: false },
+      { texto: 'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa.', editavel: false },
     ],
   },
 
@@ -589,9 +604,9 @@ const modelosTexto = {
     titulo: '🌙 Modelo — Pernoite',
     saudacaoInicial: 'Senhor(a) Coordenador(a),',
     paragrafos: [
-      'Encaminho para análise pedido de PERNOITE do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], no estabelecimento penal [UNIDADE PRISIONAL DE DESTINO], em razão de [FUNDAMENTAR A RAZÃO].',
-      'Informo que foram realizados contatos prévios com a gestão da unidade de destino, que subscreve o presente expediente, bem como com o(s) respectivo(s) Superintendente(s) Regional(is).',
-      'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade do pleito administrativo.',
+      { texto: 'Encaminho para análise pedido de PERNOITE do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) [UNIDADE PRISIONAL DE ORIGEM], no estabelecimento penal [UNIDADE PRISIONAL DE DESTINO], em razão de [FUNDAMENTAR A RAZÃO].', editavel: true, label: 'Razão do pernoite' },
+      { texto: 'Informo, por fim, que fora realizado contato prévio com a gestão da unidade de destino, que subscreve também o presente expediente.', editavel: false },
+      { texto: 'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade do pleito administrativo.', editavel: false },
     ],
   },
 
@@ -601,12 +616,13 @@ const modelosTexto = {
     saudacaoInicial: 'Senhor(a) Coordenador(a),',
     destinatarioExtra: true,
     paragrafos: [
-      'Encaminho para análise e deliberação dessa Comissão Deliberativa para inclusão de presos na Unidade de Segurança Máxima do Estado e Central de Regulação de Vagas quanto à inclusão do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) [UNIDADE PRISIONAL DE ORIGEM].',
-      'A presente solicitação fundamenta-se nos documentos e informações que seguem anexos, os quais demonstram a necessidade da medida, especialmente diante das circunstâncias que envolvem o referido custodiado e os riscos à ordem, à disciplina e à segurança do estabelecimento prisional.',
-      'Para subsidiar a análise dessa Comissão e CRV, encaminham-se os seguintes documentos: (i) Ofício de solicitação de inclusão em Regime Disciplinar Diferenciado (RDD) encaminhado ao r. Juízo competente; (ii) Decisão judicial que determina a inclusão do apenado em RDD; (iii) Boletim de Ocorrência, PAD, Relatórios e/ou demais informações pertinentes à avaliação da medida.',
-      'Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.',
-      'Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.',
-      'Diante do exposto, solicita-se a urgente apreciação do presente pedido, com vistas à deliberação acerca da inclusão do apenado na Unidade de Segurança Máxima do Estado.',
+      { texto: 'Encaminho para análise e deliberação dessa Comissão Deliberativa para inclusão de presos na Unidade de Segurança Máxima do Estado de Santa Catarina, bem como da Central de Regulação de Vagas (CRV) quanto à inclusão do(a) reeducando(a) [NOME COMPLETO], IPEN Nº [NÚMERO], atualmente custodiado(a) no(a) [UNIDADE PRISIONAL DE ORIGEM].', editavel: false },
+      { texto: 'A presente solicitação fundamenta-se nos documentos e informações que seguem anexos, os quais demonstram a necessidade da medida, especialmente diante das circunstâncias que envolvem o referido custodiado e os riscos à ordem, à disciplina e à segurança do estabelecimento prisional.', editavel: false },
+      { texto: 'Para subsidiar a análise dessa Comissão e da CRV, encaminham-se os seguintes documentos: (i) Ofício de solicitação de inclusão em Regime Disciplinar Diferenciado (RDD) encaminhado ao r. Juízo competente; (ii) Decisão judicial que determina a inclusão do apenado em RDD; (iii) Boletim de Ocorrência, PAD, Relatórios e/ou demais informações pertinentes à avaliação da medida.', editavel: false },
+      { texto: 'Ademais, informo a devida atualização no sistema i-PEN do Boletim Penal Informativo, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como anexo o Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.', editavel: false },
+      { texto: 'Uma vez efetivada a remoção, caso aprovada, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja em até 24 horas.', editavel: false },
+      { texto: 'Diante do exposto, solicita-se a urgente apreciação do presente pedido, com vistas à deliberação acerca da inclusão do apenado na Unidade de Segurança Máxima do Estado.', editavel: false },
+      { texto: 'Sem mais para o momento, colocamo-nos à disposição para quaisquer esclarecimentos adicionais que se façam necessários.', editavel: false },
     ],
   },
 
@@ -647,14 +663,35 @@ function selecionarModelo(id) {
   // Saudação padrão
   const sel = document.getElementById('ofc-saudacao');
   if (sel) sel.value = m.saudacaoInicial === 'Senhor(a) Juiz(a),'
-    ? 'Senhor(a) Juiz(a),'
-    : 'Senhor(a) Coordenador(a),';
+    ? 'Prezado(a) Juiz(a),'
+    : 'Prezado(a) Coordenador(a),';
 
-  // Parágrafos editáveis
+  // Parágrafos — suporte a formato antigo (string) e novo (objeto com editavel)
   const cont = document.getElementById('ofc-paragrafos');
-  cont.innerHTML = m.paragrafos.map(p =>
-    `<div class="oficio-paragrafo"><textarea class="oficio-paragrafo-area" rows="${Math.max(2, Math.ceil(p.length / 90))}" data-original="${p.replace(/"/g,'&quot;')}">${p}</textarea></div>`
-  ).join('');
+  cont.innerHTML = m.paragrafos.map(p => {
+    const isObj = typeof p === 'object';
+    const texto = isObj ? p.texto : p;
+    const editavel = isObj ? p.editavel : true; // legado: todos editáveis
+    const label = isObj && p.label ? p.label : null;
+
+    // Detecta campos em colchetes no texto para destacar
+    const textoDestacado = texto.replace(/\[([^\]]+)\]/g, '<span class="campo-editavel-inline">[$1]</span>');
+
+    if (editavel) {
+      // Campo editável: textarea com destaque e label
+      const rows = Math.max(2, Math.ceil(texto.length / 90));
+      return `<div class="oficio-paragrafo oficio-paragrafo-editavel">
+        ${label ? `<div class="campo-label">✏️ ${label}</div>` : '<div class="campo-label">✏️ Preencha este campo</div>'}
+        <textarea class="oficio-paragrafo-area campo-editavel-area" rows="${rows}" data-original="${texto.replace(/"/g,'&quot;')}">${texto}</textarea>
+      </div>`;
+    } else {
+      // Parágrafo fixo: exibe texto com campos em destaque visual mas não editável como bloco
+      // Ainda usa textarea para manter compatibilidade com coletarTextoOficio()
+      return `<div class="oficio-paragrafo oficio-paragrafo-fixo">
+        <textarea class="oficio-paragrafo-area oficio-paragrafo-readonly" rows="${Math.max(2, Math.ceil(texto.length / 90))}" data-original="${texto.replace(/"/g,'&quot;')}" readonly>${texto}</textarea>
+      </div>`;
+    }
+  }).join('');
 
   // Destinatário
   const destEl = document.getElementById('ofc-destinatario');
@@ -683,9 +720,7 @@ function selecionarModelo(id) {
 }
 
 function atualizarSaudacao() {
-  const sel    = document.getElementById('ofc-saudacao');
-  const custom = document.getElementById('ofc-saudacao-custom');
-  if (custom) custom.style.display = sel.value === 'outro' ? 'inline-block' : 'none';
+  // Nada a fazer — campo customizado removido
 }
 
 // ================================================
@@ -695,8 +730,7 @@ function coletarTextoOficio() {
   const cidade   = document.getElementById('ofc-cidade-txt')?.textContent || '';
   const data     = document.getElementById('ofc-data-txt')?.textContent   || '';
   const saudSel  = document.getElementById('ofc-saudacao');
-  const custom   = document.getElementById('ofc-saudacao-custom');
-  const saudacao = saudSel?.value === 'outro' ? (custom?.value || '') : (saudSel?.value || '');
+  const saudacao = saudSel?.value || 'Prezado(a) Coordenador(a),';
   const despedida = document.getElementById('ofc-despedida')?.value || 'Atenciosamente,';
   const paras    = [...document.querySelectorAll('#ofc-paragrafos textarea')].map(t => t.value.trim()).filter(Boolean);
   const asss     = [...document.querySelectorAll('#ofc-assinaturas .oficio-assinatura-bloco')].map(b => {
