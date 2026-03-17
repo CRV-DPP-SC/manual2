@@ -72,14 +72,7 @@
     </div>
   </div>
 
-  <div class="busca-bar">
-    <div class="busca-inner">
-      <span class="busca-icone">🔍</span>
-      <input type="text" id="buscaManual" placeholder="Buscar... (ex: transferência, prazo, documentos, vedação)" onkeyup="buscarManual()" autocomplete="off" />
-      <button class="busca-limpar" id="buscaLimpar" onclick="limparBusca()" title="Limpar" style="display:none;">✕</button>
-    </div>
-    <div id="buscaResultado" class="busca-resultado" style="display:none;"></div>
-  </div>
+  
 
   <div class="main-wrapper">
 
@@ -147,20 +140,21 @@
         <div class="crv-sobre-corpo">
           <div class="crv-sobre-col">
             <h3 class="crv-sobre-col-titulo">O que é a CRV</h3>
-            <p>A <strong>Central de Regulação de Vagas (CRV)</strong> é o órgão subordinado diretamente ao <strong>Diretor Geral do Departamento de Polícia Penal — DPP</strong>, responsável por analisar, coordenar e autorizar todas as transferências de pessoas privadas de liberdade no sistema prisional de Santa Catarina.</p>
-            <p>Sua criação decorre do <strong>Programa Pena Justa</strong> — iniciativa interinstitucional do Estado de Santa Catarina que tem como objetivo humanizar e racionalizar o sistema de execução penal, promovendo a adequação das condições de custódia aos ditames legais, a redução da superlotação e o fortalecimento dos direitos fundamentais dos custodiados. A CRV é o instrumento operacional central desse Programa.</p>
+            <p>A <strong>Central de Regulação de Vagas (CRV)</strong> é o órgão subordinado diretamente ao <strong>Diretor Geral do Departamento de Polícia Penal</strong>, responsável por analisar, coordenar e autorizar todas as transferências de pessoas privadas de liberdade no sistema prisional de Santa Catarina.</p>
+            <p>Sua criação está diretamente vinculada ao <strong>Plano Pena Justa</strong> — iniciativa nacional lançada em 2024, com vigência até 2027, coordenada pelo <strong>Ministério da Justiça e Segurança Pública (SENAPPEN)</strong> e pelo <strong>Conselho Nacional de Justiça (CNJ)</strong>, voltada ao enfrentamento da crise prisional brasileira, declarada pelo Supremo Tribunal Federal como <em>estado de coisas inconstitucional</em>. O Plano atua em quatro eixos: <strong>gestão de vagas</strong> (controle da entrada e redução da superlotação), <strong>qualificação prisional</strong> (infraestrutura, saúde e higiene), <strong>ressocialização</strong> (educação, trabalho e acompanhamento pós-penal) e <strong>gestão de crise</strong> (articulação entre governos estadual, federal e Judiciário).</p>
+            <p>A <strong>Central de Regulação de Vagas (CRV)</strong> é uma das ferramentas estratégicas centrais do Plano Pena Justa — metodologia difundida pelo CNJ e pelo MJSP tornada meta nacional, com 10 estados em fase final de instalação em 2026, juntando-se a estados pioneiros como Maranhão e Paraíba. Sua função é conectar o <strong>Poder Judiciário</strong> e o <strong>Poder Executivo</strong> para monitorar o índice de ocupação prisional, gerenciar a entrada e saída de pessoas no sistema e facilitar alternativas penais que evitem a superlotação.</p>
             <p>A atuação da CRV garante a <strong>distribuição equilibrada</strong> da população carcerária entre as unidades do Estado, o respeito à capacidade operacional de cada estabelecimento, a segurança institucional e o cumprimento das decisões judiciais.</p>
           </div>
           <div class="crv-sobre-col">
             <h3 class="crv-sobre-col-titulo">Base Normativa e Interinstitucionalidade</h3>
             <p>Os procedimentos da CRV são regidos pela <strong>Resolução Conjunta Interinstitucional nº 1/2026</strong>, editada em conjunto pelo <strong>Tribunal de Justiça de Santa Catarina (TJSC)</strong> e pela <strong>Secretaria de Estado de Justiça e Reintegração Social (SEJURI)</strong>.</p>
             <p>Essa natureza <strong>interinstitucional</strong> reflete a necessária articulação entre o <strong>Poder Judiciário</strong> — responsável pela execução penal e pelo controle jurisdicional das transferências — e o <strong>Poder Executivo</strong> — responsável pela administração do sistema prisional. A CRV opera exatamente nessa interface, assegurando que as movimentações de custodiados respeitem tanto as determinações judiciais quanto as possibilidades operacionais das unidades prisionais.</p>
-            <p>A eficiência do sistema depende da atuação articulada entre os <strong>Diretores das Unidades Prisionais</strong>, os <strong>Superintendentes Regionais</strong> e a <strong>CRV</strong>. Cada transferência bem instruída e encaminhada corretamente agiliza a deliberação e reduz retrabalho para todos os envolvidos.</p>
+            <p>A eficiência do sistema depende da atuação articulada entre os <strong>Diretores das Unidades Prisionais</strong>, os <strong>Superintendentes Regionais</strong> e a <strong>CRV</strong>.</p>
           </div>
           <div class="crv-sobre-col">
             <h3 class="crv-sobre-col-titulo">Princípios Fundamentais</h3>
             <p>A atuação da CRV é orientada pelo princípio constitucional da <strong>Dignidade da Pessoa Humana</strong> (art. 1º, III, CF/88), que impõe ao Estado o dever de assegurar condições dignas de custódia, vedando tratamento degradante ou desumano, independentemente do crime praticado.</p>
-            <p>Nesse sentido, a distribuição racional de vagas não é apenas uma medida administrativa — é uma <strong>obrigação constitucional e convencional</strong>, alinhada aos parâmetros da Lei de Execução Penal (Lei nº 7.210/1984), das Regras Mínimas da ONU para o Tratamento de Reclusos (Regras de Mandela) e da jurisprudência do Supremo Tribunal Federal sobre o estado de coisas inconstitucional do sistema prisional brasileiro.</p>
+            <p>Nesse sentido, a distribuição racional de vagas não é apenas uma medida administrativa — é uma <strong>obrigação constitucional e convencional</strong>.</p>
             <p>Ao regular as transferências com critérios técnicos e transparentes, a CRV contribui diretamente para a <strong>reintegração social</strong> do custodiado, o fortalecimento da segurança pública e a racionalização dos recursos do Estado.</p>
           </div>
         </div>
@@ -265,6 +259,22 @@
         </div>
       </div>
 
+      <!-- PEDIDO DE TRANSFERÊNCIA — dentro do grid, abaixo do Quadro Resumo -->
+      <div class="pedido-transferencia-bloco" style="margin-top:1.25rem;">
+        <div class="pedido-transferencia-inner">
+          <div class="pedido-transferencia-texto">
+            <div class="pedido-transferencia-icon">📨</div>
+            <div>
+              <h3 class="pedido-transferencia-titulo">Pedido de Transferência — Portal Online</h3>
+              <p class="pedido-transferencia-desc">Preso, familiar, advogado ou defensor público podem solicitar transferência diretamente pelo <strong>Portal da Polícia Penal SC</strong>, sem necessidade de comparecimento presencial à unidade. As solicitações são analisadas pela CRV e vinculadas ao Programa de Permutas.</p>
+            </div>
+          </div>
+          <a href="https://ppsc.com.br" target="_blank" rel="noopener" class="pedido-transferencia-btn">
+            🌐 Acessar Portal PPSC ↗
+          </a>
+        </div>
+      </div>
+
       <aside class="sidebar">
         <div class="sidebar-card">
           <div class="sidebar-card-header">📂 Seções</div>
@@ -320,12 +330,6 @@
         </div>
       </aside>
     </div>
-
-    <!-- PEDIDO DE TRANSFERÊNCIA — Bloco largo abaixo do Quadro Resumo -->
-    <div class="pedido-transferencia-bloco">
-      <div class="pedido-transferencia-inner">
-        <div class="pedido-transferencia-texto">
-          <div class="pedido-transferencia-icon">📨</div>
           <div>
             <h3 class="pedido-transferencia-titulo">Pedido de Transferência — Portal Online</h3>
             <p class="pedido-transferencia-desc">Preso, familiar, advogado ou defensor público podem solicitar transferência diretamente pelo <strong>Portal da Polícia Penal SC</strong>, sem necessidade de comparecimento presencial à unidade. As solicitações são analisadas pela CRV e vinculadas ao Programa de Permutas.</p>
@@ -343,7 +347,7 @@
 
 <!-- ====================================================  HIPÓTESES  ==================================================== -->
 <section id="hipoteses" class="page-section">
-  <div class="page-hero">
+  <div class="page-hero page-hero-sticky">
     <div class="page-hero-inner">
       <h2>📌 Hipóteses de Transferência</h2>
       <p>Situações previstas na Res. Conjunta nº 1/2026 que autorizam o pedido de transferência. Todo pedido deve se enquadrar em uma dessas hipóteses.</p>
