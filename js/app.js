@@ -372,16 +372,24 @@ function atualizarOficioComUnidades() {
   const cidEl = document.getElementById('ofc-cidade-txt');
   if (cidEl) cidEl.textContent = ori ? ori.cidade : '[CIDADE]';
 
-  // Parágrafos — substitui placeholders (só nos campos editáveis)
-  document.querySelectorAll('#ofc-paragrafos textarea').forEach(ta => {
-    let txt = ta.dataset.original || ta.value;
-    ta.dataset.original = txt; // guarda original para re-substituição
+  // Substitui placeholders nos campos inline das unidades
+  document.querySelectorAll('#ofc-paragrafos .campo-inline-editavel').forEach(input => {
+    const orig = input.dataset.original || input.placeholder;
+    if (ori && (orig === 'UNIDADE PRISIONAL DE ORIGEM')) {
+      input.value = ori.nome;
+    } else if (ori && (orig === 'CIDADE')) {
+      input.value = ori.cidade;
+    } else if (des && (orig === 'UNIDADE PRISIONAL DE DESTINO')) {
+      input.value = des.nome;
+    }
+  });
+  // Atualiza também os dataset.textoOriginal dos parágrafos para reflexo na exportação
+  document.querySelectorAll('#ofc-paragrafos .oficio-paragrafo-inline').forEach(div => {
+    let txt = div.dataset.textoOriginal || '';
     if (ori) txt = txt.replace(/\[UNIDADE PRISIONAL DE ORIGEM\]/g, ori.nome)
                       .replace(/\[CIDADE\]/g, ori.cidade);
     if (des) txt = txt.replace(/\[UNIDADE PRISIONAL DE DESTINO\]/g, des.nome);
-    ta.value = txt;
-    // Se readonly, atualizar também o dataset.original para não desfazer
-    if (ta.readOnly) ta.dataset.original = txt;
+    div.dataset.textoOriginal = txt;
   });
 
   // Reconstrói assinaturas
@@ -666,31 +674,22 @@ function selecionarModelo(id) {
     ? 'Senhor(a) Juiz(a),'
     : 'Senhor(a) Coordenador(a),';
 
-  // Parágrafos — suporte a formato antigo (string) e novo (objeto com editavel)
+  // Parágrafos — renderização inline com campos [EDITÁVEIS] como inputs amarelos
   const cont = document.getElementById('ofc-paragrafos');
-  cont.innerHTML = m.paragrafos.map(p => {
+  cont.innerHTML = m.paragrafos.map((p, pIdx) => {
     const isObj = typeof p === 'object';
     const texto = isObj ? p.texto : p;
-    const editavel = isObj ? p.editavel : true; // legado: todos editáveis
-    const label = isObj && p.label ? p.label : null;
 
-    // Detecta campos em colchetes no texto para destacar
-    const textoDestacado = texto.replace(/\[([^\]]+)\]/g, '<span class="campo-editavel-inline">[$1]</span>');
+    // Substitui [CAMPO] por <input> amarelo inline
+    const htmlTexto = texto.replace(/\[([^\]]+)\]/g, (match, fieldName) => {
+      const inputId = `campo-${pIdx}-${fieldName.replace(/[^a-zA-Z0-9]/g,'_')}`;
+      const w = Math.max(120, Math.min(400, fieldName.length * 9 + 40));
+      return `<input type="text" class="campo-inline-editavel" id="${inputId}" placeholder="${fieldName}" data-original="${fieldName}" style="width:${w}px;" />`;
+    });
 
-    if (editavel) {
-      // Campo editável: textarea com destaque e label
-      const rows = Math.max(2, Math.ceil(texto.length / 90));
-      return `<div class="oficio-paragrafo oficio-paragrafo-editavel">
-        ${label ? `<div class="campo-label">✏️ ${label}</div>` : '<div class="campo-label">✏️ Preencha este campo</div>'}
-        <textarea class="oficio-paragrafo-area campo-editavel-area" rows="${rows}" data-original="${texto.replace(/"/g,'&quot;')}">${texto}</textarea>
-      </div>`;
-    } else {
-      // Parágrafo fixo: exibe texto com campos em destaque visual mas não editável como bloco
-      // Ainda usa textarea para manter compatibilidade com coletarTextoOficio()
-      return `<div class="oficio-paragrafo oficio-paragrafo-fixo">
-        <textarea class="oficio-paragrafo-area oficio-paragrafo-readonly" rows="${Math.max(2, Math.ceil(texto.length / 90))}" data-original="${texto.replace(/"/g,'&quot;')}" readonly>${texto}</textarea>
-      </div>`;
-    }
+    return `<div class="oficio-paragrafo oficio-paragrafo-inline" data-texto-original="${texto.replace(/"/g,'&quot;')}">
+      <p class="oficio-paragrafo-texto">${htmlTexto}</p>
+    </div>`;
   }).join('');
 
   // Destinatário
@@ -732,7 +731,16 @@ function coletarTextoOficio() {
   const saudSel  = document.getElementById('ofc-saudacao');
   const saudacao = saudSel?.value || 'Prezado(a) Coordenador(a),';
   const despedida = document.getElementById('ofc-despedida')?.value || 'Atenciosamente,';
-  const paras    = [...document.querySelectorAll('#ofc-paragrafos textarea')].map(t => t.value.trim()).filter(Boolean);
+  // Coleta parágrafos com campos inline preenchidos
+  const paras = [...document.querySelectorAll('#ofc-paragrafos .oficio-paragrafo-inline')].map(div => {
+    let texto = div.dataset.textoOriginal || '';
+    div.querySelectorAll('.campo-inline-editavel').forEach(input => {
+      const original = input.dataset.original || input.placeholder;
+      const valor = input.value.trim() || input.placeholder;
+      texto = texto.replace('[' + original + ']', valor);
+    });
+    return texto.trim();
+  }).filter(Boolean);
   const asss     = [...document.querySelectorAll('#ofc-assinaturas .oficio-assinatura-bloco')].map(b => {
     const nome   = b.querySelector('.ass-nome input')?.value || '';
     const cargos = [...b.querySelectorAll('.ass-cargo input')].map(i => i.value).filter(Boolean);
