@@ -1788,3 +1788,349 @@ body.dark-mode .oficio-sel-info   { color: #94a3b8; }
 @media (max-width: 600px) {
   .oficio-sel-row { grid-template-columns: 1fr; }
 }
+
+
+/* ================================================
+   NOVAS FUNCIONALIDADES — 2026
+   ================================================ */
+
+/* --- BUSCA: destaque do termo encontrado --- */
+.busca-mark {
+  background: #fef08a;
+  color: #1e293b;
+  border-radius: 2px;
+  padding: 0 2px;
+  font-weight: 700;
+}
+
+/* --- CAMPOS DO OFÍCIO: fixos vs editáveis --- */
+.oficio-paragrafo-fixo .oficio-paragrafo-readonly {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #374151;
+  cursor: default;
+  resize: none;
+  font-style: normal;
+  opacity: 0.92;
+}
+
+.oficio-paragrafo-editavel {
+  border: 2px solid var(--ouro-3, #f0b429);
+  border-radius: 8px;
+  padding: .75rem;
+  background: #fffbeb;
+  margin-bottom: .75rem;
+}
+
+.campo-label {
+  font-size: .75rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: .4rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.campo-editavel-area {
+  border: 2px solid #f0b429 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(240,180,41,.15);
+}
+
+.campo-editavel-area:focus {
+  border-color: var(--azul-4) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+  outline: none;
+}
+
+/* --- COMECE POR AQUI — Fast Track --- */
+.comece-por-aqui-bloco {
+  background: linear-gradient(135deg, var(--azul-1), var(--azul-3));
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.comece-titulo {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  letter-spacing: .02em;
+}
+
+.comece-steps {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.comece-step {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 10px;
+  padding: .65rem .9rem;
+  text-decoration: none;
+  color: #fff;
+  flex: 1;
+  min-width: 130px;
+  transition: background .2s, border-color .2s, transform .15s;
+}
+
+.comece-step:hover {
+  background: rgba(255,255,255,.2);
+  border-color: var(--ouro-3);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.comece-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ouro-3);
+  color: #1a1a1a;
+  font-weight: 900;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comece-step-texto {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+
+.comece-step-texto strong {
+  font-size: .82rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.comece-step-texto span {
+  font-size: .7rem;
+  color: rgba(255,255,255,.7);
+  line-height: 1.3;
+}
+
+.comece-seta {
+  color: var(--ouro-3);
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .comece-steps {
+    flex-direction: column;
+  }
+  .comece-step {
+    width: 100%;
+    min-width: unset;
+  }
+  .comece-seta {
+    transform: rotate(90deg);
+    align-self: center;
+  }
+}
+
+/* --- SIDEBAR: botão portal pedido transferência --- */
+.sidebar-card-destaque .sidebar-card-header {
+  font-weight: 800;
+}
+
+.btn-sidebar-portal {
+  display: block;
+  background: var(--azul-4);
+  color: #fff !important;
+  text-decoration: none;
+  padding: .55rem .9rem;
+  border-radius: 8px;
+  font-size: .82rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: .5rem;
+  transition: background .2s, transform .15s;
+}
+
+.btn-sidebar-portal:hover {
+  background: var(--azul-5);
+  transform: translateY(-1px);
+  color: #fff !important;
+}
+
+/* --- LEGISLAÇÃO: novo layout em cards --- */
+.leg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.leg-card {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+  background: var(--branco);
+  border: 1px solid var(--cinza-border, #e2e8f0);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: var(--cinza-1);
+  transition: border-color .2s, box-shadow .2s, transform .15s;
+  position: relative;
+}
+
+.leg-card:hover {
+  border-color: var(--azul-4);
+  box-shadow: 0 4px 16px rgba(37,99,235,.12);
+  transform: translateY(-2px);
+}
+
+.leg-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: .1rem;
+}
+
+.leg-body {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.leg-title {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--azul-2);
+  line-height: 1.3;
+}
+
+.leg-sub {
+  font-size: .78rem;
+  color: var(--cinza-3);
+  line-height: 1.5;
+}
+
+.leg-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  background: var(--azul-5);
+  color: #fff;
+  border-radius: 4px;
+  padding: .1rem .45rem;
+  margin-top: .2rem;
+  width: fit-content;
+}
+
+.leg-type-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: .1rem .45rem;
+  margin-top: .15rem;
+  margin-bottom: .15rem;
+  width: fit-content;
+}
+
+.norma-principal {
+  background: #7c2d12;
+  color: #fff;
+}
+
+.norma-federal {
+  background: #1e3a5f;
+  color: #fff;
+}
+
+/* --- ERROS MAIS COMUNS --- */
+.erros-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.erro-card {
+  border-radius: 12px;
+  border: 1px solid #fecaca;
+  background: #fff;
+  overflow: hidden;
+}
+
+.erro-header {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  background: #fef2f2;
+  padding: .85rem 1.1rem;
+  border-bottom: 1px solid #fecaca;
+}
+
+.erro-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 900;
+  font-size: .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.erro-titulo {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #991b1b;
+}
+
+.erro-body {
+  padding: .9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.erro-problema {
+  font-size: .85rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.erro-solucao {
+  font-size: .85rem;
+  color: #065f46;
+  background: #d1fae5;
+  border-radius: 6px;
+  padding: .55rem .85rem;
+  line-height: 1.6;
+  border-left: 3px solid #10b981;
+}
+
+/* --- FAQ: estilo adicional para accordion da FAQ --- */
+#faq .accordion-item {
+  border-color: rgba(37,99,235,.15);
+}
+
+#faq .accordion-header {
+  color: var(--azul-2);
+}
+
+#faq .accordion-header:hover {
+  background: rgba(37,99,235,.04);
+}
+
