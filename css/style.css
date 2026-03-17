@@ -2621,3 +2621,22 @@ body.dark-mode .oficio-sel-info   { color: #94a3b8; }
   font-weight: 800 !important;
 }
 
+
+
+/* ================================================
+   HERO BANNER FIXO (STICKY) — PÁGINA INICIAL
+   ================================================ */
+
+.page-hero-sticky {
+  position: sticky;
+  top: 64px; /* altura do header */
+  z-index: 80;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+}
+
+/* Garante que o conteúdo abaixo não fique atrás do hero sticky */
+#inicio .main-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
