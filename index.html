@@ -1082,7 +1082,7 @@
       <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">6. Preso em RDD transferido para unidade comum<span class="accordion-seta">▼</span></div><div class="accordion-body">Durante o cumprimento de RDD, a transferência para unidade comum somente ocorrerá mediante autorização judicial expressa.</div></div>
       <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">7. Restrição judicial de permanência na unidade atual<span class="accordion-seta">▼</span></div><div class="accordion-body">Quando o juízo competente determinou expressamente a permanência do preso na unidade, nenhuma transferência será autorizada sem nova decisão judicial revogando a restrição.</div></div>
       <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">8. Contraindicação médica ao transporte<span class="accordion-seta">▼</span></div><div class="accordion-body">Laudo médico que contraindique o transporte (risco de morte ou agravamento grave) suspende a transferência até nova autorização médica. A CRV é comunicada e o processo fica em espera.</div></div>
-      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">9. Pedido emergencial sem enquadramento em hipótese (I ou II)<span class="accordion-seta">▼</span></div><div class="accordion-body">Todo pedido emergencial deve ser classificado expressamente como Hipótese I (gerenciamento de crise em tese) ou Hipótese II (medida de segurança) antes da análise da urgência. A mera alegação genérica de urgência não é suficiente. Pedidos sem enquadramento serão indeferidos de plano.</div></div>
+      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">9. Pedido emergencial sem enquadramento em hipótese (I ou II)<span class="accordion-seta">▼</span></div><div class="accordion-body">Todo pedido emergencial deve ser classificado expressamente como Hipótese I (Gerenciamento de Crise) ou Hipótese II (Medida de Segurança) antes da análise da urgência. A mera alegação genérica de urgência não é suficiente. Pedidos sem enquadramento serão indeferidos de plano.</div></div>
       <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">10. Isolamento preventivo em pedido enquadrado na Hipótese II<span class="accordion-seta">▼</span></div><div class="accordion-body">Na Hipótese II (medida de segurança), o isolamento do reeducando é expressamente vedado. O reeducando deve permanecer em cela de convívio, com todos os seus direitos preservados. O uso indevido do isolamento nessa hipótese pode caracterizar abuso de autoridade.</div></div>
     </div>
   </div>
@@ -1632,7 +1632,7 @@
         <div class="card mb-2">
           <div class="card-header"><span>🔴</span><h3>Hipótese I — Gerenciamento de Crise</h3></div>
           <div class="card-body">
-            <p class="text-sm mb-2">Motivada por conduta que, em tese, configure falta grave (art. 50 e caput do art. 52 da LEP) e comprometa a segurança ou o regular funcionamento da unidade.</p>
+            <p class="text-sm mb-2">Destinada a situações de instabilidade interna, conflitos ou risco à ordem da unidade que exijam a retirada imediata do reeducando. A transferência possui natureza <strong>administrativa e não punitiva</strong>. Havendo falta disciplinar, a instauração de PAD é obrigatória.</p>
             <ul style="margin:.5rem 0 .5rem 1.25rem;list-style:disc;font-size:.85rem;line-height:2;">
               <li>Instauração de <strong>PAD é obrigatória</strong>.</li>
               <li>Isolamento preventivo de <strong>até 10 dias</strong>.</li>
@@ -1654,6 +1654,38 @@
             </ul>
           </div>
         </div>
+        <!-- Prazo de permanência -->
+        <div class="alerta alerta-info mb-2">
+          <span class="alerta-icone">⏱</span>
+          <div><strong>Prazo de permanência na unidade de destino:</strong> Em regra, a permanência ocorre por cerca de <strong>30 (trinta) dias</strong>, podendo ser revista, reduzida ou prorrogada conforme o caso concreto e a evolução da situação.</div>
+        </div>
+
+        <!-- Com PAD / Sem PAD -->
+        <div class="card mb-2">
+          <div class="card-body">
+            <p class="text-sm mb-2" style="font-weight:700;text-align:center;">⬇ Houve falta disciplinar (PAD)?</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+              <div style="flex:1;min-width:240px;border:1px solid #d1fae5;border-radius:8px;padding:12px;background:#f0fdf4;">
+                <p style="font-weight:700;color:#0f8a4b;margin:0 0 8px;">✔ SIM — Com PAD</p>
+                <ul style="font-size:.84rem;line-height:2;list-style:none;">
+                  <li>✔ Instauração de <strong>PAD obrigatória</strong></li>
+                  <li>🔒 Isolamento preventivo de <strong>até 10 dias</strong></li>
+                  <li>→ Se o PAD for concluído com decisão procedente: pode aplicar sanção, com limite total de <strong>30 dias de isolamento</strong> (10 já cumpridos + até 20 restantes)</li>
+                  <li>❗ Se o PAD não for concluído em 10 dias: isolamento cessa imediatamente e o reeducando vai para <strong>cela de convívio, com direitos preservados</strong></li>
+                </ul>
+              </div>
+              <div style="flex:1;min-width:240px;border:1px solid #fee2e2;border-radius:8px;padding:12px;background:#fff5f5;">
+                <p style="font-weight:700;color:#c53030;margin:0 0 8px;">✔ NÃO — Sem PAD</p>
+                <ul style="font-size:.84rem;line-height:2;list-style:none;">
+                  <li>✔ Não há PAD</li>
+                  <li>✔ Não há isolamento disciplinar</li>
+                  <li>➡ Reeducando permanece na unidade de destino em <strong>cela de convívio</strong>, com <strong>direitos integralmente preservados</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Fluxo -->
         <div class="card">
           <div class="card-body">
@@ -1995,7 +2027,7 @@
           Qual a diferença entre as Hipóteses I e II na transferência emergencial?<span class="accordion-seta">▼</span>
         </div>
         <div class="accordion-body">
-          A <strong>Hipótese I</strong> é motivada por conduta do reeducando que, em tese, configure falta grave (art. 50 e caput do art. 52 da LEP). Exige instauração obrigatória de PAD e admite isolamento preventivo de até 10 dias (prorrogável por mais 20 se o PAD for concluído com decisão procedente dentro desse período). A <strong>Hipótese II</strong> visa preservar a segurança do reeducando, de terceiros ou a estabilidade da unidade, sem relação com falta disciplinar — o isolamento é <em>vedado</em> e o reeducando permanece em cela de convívio.
+          A <strong>Hipótese I — Gerenciamento de Crise</strong> é motivada por situações de instabilidade interna, conflitos ou risco à ordem da unidade que exijam a retirada imediata do reeducando. Havendo falta disciplinar em tese, exige instauração obrigatória de PAD e admite isolamento preventivo de até 10 dias (prorrogável por mais 20 se o PAD for concluído com decisão procedente dentro desse período). A <strong>Hipótese II — Medida de Segurança</strong> visa preservar a integridade física do reeducando, de terceiros ou a estabilidade da unidade diante de ameaças, motins ou rebeliões, sem relação com falta disciplinar — o isolamento é <em>vedado</em> e o reeducando permanece em cela de convívio. Ambas as hipóteses possuem natureza administrativa e não punitiva.
         </div>
       </div>
 
@@ -2151,7 +2183,7 @@
           <span class="erro-titulo">❌ Pedido emergencial sem enquadramento na Hipótese I ou II</span>
         </div>
         <div class="erro-body">
-          <div class="erro-problema">O ofício não identifica expressamente se a transferência se enquadra na Hipótese I (gerenciamento de crise em tese) ou na Hipótese II (medida de segurança). Pedidos genéricos serão indeferidos de plano.</div>
+          <div class="erro-problema">O ofício não identifica expressamente se a transferência se enquadra na Hipótese I (Gerenciamento de Crise) ou na Hipótese II (Medida de Segurança). Pedidos genéricos serão indeferidos de plano.</div>
           <div class="erro-solucao">✅ <strong>Solução:</strong> Antes de ligar para a CRV, identifique a hipótese correta. Indique-a expressamente no ofício e ajuste a documentação exigida conforme a hipótese (PAD é obrigatório apenas na Hipótese I).</div>
         </div>
       </div>
