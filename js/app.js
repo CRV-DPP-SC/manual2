@@ -813,7 +813,7 @@ const modelosTexto = {
     ],
   },
 
-}
+};
 
 let modeloAtual = 'emergencial';
 
