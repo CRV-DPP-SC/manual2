@@ -27,7 +27,19 @@
     font-style: italic;
   }
 
-/* ══ DRAWER GUIA ══ */
+/* == GUIA CARD == */
+.guia-card{border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(13,43,85,.13);transition:transform .2s,box-shadow .2s;cursor:pointer;margin-bottom:1.5rem;display:block}
+.guia-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,43,85,.18)}
+.guia-card-inner{display:flex;align-items:center;gap:20px;padding:22px 28px;background:linear-gradient(135deg,#0d2b55 0%,#1a4a8a 60%,#2563b0 100%);color:white;position:relative;overflow:hidden}
+.guia-card-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 120% at 95% 50%,rgba(200,147,10,.18) 0%,transparent 60%);pointer-events:none}
+.guia-card-icon{font-size:2.6rem;flex-shrink:0;position:relative;z-index:1}
+.guia-card-body{flex:1;min-width:0;position:relative;z-index:1}
+.guia-card-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#f0c040;margin-bottom:4px}
+.guia-card-titulo{font-size:1.35rem;font-weight:900;color:white;margin:0 0 6px;line-height:1.2;font-family:'Playfair Display','Georgia',serif}
+.guia-card-desc{font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.55;margin:0}
+.guia-card-arrow{font-size:1.8rem;color:#f0c040;flex-shrink:0;position:relative;z-index:1;transition:transform .2s}
+.guia-card:hover .guia-card-arrow{transform:translateX(5px)}
+/* == DRAWER == */
 #gd-overlay{position:fixed;inset:0;background:rgba(5,15,35,.55);z-index:3000;opacity:0;pointer-events:none;transition:opacity .3s}
 #gd-overlay.open{opacity:1;pointer-events:auto}
 #gd-drawer{position:fixed;top:0;right:0;bottom:0;width:min(96vw,1020px);background:#f0f4fa;z-index:3001;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 48px rgba(0,0,0,.22)}
@@ -37,21 +49,19 @@
 #gd-drawer-head h2 em{font-style:normal;color:#f0c040}
 #gd-drawer-close{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:white;border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:background .15s;flex-shrink:0}
 #gd-drawer-close:hover{background:rgba(255,255,255,.22)}
-#gd-drawer-body{flex:1;overflow-y:auto;display:flex;gap:0}
-#gd-drawer-nav{width:190px;flex-shrink:0;background:white;border-right:1px solid #c8d6ec;padding-top:8px;overflow-y:auto}
+#gd-drawer-body{flex:1;overflow-y:auto;display:flex}
+#gd-drawer-nav{width:190px;flex-shrink:0;background:white;border-right:1px solid #c8d6ec;overflow-y:auto}
 #gd-drawer-nav .gdn-head{background:#0d2b55;color:white;padding:10px 14px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 #gd-drawer-nav a{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:.81rem;font-weight:600;color:#4a6080;text-decoration:none;border-left:3px solid transparent;border-bottom:1px solid #f0f4fa;transition:background .14s,border-color .14s,color .14s}
 #gd-drawer-nav a:last-child{border-bottom:none}
 #gd-drawer-nav a:hover{background:#f0f5ff;color:#174b8a;border-left-color:#2563b0}
 #gd-drawer-nav a.gd-cl{background:#f0f7ee}
 #gd-drawer-nav a.gd-cl span{font-size:.68rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#1a7a40}
-#gd-main{flex:1;min-width:0;padding:28px 28px 60px;display:flex;flex-direction:column;gap:22px}
+#gd-main{flex:1;min-width:0;padding:28px 28px 60px;display:flex;flex-direction:column;gap:22px;overflow-y:auto}
 #gd-main .gcard{background:white;border-radius:16px;box-shadow:0 2px 18px rgba(13,43,85,.07);overflow:hidden}
 #gd-main .gcard-head{display:flex;align-items:flex-start;gap:14px;padding:20px 24px 16px;border-bottom:1px solid #c8d6ec}
 #gd-main .gcard-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
-#gd-main .gi-azul{background:#dde8f8}
-#gd-main .gi-ouro{background:#fdf0d0}
-#gd-main .gi-verde{background:#d4edda}
+#gd-main .gi-azul{background:#dde8f8}#gd-main .gi-ouro{background:#fdf0d0}#gd-main .gi-verde{background:#d4edda}
 #gd-main .gcard-head-txt h2{font-family:'Playfair Display','Georgia',serif;font-size:1.12rem;color:#0d2b55;line-height:1.25;margin:0}
 #gd-main .gcard-head-txt p{font-size:.82rem;color:#4a6080;margin:3px 0 0;line-height:1.5}
 #gd-main .gcard-body{padding:22px 24px}
@@ -74,7 +84,6 @@
 #gd-main .gmod-card:hover{border-color:var(--stripe);box-shadow:0 4px 14px rgba(13,43,85,.1);transform:translateY(-2px)}
 #gd-main .gmod-card:hover::after{transform:scaleX(1)}
 #gd-main .gmod-head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-#gd-main .gmod-emoji{font-size:1.3rem}
 #gd-main .gmod-card h3{font-size:.88rem;font-weight:700;color:#0d2b55;margin:0}
 #gd-main .gmod-art{margin-left:auto;font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--chip-bg);color:var(--chip-cor);white-space:nowrap}
 #gd-main .gmod-card>p{font-size:.81rem;color:#4a6080;line-height:1.55;margin-bottom:10px}
@@ -127,18 +136,6 @@
 #gd-main .gcl-item{display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border-radius:8px;font-size:.84rem;line-height:1.5;margin-bottom:4px}
 #gd-main .gcl-item:hover{background:#f5f9f4}
 #gd-main .gcl-dot{width:7px;height:7px;border-radius:50%;background:#1a7a40;margin-top:6px;flex-shrink:0}
-/* Card do Guia na home */
-.guia-card{border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(13,43,85,.13);transition:transform .2s,box-shadow .2s;cursor:pointer;margin-bottom:1.5rem}
-.guia-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(13,43,85,.18)}
-.guia-card-inner{display:flex;align-items:center;gap:20px;padding:22px 28px;background:linear-gradient(135deg,#0d2b55 0%,#1a4a8a 60%,#2563b0 100%);color:white;position:relative;overflow:hidden}
-.guia-card-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 120% at 95% 50%,rgba(200,147,10,.18) 0%,transparent 60%);pointer-events:none}
-.guia-card-icon{font-size:2.6rem;flex-shrink:0;position:relative;z-index:1}
-.guia-card-body{flex:1;min-width:0;position:relative;z-index:1}
-.guia-card-label{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#f0c040;margin-bottom:4px}
-.guia-card-titulo{font-size:1.35rem;font-weight:900;color:white;margin:0 0 6px;line-height:1.2;font-family:'Playfair Display','Georgia',serif}
-.guia-card-desc{font-size:.88rem;color:rgba(255,255,255,.78);line-height:1.55;margin:0}
-.guia-card-arrow{font-size:1.8rem;color:#f0c040;flex-shrink:0;position:relative;z-index:1;transition:transform .2s}
-.guia-card:hover .guia-card-arrow{transform:translateX(5px)}
 
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,7 +221,20 @@
 
   <div class="main-wrapper">
 
-    <div class="alerta alerta-info fade-up fade-up-delay-1">
+    <!-- ══ GUIA CARD ══ -->
+<div class="guia-card fade-up fade-up-delay-1" onclick="gdAbrir()" role="button" tabindex="0">
+  <div class="guia-card-inner">
+    <div class="guia-card-icon">&#128196;</div>
+    <div class="guia-card-body">
+      <div class="guia-card-label">Ferramenta</div>
+      <h2 class="guia-card-titulo">Guia &#8212; Gerador de Of&#237;cios</h2>
+      <p class="guia-card-desc">Passo a passo completo: modalidades, checklist de documentos, edi&#231;&#227;o e comunica&#231;&#227;o ao Poder Judici&#225;rio.</p>
+    </div>
+    <div class="guia-card-arrow">&#8594;</div>
+  </div>
+</div>
+
+<div class="alerta alerta-info fade-up fade-up-delay-1">
       <span class="alerta-icone">📖</span>
       <div>
         <strong class="alerta-titulo">Sobre este Procedimento Operacional Padrão</strong>
@@ -5846,7 +5856,7 @@ function gdNavClick(e,a){
   e.preventDefault();
   var id=a.getAttribute('href').replace('#','');
   var el=document.getElementById(id);
-  if(el){var b=document.getElementById('gd-drawer-body');b.scrollTo({top:el.offsetTop-16,behavior:'smooth'});}
+  if(el){var b=document.getElementById('gd-main');b.scrollTo({top:el.offsetTop-16,behavior:'smooth'});}
 }
 function gdClTab(btn,panelId){
   var body=btn.closest('.gcard-body');
@@ -5859,24 +5869,9 @@ function gdClTab(btn,panelId){
 document.addEventListener('keydown',function(e){if(e.key==='Escape')gdFechar();});
 
 </script>
-
-<!-- ══ GUIA CARD ══ -->
-<div class="guia-card fade-up fade-up-delay-1" onclick="gdAbrir()" role="button" tabindex="0">
-  <div class="guia-card-inner">
-    <div class="guia-card-icon">&#128196;</div>
-    <div class="guia-card-body">
-      <div class="guia-card-label">Ferramenta</div>
-      <h2 class="guia-card-titulo">Guia &#8212; Gerador de Of&#237;cios</h2>
-      <p class="guia-card-desc">Passo a passo completo de uso do Gerador de Of&#237;cios CRV/DPP: modalidades, checklist de documentos, edi&#231;&#227;o ap&#243;s gera&#231;&#227;o e comunica&#231;&#227;o ao Poder Judici&#225;rio.</p>
-    </div>
-    <div class="guia-card-arrow">&#8594;</div>
-  </div>
-</div>
-<!-- ══ /GUIA CARD ══ -->
-
 <!-- ══ DRAWER GUIA ══ -->
 <div id="gd-overlay" onclick="gdFechar()"></div>
-<div id="gd-drawer" role="dialog" aria-label="Guia do Gerador de Of&#237;cios">
+<div id="gd-drawer" role="dialog" aria-label="Guia do Gerador de Oficios">
   <div id="gd-drawer-head">
     <span style="font-size:1.5rem">&#128196;</span>
     <h2>Guia de Uso &#8212; <em>Gerador de Of&#237;cios</em></h2>
@@ -5893,37 +5888,31 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')gdFechar();}
       <a href="#gd-botoes" onclick="gdNavClick(event,this)">&#128432; Bot&#245;es</a>
     </nav>
     <div id="gd-main">
-
       <div class="gcard" id="gd-passos">
         <div class="gcard-head"><div class="gcard-icon gi-azul">&#128640;</div><div class="gcard-head-txt"><h2>Passo a Passo Geral</h2><p>Como utilizar o Gerador de Of&#237;cios do in&#237;cio ao fim</p></div></div>
-        <div class="gcard-body">
-          <div class="gsteps">
-            <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Acesse o Gerador de Of&#237;cios no site da CRV</h4><p>No menu superior, clique em <strong>Gerador de Of&#237;cios</strong>. A ferramenta abre diretamente no navegador.</p></div></div>
-            <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Escolha a modalidade</h4><p>O assistente exibe os tipos de of&#237;cio dispon&#237;veis. Clique no bot&#227;o correspondente.</p></div></div>
-            <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Responda &#224;s perguntas sequenciais</h4><p>O fluxo avan&#231;a automaticamente. Algumas etapas s&#227;o cliques em op&#231;&#245;es, outras s&#227;o campos de texto livre.</p><div class="gtip">&#9888; Campos de texto pedem uma informa&#231;&#227;o por vez &#8212; aguarde a pr&#243;xima pergunta aparecer.</div></div></div>
-            <div class="gstep"><div class="gstep-n">4</div><div class="gstep-body"><h4>O of&#237;cio &#233; gerado automaticamente</h4><p>O documento A4 aparece formatado na tela, pronto para revis&#227;o, edi&#231;&#227;o, c&#243;pia ou download.</p></div></div>
-            <div class="gstep"><div class="gstep-n">5</div><div class="gstep-body"><h4>Use os bot&#245;es de a&#231;&#227;o</h4><p>Copie, baixe como .doc, exporte em PDF, edite no papel ou gere o of&#237;cio ao Poder Judici&#225;rio.</p></div></div>
-          </div>
-        </div>
+        <div class="gcard-body"><div class="gsteps">
+          <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Acesse o Gerador de Of&#237;cios no site da CRV</h4><p>No menu superior, clique em <strong>Gerador de Of&#237;cios</strong>.</p></div></div>
+          <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Escolha a modalidade</h4><p>Clique no bot&#227;o correspondente &#224; sua necessidade.</p></div></div>
+          <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Responda &#224;s perguntas sequenciais</h4><p>Algumas etapas s&#227;o cliques em op&#231;&#245;es, outras s&#227;o campos de texto livre.</p><div class="gtip">&#9888; Campos de texto pedem uma informa&#231;&#227;o por vez.</div></div></div>
+          <div class="gstep"><div class="gstep-n">4</div><div class="gstep-body"><h4>O of&#237;cio &#233; gerado automaticamente</h4><p>Documento A4 formatado, pronto para revis&#227;o, edi&#231;&#227;o, c&#243;pia ou download.</p></div></div>
+          <div class="gstep"><div class="gstep-n">5</div><div class="gstep-body"><h4>Use os bot&#245;es de a&#231;&#227;o</h4><p>Copie, baixe .doc/PDF, edite no papel ou gere o of&#237;cio ao Judici&#225;rio.</p></div></div>
+        </div></div>
       </div>
-
       <div class="gcard" id="gd-modalidades">
         <div class="gcard-head"><div class="gcard-icon gi-ouro">&#128203;</div><div class="gcard-head-txt"><h2>Modalidades Dispon&#237;veis</h2><p>6 tipos de of&#237;cio, cada um com fluxo e texto espec&#237;ficos</p></div></div>
-        <div class="gcard-body">
-          <div class="gmod-grid">
-            <div class="gmod-card" style="--stripe:#c0392b;--chip-bg:#f8dada;--chip-cor:#8b1a1a;"><div class="gmod-head"><span class="gmod-emoji">&#128680;</span><h3>Emergencial</h3><span class="gmod-art" style="background:#f8dada;color:#8b1a1a;">Art. 21, I</span></div><p>Transfer&#234;ncia urgente por risco &#224; integridade ou &#224; seguran&#231;a, com ou sem PAD.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Situa&#231;&#227;o: com PAD (falta grave) ou sem PAD (risco)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o do(s) reeducando(s)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Descri&#231;&#227;o detalhada da situa&#231;&#227;o concreta</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI</span></div><div class="gmc"><div class="gmc-dot"></div><span>Sauda&#231;&#227;o, fechamento, n&#250;mero do of&#237;cio, assinaturas</span></div></div></div>
-            <div class="gmod-card" style="--stripe:#174b8a;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span class="gmod-emoji">&#127963;</span><h3>Mandado de Comarca Diversa</h3><span class="gmod-art">Art. 21, III</span></div><p>Transfer&#234;ncia para a unidade respons&#225;vel pela circunscri&#231;&#227;o do ju&#237;zo expedidor.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o do(s) reeducando(s)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Ju&#237;zo expedidor do Mandado de Pris&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI</span></div></div></div>
-            <div class="gmod-card" style="--stripe:#2563b0;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span class="gmod-emoji">&#9875;</span><h3>Adequa&#231;&#227;o da Capacidade</h3><span class="gmod-art">Art. 21, III</span></div><p>3 submodalidades: <strong>Larga Escala</strong>, <strong>Pontual</strong> e <strong>Altera&#231;&#227;o de Regime</strong>.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da transfer&#234;ncia e crit&#233;rio de indica&#231;&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
-            <div class="gmod-card" style="--stripe:#1a7a40;--chip-bg:#d4edda;--chip-cor:#1a7a40;"><div class="gmod-head"><span class="gmod-emoji">&#128260;</span><h3>Permuta entre Unidades</h3><span class="gmod-art" style="background:#d4edda;color:#1a7a40;">Art. 21, III</span></div><p>Troca de reeducandos entre duas unidades, com crit&#233;rio de escolha obrigat&#243;rio.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da permuta e crit&#233;rio de escolha/indica&#231;&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
-            <div class="gmod-card" style="--stripe:#7d3c98;--chip-bg:#ead9f5;--chip-cor:#7d3c98;"><div class="gmod-head"><span class="gmod-emoji">&#9878;</span><h3>Pris&#227;o Civil</h3><span class="gmod-art" style="background:#ead9f5;color:#7d3c98;">Especializada</span></div><p>Preso civil para unidade adequada. <strong>N&#227;o solicita regime ou aloca&#231;&#227;o.</strong></p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome e IPEN do(s) preso(s) civil(is)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino</span></div><div class="gmc"><div class="gmc-dot"></div><span>Encaminha c&#243;pia da decis&#227;o judicial junto ao BPI</span></div></div></div>
-            <div class="gmod-card" style="--stripe:#c8930a;--chip-bg:#fdf0d0;--chip-cor:#7a5000;"><div class="gmod-head"><span class="gmod-emoji">&#128232;</span><h3>Of&#237;cios de Comunica&#231;&#227;o</h3><span class="gmod-art" style="background:#fdf0d0;color:#7a5000;">Art. 16</span></div><p>Comunica ao Ju&#237;zo transfer&#234;ncia j&#225; realizada. Submodalidades: <strong>Sa&#237;da</strong> e <strong>Entrada</strong>.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome e IPEN do(s) custodiado(s)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Data, motivo, unidade origem/destino</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome do(a) Ju&#237;z(a), Vara e Cidade/UF</span></div></div></div>
-          </div>
-          <div class="gcallout gca-azul" style="margin-top:16px"><span class="gca-icon">&#8505;</span><span>Em todas as modalidades com <strong>m&#250;ltiplos reeducandos</strong>, o sistema gera automaticamente uma tabela em folha <strong>Anexo I</strong>.</span></div>
+        <div class="gcard-body"><div class="gmod-grid">
+          <div class="gmod-card" style="--stripe:#c0392b;--chip-bg:#f8dada;--chip-cor:#8b1a1a;"><div class="gmod-head"><span>&#128680;</span><h3>Emergencial</h3><span class="gmod-art" style="background:#f8dada;color:#8b1a1a;">Art. 21, I</span></div><p>Transfer&#234;ncia urgente por risco &#224; integridade ou seguran&#231;a, com ou sem PAD.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Situa&#231;&#227;o: com PAD (falta grave) ou sem PAD (risco)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o do(s) reeducando(s)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Descri&#231;&#227;o detalhada da situa&#231;&#227;o concreta</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
+          <div class="gmod-card" style="--stripe:#174b8a;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span>&#127963;</span><h3>Mandado de Comarca Diversa</h3><span class="gmod-art">Art. 21, III</span></div><p>Transfer&#234;ncia para unidade do ju&#237;zo expedidor do mandado.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Ju&#237;zo expedidor do Mandado de Pris&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
+          <div class="gmod-card" style="--stripe:#2563b0;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span>&#9875;</span><h3>Adequa&#231;&#227;o da Capacidade</h3><span class="gmod-art">Art. 21, III</span></div><p>3 submodalidades: Larga Escala, Pontual e Altera&#231;&#227;o de Regime.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da transfer&#234;ncia e crit&#233;rio de indica&#231;&#227;o</span></div></div></div>
+          <div class="gmod-card" style="--stripe:#1a7a40;--chip-bg:#d4edda;--chip-cor:#1a7a40;"><div class="gmod-head"><span>&#128260;</span><h3>Permuta entre Unidades</h3><span class="gmod-art" style="background:#d4edda;color:#1a7a40;">Art. 21, III</span></div><p>Troca de reeducandos com crit&#233;rio de escolha obrigat&#243;rio.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da permuta e crit&#233;rio de escolha</span></div></div></div>
+          <div class="gmod-card" style="--stripe:#7d3c98;--chip-bg:#ead9f5;--chip-cor:#7d3c98;"><div class="gmod-head"><span>&#9878;</span><h3>Pris&#227;o Civil</h3><span class="gmod-art" style="background:#ead9f5;color:#7d3c98;">Especializada</span></div><p>Preso civil para unidade adequada. N&#227;o solicita regime ou aloca&#231;&#227;o.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome e IPEN do(s) preso(s) civil(is)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Sa&#250;de, origem, destino, c&#243;pia da decis&#227;o judicial</span></div></div></div>
+          <div class="gmod-card" style="--stripe:#c8930a;--chip-bg:#fdf0d0;--chip-cor:#7a5000;"><div class="gmod-head"><span>&#128232;</span><h3>Of&#237;cios de Comunica&#231;&#227;o</h3><span class="gmod-art" style="background:#fdf0d0;color:#7a5000;">Art. 16</span></div><p>Comunica ao Ju&#237;zo transfer&#234;ncia j&#225; realizada. Submodalidades: Sa&#237;da e Entrada.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, data, motivo, origem/destino</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome do(a) Ju&#237;z(a), Vara e Cidade/UF</span></div></div></div>
+        </div>
+        <div class="gcallout gca-azul" style="margin-top:16px"><span class="gca-icon">&#8505;</span><span>Com <strong>m&#250;ltiplos reeducandos</strong>, o sistema gera automaticamente uma tabela <strong>Anexo I</strong>.</span></div>
         </div>
       </div>
-
       <div class="gcard" id="gd-checklist">
-        <div class="gcard-head-verde"><div class="gi-inv">&#9745;</div><div><h2>Checklist de Documentos</h2><p>Documenta&#231;&#227;o exigida por modalidade &#183; Pedidos incompletos ser&#227;o devolvidos</p></div></div>
+        <div class="gcard-head-verde"><div class="gi-inv">&#9745;</div><div><h2>Checklist de Documentos</h2><p>Documenta&#231;&#227;o exigida por modalidade</p></div></div>
         <div class="gcard-body">
           <div class="gcl-tabs">
             <button class="gcl-tab active" onclick="gdClTab(this,'gd-cl-emerg')">&#128680; Emergencial</button>
@@ -5933,87 +5922,70 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')gdFechar();}
             <button class="gcl-tab" onclick="gdClTab(this,'gd-cl-segmax')">&#128274; Seg. M&#225;xima</button>
           </div>
           <div class="gcl-panel active" id="gd-cl-emerg">
-            <div class="gcl-group"><div class="gcl-gtitle">Com PAD &#8212; falta grave (Art. 50/52 LEP)</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo A (Com PAD), Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino + Superintendente(s) Regional(is)<br><small style="color:#4a6080">N&#227;o &#233; necess&#225;rio tramitar no SGPe.</small></span></div></div>
-            <div class="gcl-group"><div class="gcl-gtitle">Sem PAD &#8212; risco &#224; integridade / seguran&#231;a</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo B (Sem PAD), Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino + Superintendente(s) Regional(is)<br><small style="color:#4a6080">N&#227;o &#233; necess&#225;rio tramitar no SGPe.</small></span></div></div>
-            <div class="gcallout gca-verm"><span class="gca-icon">&#9888;</span><span>A mera alega&#231;&#227;o gen&#233;rica de urg&#234;ncia <strong>n&#227;o &#233; suficiente</strong>. Pedidos gen&#233;ricos ser&#227;o indeferidos de plano.</span></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Com PAD &#8212; falta grave (Art. 50/52 LEP)</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo A, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Sem PAD &#8212; risco &#224; integridade</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo B, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
+            <div class="gcallout gca-verm"><span class="gca-icon">&#9888;</span><span>A mera alega&#231;&#227;o gen&#233;rica de urg&#234;ncia <strong>n&#227;o &#233; suficiente</strong>. Pedidos gen&#233;ricos ser&#227;o indeferidos.</span></div>
           </div>
           <div class="gcl-panel" id="gd-cl-adequacao">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio da Dire&#231;&#227;o / SR / DPP / CRV</strong> &#8212; Art. 21, III da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Lista dos presos indicados</strong> &#8212; nome, IPEN, regime, perfil</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + SR de Origem + Diretor de Destino<br><small style="color:#4a6080">Quando Regionais diferentes, o SR de Destino tamb&#233;m deve assinar.</small></span></div></div>
-            <div class="gcallout gca-azul"><span class="gca-icon">&#128203;</span><span><strong>Mesmo Complexo Prisional:</strong> basta o cadastro no i-PEN com men&#231;&#227;o ao contato pr&#233;vio com o Diretor de Destino.</span></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> da Dire&#231;&#227;o / SR / DPP / CRV</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Lista dos presos indicados</strong> &#8212; nome, IPEN, regime, perfil</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem + Diretor Destino<br><small style="color:#4a6080">Regionais diferentes: SR Destino tamb&#233;m assina.</small></span></div></div>
+            <div class="gcallout gca-azul"><span class="gca-icon">&#128203;</span><span><strong>Mesmo Complexo:</strong> basta cadastro no i-PEN com men&#231;&#227;o ao contato pr&#233;vio com Diretor de Destino.</span></div>
           </div>
           <div class="gcl-panel" id="gd-cl-mandado">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III &#183; Art. 24 PN 2189/2025</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio da Dire&#231;&#227;o</strong> &#8212; Art. 21, III da Res. n&#186; 1/2026 e Art. 24 da PN 2189/2025</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>C&#243;pia do Mandado de Pris&#227;o</strong> &#8212; expedido pela Vara competente</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino</span></div></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III e Art. 24 PN 2189/2025</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio da Dire&#231;&#227;o</strong></span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>C&#243;pia do Mandado de Pris&#227;o</strong></span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino</span></div></div>
           </div>
           <div class="gcl-panel" id="gd-cl-pernoite">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Pedido cadastrado no i-PEN</strong> &#8212; com fundamenta&#231;&#227;o do motivo do pernoite</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Men&#231;&#227;o expressa</strong> de contato pr&#233;vio com o Diretor da unidade de destino</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Documentos eventuais</strong> &#8212; Despacho/Decis&#227;o Judicial, se houver</span></div></div>
-            <div class="gcallout gca-azul"><span class="gca-icon">&#8505;</span><span>N&#227;o &#233; exigida anu&#234;ncia dos Superintendentes Regionais nem envio de of&#237;cio via SGPe.</span></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Pedido no i-PEN</strong> com fundamenta&#231;&#227;o do motivo</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Men&#231;&#227;o expressa</strong> ao contato pr&#233;vio com Diretor de Destino</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Documentos eventuais</strong> &#8212; Decis&#227;o Judicial, se houver</span></div></div>
+            <div class="gcallout gca-azul"><span class="gca-icon">&#8505;</span><span>N&#227;o &#233; exigida anu&#234;ncia dos SRs nem of&#237;cio via SGPe.</span></div>
           </div>
           <div class="gcl-panel" id="gd-cl-segmax">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; RDD / Seguran&#231;a M&#225;xima</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Autoriza&#231;&#227;o expressa do DPP</strong> &#8212; via Comiss&#227;o Deliberativa da USM</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio de solicita&#231;&#227;o de RDD</strong> &#8212; encaminhado ao ju&#237;zo competente</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Decis&#227;o judicial</strong> &#8212; que determina a inclus&#227;o em RDD</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Boletim de Ocorr&#234;ncia, PAD, Relat&#243;rios</strong> &#8212; e demais documentos pertinentes</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + SR de Origem</span></div></div>
-            <div class="gcallout gca-ouro"><span class="gca-icon">&#128274;</span><span><strong>Sigilo no SGPe:</strong> &#233; <strong>obrigat&#243;rio alterar o controle de acesso</strong> para: <em>"Usu&#225;rios em setor de tramita&#231;&#227;o do Processo, Interessado e Setor de Compet&#234;ncia"</em>.</span></div>
+            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; RDD / Seguran&#231;a M&#225;xima</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Autoriza&#231;&#227;o do DPP</strong> via Comiss&#227;o Deliberativa da USM</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio de solicita&#231;&#227;o de RDD</strong> ao ju&#237;zo competente</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Decis&#227;o judicial</strong> de inclus&#227;o em RDD</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>BO, PAD, Relat&#243;rios</strong> e demais documentos</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem</span></div></div>
+            <div class="gcallout gca-ouro"><span class="gca-icon">&#128274;</span><span><strong>Sigilo no SGPe:</strong> alterar controle de acesso para <em>"Usu&#225;rios em setor de tramita&#231;&#227;o, Interessado e Setor de Compet&#234;ncia"</em>.</span></div>
           </div>
         </div>
       </div>
-
       <div class="gcard" id="gd-edicao">
         <div class="gcard-head"><div class="gcard-icon gi-ouro">&#9999;</div><div class="gcard-head-txt"><h2>Edi&#231;&#227;o Ap&#243;s o Of&#237;cio Gerado</h2><p>Ajuste qualquer texto diretamente no documento</p></div></div>
-        <div class="gcard-body">
-          <div class="gsteps">
-            <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Clique em &#9999; Editar</h4><p>Um banner amarelo aparece: <em>"Modo edi&#231;&#227;o ativado &#8212; clique nos textos para editar."</em></p></div></div>
-            <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Elementos edit&#225;veis ficam destacados em amarelo</h4><p>Clique sobre qualquer campo destacado para editar inline.</p><div class="gedit-demo"><span class="gedit-label">Exemplo visual</span><div class="gedit-row">Florian&#243;polis/SC, <span class="ghl">15 de julho de 2025</span></div><div class="gedit-row">Of&#237;cio n&#186; <span class="ghl">042/2026/DPP</span></div><div class="gedit-row" style="margin-top:6px">Senhor(a) <span class="ghl">Coordenador(a)</span>,</div></div></div></div>
-            <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Clique em &#10003; Finalizar Edi&#231;&#227;o</h4><p>O documento volta ao visual normal. Download e c&#243;pia refletir&#227;o o conte&#250;do editado.</p><div class="gtip">&#9888; N&#227;o h&#225; "desfazer" autom&#225;tico. Use &#128260; Novo Of&#237;cio para recomecar.</div></div></div>
-          </div>
-          <p style="font-size:.84rem;font-weight:700;color:#0d2b55;margin:16px 0 8px">Campos edit&#225;veis incluem:</p>
-          <div class="gtags"><span class="gtag">Par&#225;grafos do corpo</span><span class="gtag">Sauda&#231;&#227;o</span><span class="gtag">Fechamento</span><span class="gtag">Nome e cargo do assinante</span><span class="gtag">Destinat&#225;rio</span><span class="gtag">N&#250;mero e data do of&#237;cio</span><span class="gtag">Cabe&#231;alho</span><span class="gtag">Rodap&#233;</span></div>
+        <div class="gcard-body"><div class="gsteps">
+          <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Clique em Editar</h4><p>Banner amarelo: <em>"Modo edi&#231;&#227;o ativado &#8212; clique nos textos para editar."</em></p></div></div>
+          <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Campos com fundo amarelo s&#227;o edit&#225;veis</h4><p>Clique sobre qualquer campo destacado para editar inline.</p><div class="gedit-demo"><span class="gedit-label">Exemplo</span><div class="gedit-row">Florian&#243;polis/SC, <span class="ghl">15 de julho de 2025</span></div><div class="gedit-row">Of&#237;cio n&#186; <span class="ghl">042/2026/DPP</span></div><div class="gedit-row" style="margin-top:6px">Senhor(a) <span class="ghl">Coordenador(a)</span>,</div></div></div></div>
+          <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Clique em Finalizar Edi&#231;&#227;o</h4><p>Visual normal restaurado. Downloads refletem o conte&#250;do editado.</p></div></div>
+        </div>
+        <div class="gtags" style="margin-top:16px"><span class="gtag">Par&#225;grafos</span><span class="gtag">Sauda&#231;&#227;o</span><span class="gtag">Fechamento</span><span class="gtag">Assinante</span><span class="gtag">Destinat&#225;rio</span><span class="gtag">Data e n&#250;mero</span><span class="gtag">Cabe&#231;alho</span><span class="gtag">Rodap&#233;</span></div>
         </div>
       </div>
-
       <div class="gcard" id="gd-judiciario">
-        <div class="gcard-head"><div class="gcard-icon gi-verde">&#128140;</div><div class="gcard-head-txt"><h2>Comunica&#231;&#227;o ao Poder Judici&#225;rio</h2><p>Gera of&#237;cio de comunica&#231;&#227;o judicial a partir do of&#237;cio principal j&#225; criado</p></div></div>
+        <div class="gcard-head"><div class="gcard-icon gi-verde">&#128140;</div><div class="gcard-head-txt"><h2>Comunica&#231;&#227;o ao Poder Judici&#225;rio</h2><p>Gera of&#237;cio judicial a partir do of&#237;cio principal j&#225; criado</p></div></div>
         <div class="gcard-body">
-          <p style="font-size:.85rem;color:#4a6080;margin-bottom:6px">O bot&#227;o <strong>&#128140; Comunicar Judici&#225;rio</strong> aparece automaticamente nas modalidades:</p>
+          <p style="font-size:.85rem;color:#4a6080;margin-bottom:6px">Bot&#227;o <strong>Comunicar Judici&#225;rio</strong> aparece automaticamente nas modalidades:</p>
           <div class="gmbadges"><span class="gmbadge">&#128680; Emergencial</span><span class="gmbadge">&#127963; Mandado</span><span class="gmbadge">&#9875; Adequa&#231;&#227;o</span><span class="gmbadge">&#128260; Permuta</span><span class="gmbadge">&#9878; Pris&#227;o Civil</span></div>
-          <p style="font-size:.84rem;font-weight:700;color:#0d2b55;margin:18px 0 10px">Fluxo de uso:</p>
-          <div class="gcj-flow">
-            <div class="gcj-step"><span class="gcj-icon">&#128196;</span><h4>Of&#237;cio gerado</h4><p>Principal j&#225; na tela</p></div>
-            <div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128140;</span><h4>Clique no bot&#227;o</h4><p>Comunicar Judici&#225;rio</p></div>
-            <div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128221;</span><h4>Preencha</h4><p>Data, Ju&#237;z(a), Vara, Cidade</p></div>
-            <div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128065;</span><h4>Visualize</h4><p>Navegue entre of&#237;cios</p></div>
-            <div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128229;</span><h4>Baixe o PDF</h4><p>Um por ju&#237;zo</p></div>
+          <div class="gcj-flow" style="margin-top:16px">
+            <div class="gcj-step"><span class="gcj-icon">&#128196;</span><h4>Of&#237;cio gerado</h4><p>Na tela</p></div><div class="gcj-arr">&#8250;</div>
+            <div class="gcj-step"><span class="gcj-icon">&#128140;</span><h4>Bot&#227;o</h4><p>Comunicar</p></div><div class="gcj-arr">&#8250;</div>
+            <div class="gcj-step"><span class="gcj-icon">&#128221;</span><h4>Preencha</h4><p>Ju&#237;z, Vara</p></div><div class="gcj-arr">&#8250;</div>
+            <div class="gcj-step"><span class="gcj-icon">&#128065;</span><h4>Visualize</h4><p>Preview</p></div><div class="gcj-arr">&#8250;</div>
+            <div class="gcj-step"><span class="gcj-icon">&#128229;</span><h4>Baixe PDF</h4><p>Por ju&#237;zo</p></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
-            <div class="gcallout gca-azul"><span class="gca-icon">&#128100;</span><div><strong>Preso &#250;nico:</strong> preencha o nome do(a) Ju&#237;z(a), Vara e Cidade/UF. Motivo &#233; pr&#233;-preenchido e pode ser editado.</div></div>
-            <div class="gcallout gca-ouro"><span class="gca-icon">&#128101;</span><div><strong>M&#250;ltiplos presos:</strong> o sistema <strong>agrupa automaticamente</strong> os que t&#234;m o mesmo ju&#237;zo e gera of&#237;cios separados para ju&#237;zes diferentes.</div></div>
-          </div>
+          <div class="gcallout gca-ouro" style="margin-top:12px"><span class="gca-icon">&#128101;</span><div><strong>M&#250;ltiplos presos:</strong> o sistema agrupa os que t&#234;m o mesmo ju&#237;zo e gera of&#237;cios separados para ju&#237;zes diferentes.</div></div>
         </div>
       </div>
-
       <div class="gcard" id="gd-botoes">
         <div class="gcard-head"><div class="gcard-icon gi-azul">&#128432;</div><div class="gcard-head-txt"><h2>Bot&#245;es de A&#231;&#227;o</h2><p>Dispon&#237;veis na barra superior ap&#243;s a gera&#231;&#227;o do of&#237;cio</p></div></div>
-        <div class="gcard-body">
-          <table class="gbtable">
-            <thead><tr><th>Bot&#227;o</th><th>O que faz</th></tr></thead>
-            <tbody>
-              <tr><td><span class="gblbl">&#128203; Copiar</span></td><td>Copia o of&#237;cio com formata&#231;&#227;o para a &#225;rea de transfer&#234;ncia</td></tr>
-              <tr><td><span class="gblbl">&#128190; Baixar .doc</span></td><td>Download do of&#237;cio no formato Word (.doc)</td></tr>
-              <tr><td><span class="gblbl">&#128196; Baixar PDF</span></td><td>Abre a janela de impress&#227;o para salvar como PDF (A4)</td></tr>
-              <tr><td><span class="gblbl">&#128202; Resumo Sint&#233;tico</span></td><td>Exibe par&#225;grafo resumido &#8212; pode ser copiado ou baixado em .txt</td></tr>
-              <tr><td><span class="gblbl">&#9999; Editar</span><span class="gbadge gbg-ouro">toggle</span></td><td>Ativa/desativa o modo de edi&#231;&#227;o inline</td></tr>
-              <tr><td><span class="gblbl">&#128140; Comunicar Judici&#225;rio</span><span class="gbadge gbg-verde">condicional</span></td><td>Abre o modal para gerar o of&#237;cio ao Ju&#237;zo competente</td></tr>
-              <tr><td><span class="gblbl">&#8617; Voltar ao chat</span></td><td>Retorna ao assistente sem apagar os dados</td></tr>
-              <tr><td><span class="gblbl">&#128260; Novo Of&#237;cio</span><span class="gbadge gbg-verm">reinicia</span></td><td>Apaga todos os dados e reinicia do zero</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <div class="gcard-body"><table class="gbtable">
+          <thead><tr><th>Bot&#227;o</th><th>O que faz</th></tr></thead>
+          <tbody>
+            <tr><td><span class="gblbl">&#128203; Copiar</span></td><td>Copia o of&#237;cio com formata&#231;&#227;o</td></tr>
+            <tr><td><span class="gblbl">&#128190; Baixar .doc</span></td><td>Download no formato Word</td></tr>
+            <tr><td><span class="gblbl">&#128196; Baixar PDF</span></td><td>Janela de impress&#227;o (A4)</td></tr>
+            <tr><td><span class="gblbl">&#128202; Resumo Sint&#233;tico</span></td><td>Par&#225;grafo resumido &#8212; copiavel ou download .txt</td></tr>
+            <tr><td><span class="gblbl">&#9999; Editar</span><span class="gbadge gbg-ouro">toggle</span></td><td>Modo de edi&#231;&#227;o inline</td></tr>
+            <tr><td><span class="gblbl">&#128140; Comunicar Judici&#225;rio</span><span class="gbadge gbg-verde">condicional</span></td><td>Gera of&#237;cio ao Ju&#237;zo competente</td></tr>
+            <tr><td><span class="gblbl">&#8617; Voltar ao chat</span></td><td>Retorna ao assistente sem apagar dados</td></tr>
+            <tr><td><span class="gblbl">&#128260; Novo Of&#237;cio</span><span class="gbadge gbg-verm">reinicia</span></td><td>Apaga tudo e reinicia do zero</td></tr>
+          </tbody>
+        </table></div>
       </div>
-
     </div>
   </div>
 </div>
 <!-- ══ /DRAWER GUIA ══ -->
-
 </body
