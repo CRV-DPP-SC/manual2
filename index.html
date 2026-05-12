@@ -31,9 +31,9 @@ window.gdNavClick=function(e,a){
   }
 };
 window.gdClTab=function(btn,panelId){
-  var body=btn.closest('.gcard-body');
-  body.querySelectorAll('.gcl-tab').forEach(function(b){b.classList.remove('active');});
-  body.querySelectorAll('.gcl-panel').forEach(function(p){p.classList.remove('active');});
+  var body=btn.closest('.gd__card-body');
+  body.querySelectorAll('.gd__cl-tab').forEach(function(b){b.classList.remove('active');});
+  body.querySelectorAll('.gd__cl-panel').forEach(function(p){p.classList.remove('active');});
   btn.classList.add('active');
   var p=document.getElementById(panelId);
   if(p)p.classList.add('active');
@@ -91,84 +91,84 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')window.gdFec
 
 
 #gd-main{flex:1;min-width:0;padding:28px 32px 60px;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
-#gd-main .gcard{background:white;border-radius:16px;box-shadow:0 2px 18px rgba(13,43,85,.07);overflow:hidden}
-#gd-main .gcard-head{display:flex;align-items:flex-start;gap:14px;padding:20px 24px 16px;border-bottom:1px solid #c8d6ec}
-#gd-main .gcard-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
-#gd-main .gi-azul{background:#dde8f8}#gd-main .gi-ouro{background:#fdf0d0}#gd-main .gi-verde{background:#d4edda}
-#gd-main .gcard-head-txt h2{font-family:'Playfair Display','Georgia',serif;font-size:1.12rem;color:#0d2b55;line-height:1.25;margin:0}
-#gd-main .gcard-head-txt p{font-size:.82rem;color:#4a6080;margin:3px 0 0;line-height:1.5}
-#gd-main .gcard-body{padding:22px 24px}
-#gd-main .gcard-head-verde{display:flex;align-items:flex-start;gap:14px;padding:20px 24px 16px;background:linear-gradient(135deg,#14532d,#1a7a40)}
-#gd-main .gcard-head-verde h2{font-family:'Playfair Display','Georgia',serif;font-size:1.12rem;color:white;margin:0}
-#gd-main .gcard-head-verde p{font-size:.82rem;color:rgba(255,255,255,.75);margin:3px 0 0}
-#gd-main .gi-inv{width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
-#gd-main .gsteps{display:flex;flex-direction:column;position:relative}
-#gd-main .gsteps::before{content:'';position:absolute;left:20px;top:22px;bottom:22px;width:2px;background:linear-gradient(to bottom,#2563b0,#c8d6ec)}
-#gd-main .gstep{display:flex;gap:16px;padding-bottom:20px;position:relative}
-#gd-main .gstep:last-child{padding-bottom:0}
-#gd-main .gstep-n{width:40px;height:40px;border-radius:50%;background:#0d2b55;color:white;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display','Georgia',serif;font-size:1rem;font-weight:700;flex-shrink:0;position:relative;z-index:1;box-shadow:0 0 0 4px #f0f4fa}
-#gd-main .gstep-body{padding-top:8px}
-#gd-main .gstep-body h4{font-size:.93rem;font-weight:700;color:#0d2b55;margin:0 0 4px}
-#gd-main .gstep-body p{font-size:.84rem;color:#4a6080;line-height:1.6;margin:0}
-#gd-main .gtip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#fff8e1;border:1px solid #f0c040;border-radius:8px;padding:5px 12px;font-size:.78rem;color:#7a5000}
-#gd-main .gmod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-#gd-main .gmod-card{border:1.5px solid #c8d6ec;border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
-#gd-main .gmod-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--stripe);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-#gd-main .gmod-card:hover{border-color:var(--stripe);box-shadow:0 4px 14px rgba(13,43,85,.1);transform:translateY(-2px)}
-#gd-main .gmod-card:hover::after{transform:scaleX(1)}
-#gd-main .gmod-head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-#gd-main .gmod-card h3{font-size:.88rem;font-weight:700;color:#0d2b55;margin:0}
-#gd-main .gmod-art{margin-left:auto;font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--chip-bg);color:var(--chip-cor);white-space:nowrap}
-#gd-main .gmod-card>p{font-size:.81rem;color:#4a6080;line-height:1.55;margin-bottom:10px}
-#gd-main .gmod-campos{display:flex;flex-direction:column;gap:5px}
-#gd-main .gmc{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:#1a2740;line-height:1.45}
-#gd-main .gmc-dot{width:6px;height:6px;border-radius:50%;background:var(--stripe);margin-top:5px;flex-shrink:0}
-#gd-main .gcallout{display:flex;gap:10px;padding:12px 16px;border-radius:10px;font-size:.84rem;line-height:1.6}
-#gd-main .gca-azul{background:#eaf2ff;border-left:4px solid #2563b0}
-#gd-main .gca-ouro{background:#fff8e1;border-left:4px solid #c8930a}
-#gd-main .gca-verde{background:#eafaf1;border-left:4px solid #1a7a40}
-#gd-main .gca-verm{background:#fef2f2;border-left:4px solid #dc2626}
-#gd-main .gca-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
-#gd-main .gedit-demo{background:#f8fafb;border:1.5px dashed #c8d6ec;border-radius:10px;padding:18px 16px 14px;font-size:.83rem;margin-top:14px;position:relative}
-#gd-main .gedit-label{position:absolute;top:-10px;left:14px;background:#c8930a;color:white;font-size:.66rem;font-weight:700;padding:2px 10px;border-radius:8px;text-transform:uppercase;letter-spacing:.08em}
-#gd-main .ghl{background:rgba(255,200,0,.3);border-radius:3px;padding:1px 4px;border-bottom:1.5px dashed #c8930a}
-#gd-main .gedit-row{margin-bottom:6px;color:#4a6080}
-#gd-main .gtags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-#gd-main .gtag{background:#f0f5ff;border:1px solid #c8d6ec;border-radius:8px;padding:4px 11px;font-size:.77rem;color:#4a6080}
-#gd-main .gcj-flow{display:flex;align-items:stretch}
-#gd-main .gcj-step{flex:1;min-width:80px;padding:12px 7px;background:#f5f8ff;border:1.5px solid #c8d6ec;text-align:center}
-#gd-main .gcj-step:first-child{border-radius:12px 0 0 12px}
-#gd-main .gcj-step:last-child{border-radius:0 12px 12px 0}
-#gd-main .gcj-step+.gcj-step{border-left:none}
-#gd-main .gcj-icon{font-size:1.3rem;display:block;margin-bottom:4px}
-#gd-main .gcj-step h4{font-size:.72rem;font-weight:700;color:#0d2b55;margin:0 0 2px}
-#gd-main .gcj-step p{font-size:.68rem;color:#4a6080;line-height:1.3;margin:0}
-#gd-main .gcj-arr{display:flex;align-items:center;background:white;border-top:1.5px solid #c8d6ec;border-bottom:1.5px solid #c8d6ec;padding:0 2px;color:#2563b0;font-size:.9rem}
-#gd-main .gmbadges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
-#gd-main .gmbadge{padding:5px 12px;border-radius:20px;font-size:.77rem;font-weight:700;border:1.5px solid #2563b0;color:#174b8a;background:#eaf0fb}
-#gd-main .gbtable{width:100%;border-collapse:collapse;font-size:.84rem}
-#gd-main .gbtable th{background:#0d2b55;color:white;text-align:left;padding:9px 13px;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
-#gd-main .gbtable th:first-child{border-radius:10px 0 0 0}
-#gd-main .gbtable th:last-child{border-radius:0 10px 0 0}
-#gd-main .gbtable td{padding:9px 13px;border-bottom:1px solid #c8d6ec;vertical-align:top;line-height:1.5}
-#gd-main .gbtable tr:hover td{background:#f5f8ff}
-#gd-main .gbtable tr:last-child td{border-bottom:none}
-#gd-main .gblbl{font-weight:700;color:#0d2b55}
-#gd-main .gbadge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:.68rem;font-weight:700;margin-left:5px}
-#gd-main .gbg-verde{background:#d4edda;color:#1a7a40}
-#gd-main .gbg-verm{background:#f8dada;color:#8b1a1a}
-#gd-main .gbg-ouro{background:#fdf0d0;color:#7a5000}
-#gd-main .gcl-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-#gd-main .gcl-tab{padding:6px 14px;border-radius:20px;border:1.5px solid #c8d6ec;background:white;font-size:.78rem;font-weight:700;color:#4a6080;cursor:pointer;font-family:inherit;transition:all .18s}
-#gd-main .gcl-tab:hover{border-color:#1a7a40;color:#1a7a40;background:#f0f7ee}
-#gd-main .gcl-tab.active{background:#1a7a40;color:white;border-color:#1a7a40}
-#gd-main .gcl-panel{display:none}
-#gd-main .gcl-panel.active{display:block}
-#gd-main .gcl-group{margin-bottom:15px}
-#gd-main .gcl-gtitle{font-size:.69rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4a6080;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid #c8d6ec}
-#gd-main .gcl-item{display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border-radius:8px;font-size:.84rem;line-height:1.5;margin-bottom:4px}
-#gd-main .gcl-item:hover{background:#f5f9f4}
-#gd-main .gcl-dot{width:7px;height:7px;border-radius:50%;background:#1a7a40;margin-top:6px;flex-shrink:0}
+#gd-main .gd__card{background:white;border-radius:16px;box-shadow:0 2px 18px rgba(13,43,85,.07);overflow:hidden}
+#gd-main .gd__card-head{display:flex;align-items:flex-start;gap:14px;padding:20px 24px 16px;border-bottom:1px solid #c8d6ec}
+#gd-main .gd__card-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
+#gd-main .gd__ic-azul{background:#dde8f8}#gd-main .gd__ic-ouro{background:#fdf0d0}#gd-main .gd__ic-verde{background:#d4edda}
+#gd-main .gd__card-head-txt h2{font-family:'Playfair Display','Georgia',serif;font-size:1.12rem;color:#0d2b55;line-height:1.25;margin:0}
+#gd-main .gd__card-head-txt p{font-size:.82rem;color:#4a6080;margin:3px 0 0;line-height:1.5}
+#gd-main .gd__card-body{padding:22px 24px}
+#gd-main .gd__card-head-verde{display:flex;align-items:flex-start;gap:14px;padding:20px 24px 16px;background:linear-gradient(135deg,#14532d,#1a7a40)}
+#gd-main .gd__card-head-verde h2{font-family:'Playfair Display','Georgia',serif;font-size:1.12rem;color:white;margin:0}
+#gd-main .gd__card-head-verde p{font-size:.82rem;color:rgba(255,255,255,.75);margin:3px 0 0}
+#gd-main .gd__ic-inv{width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
+#gd-main .gd__steps{display:flex;flex-direction:column;position:relative}
+#gd-main .gd__steps::before{content:'';position:absolute;left:20px;top:22px;bottom:22px;width:2px;background:linear-gradient(to bottom,#2563b0,#c8d6ec)}
+#gd-main .gd__step{display:flex;gap:16px;padding-bottom:20px;position:relative}
+#gd-main .gd__step:last-child{padding-bottom:0}
+#gd-main .gd__step-n{width:40px;height:40px;border-radius:50%;background:#0d2b55;color:white;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display','Georgia',serif;font-size:1rem;font-weight:700;flex-shrink:0;position:relative;z-index:1;box-shadow:0 0 0 4px #f0f4fa}
+#gd-main .gd__step-body{padding-top:8px}
+#gd-main .gd__step-body h4{font-size:.93rem;font-weight:700;color:#0d2b55;margin:0 0 4px}
+#gd-main .gd__step-body p{font-size:.84rem;color:#4a6080;line-height:1.6;margin:0}
+#gd-main .gd__tip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:#fff8e1;border:1px solid #f0c040;border-radius:8px;padding:5px 12px;font-size:.78rem;color:#7a5000}
+#gd-main .gd__mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+#gd-main .gd__mod-card{border:1.5px solid #c8d6ec;border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+#gd-main .gd__mod-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--stripe);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+#gd-main .gd__mod-card:hover{border-color:var(--stripe);box-shadow:0 4px 14px rgba(13,43,85,.1);transform:translateY(-2px)}
+#gd-main .gd__mod-card:hover::after{transform:scaleX(1)}
+#gd-main .gd__mod-head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+#gd-main .gd__mod-card h3{font-size:.88rem;font-weight:700;color:#0d2b55;margin:0}
+#gd-main .gd__mod-art{margin-left:auto;font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--chip-bg);color:var(--chip-cor);white-space:nowrap}
+#gd-main .gd__mod-card>p{font-size:.81rem;color:#4a6080;line-height:1.55;margin-bottom:10px}
+#gd-main .gd__mod-campos{display:flex;flex-direction:column;gap:5px}
+#gd-main .gd__mc{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:#1a2740;line-height:1.45}
+#gd-main .gd__mc-dot{width:6px;height:6px;border-radius:50%;background:var(--stripe);margin-top:5px;flex-shrink:0}
+#gd-main .gd__callout{display:flex;gap:10px;padding:12px 16px;border-radius:10px;font-size:.84rem;line-height:1.6}
+#gd-main .gd__ca-azul{background:#eaf2ff;border-left:4px solid #2563b0}
+#gd-main .gd__ca-ouro{background:#fff8e1;border-left:4px solid #c8930a}
+#gd-main .gd__ca-verde{background:#eafaf1;border-left:4px solid #1a7a40}
+#gd-main .gd__ca-verm{background:#fef2f2;border-left:4px solid #dc2626}
+#gd-main .gd__ca-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
+#gd-main .gd__edit-demo{background:#f8fafb;border:1.5px dashed #c8d6ec;border-radius:10px;padding:18px 16px 14px;font-size:.83rem;margin-top:14px;position:relative}
+#gd-main .gd__edit-label{position:absolute;top:-10px;left:14px;background:#c8930a;color:white;font-size:.66rem;font-weight:700;padding:2px 10px;border-radius:8px;text-transform:uppercase;letter-spacing:.08em}
+#gd-main .gd__hl{background:rgba(255,200,0,.3);border-radius:3px;padding:1px 4px;border-bottom:1.5px dashed #c8930a}
+#gd-main .gd__edit-row{margin-bottom:6px;color:#4a6080}
+#gd-main .gd__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+#gd-main .gd__tag{background:#f0f5ff;border:1px solid #c8d6ec;border-radius:8px;padding:4px 11px;font-size:.77rem;color:#4a6080}
+#gd-main .gd__cj-flow{display:flex;align-items:stretch}
+#gd-main .gd__cj-step{flex:1;min-width:80px;padding:12px 7px;background:#f5f8ff;border:1.5px solid #c8d6ec;text-align:center}
+#gd-main .gd__cj-step:first-child{border-radius:12px 0 0 12px}
+#gd-main .gd__cj-step:last-child{border-radius:0 12px 12px 0}
+#gd-main .gd__cj-step+.gd__cj-step{border-left:none}
+#gd-main .gd__cj-icon{font-size:1.3rem;display:block;margin-bottom:4px}
+#gd-main .gd__cj-step h4{font-size:.72rem;font-weight:700;color:#0d2b55;margin:0 0 2px}
+#gd-main .gd__cj-step p{font-size:.68rem;color:#4a6080;line-height:1.3;margin:0}
+#gd-main .gd__cj-arr{display:flex;align-items:center;background:white;border-top:1.5px solid #c8d6ec;border-bottom:1.5px solid #c8d6ec;padding:0 2px;color:#2563b0;font-size:.9rem}
+#gd-main .gd__mbadges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+#gd-main .gd__mbadge{padding:5px 12px;border-radius:20px;font-size:.77rem;font-weight:700;border:1.5px solid #2563b0;color:#174b8a;background:#eaf0fb}
+#gd-main .gd__btable{width:100%;border-collapse:collapse;font-size:.84rem}
+#gd-main .gd__btable th{background:#0d2b55;color:white;text-align:left;padding:9px 13px;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+#gd-main .gd__btable th:first-child{border-radius:10px 0 0 0}
+#gd-main .gd__btable th:last-child{border-radius:0 10px 0 0}
+#gd-main .gd__btable td{padding:9px 13px;border-bottom:1px solid #c8d6ec;vertical-align:top;line-height:1.5}
+#gd-main .gd__btable tr:hover td{background:#f5f8ff}
+#gd-main .gd__btable tr:last-child td{border-bottom:none}
+#gd-main .gd__blbl{font-weight:700;color:#0d2b55}
+#gd-main .gd__badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:.68rem;font-weight:700;margin-left:5px}
+#gd-main .gd__bg-verde{background:#d4edda;color:#1a7a40}
+#gd-main .gd__bg-verm{background:#f8dada;color:#8b1a1a}
+#gd-main .gd__bg-ouro{background:#fdf0d0;color:#7a5000}
+#gd-main .gd__cl-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+#gd-main .gd__cl-tab{padding:6px 14px;border-radius:20px;border:1.5px solid #c8d6ec;background:white;font-size:.78rem;font-weight:700;color:#4a6080;cursor:pointer;font-family:inherit;transition:all .18s}
+#gd-main .gd__cl-tab:hover{border-color:#1a7a40;color:#1a7a40;background:#f0f7ee}
+#gd-main .gd__cl-tab.active{background:#1a7a40;color:white;border-color:#1a7a40}
+#gd-main .gd__cl-panel{display:none}
+#gd-main .gd__cl-panel.active{display:block}
+#gd-main .gd__cl-group{margin-bottom:15px}
+#gd-main .gd__cl-gtitle{font-size:.69rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4a6080;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid #c8d6ec}
+#gd-main .gd__cl-item{display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border-radius:8px;font-size:.84rem;line-height:1.5;margin-bottom:4px}
+#gd-main .gd__cl-item:hover{background:#f5f9f4}
+#gd-main .gd__cl-dot{width:7px;height:7px;border-radius:50%;background:#1a7a40;margin-top:6px;flex-shrink:0}
 
 </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5895,99 +5895,99 @@ function cxkToast(msg, tipo='sucesso') {
       <a href="#gd-botoes" onclick="gdNavClick(event,this)">&#128432; Bot&#245;es</a>
     </nav>
     <div id="gd-main">
-      <div class="gcard" id="gd-passos">
-        <div class="gcard-head"><div class="gcard-icon gi-azul">&#128640;</div><div class="gcard-head-txt"><h2>Passo a Passo Geral</h2><p>Como utilizar o Gerador de Of&#237;cios do in&#237;cio ao fim</p></div></div>
-        <div class="gcard-body"><div class="gsteps">
-          <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Acesse o Gerador de Of&#237;cios no site da CRV</h4><p>No menu superior, clique em <strong>Gerador de Of&#237;cios</strong>.</p></div></div>
-          <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Escolha a modalidade</h4><p>Clique no bot&#227;o correspondente &#224; sua necessidade.</p></div></div>
-          <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Responda &#224;s perguntas sequenciais</h4><p>Algumas etapas s&#227;o cliques em op&#231;&#245;es, outras s&#227;o campos de texto livre.</p><div class="gtip">&#9888; Campos de texto pedem uma informa&#231;&#227;o por vez.</div></div></div>
-          <div class="gstep"><div class="gstep-n">4</div><div class="gstep-body"><h4>O of&#237;cio &#233; gerado automaticamente</h4><p>Documento A4 formatado, pronto para revis&#227;o, edi&#231;&#227;o, c&#243;pia ou download.</p></div></div>
-          <div class="gstep"><div class="gstep-n">5</div><div class="gstep-body"><h4>Use os bot&#245;es de a&#231;&#227;o</h4><p>Copie, baixe .doc/PDF, edite no papel ou gere o of&#237;cio ao Judici&#225;rio.</p></div></div>
+      <div class="gd__card" id="gd-passos">
+        <div class="gd__card-head"><div class="gd__card-icon gd__ic-azul">&#128640;</div><div class="gd__card-head-txt"><h2>Passo a Passo Geral</h2><p>Como utilizar o Gerador de Of&#237;cios do in&#237;cio ao fim</p></div></div>
+        <div class="gd__card-body"><div class="gd__steps">
+          <div class="gd__step"><div class="gd__step-n">1</div><div class="gd__step-body"><h4>Acesse o Gerador de Of&#237;cios no site da CRV</h4><p>No menu superior, clique em <strong>Gerador de Of&#237;cios</strong>.</p></div></div>
+          <div class="gd__step"><div class="gd__step-n">2</div><div class="gd__step-body"><h4>Escolha a modalidade</h4><p>Clique no bot&#227;o correspondente &#224; sua necessidade.</p></div></div>
+          <div class="gd__step"><div class="gd__step-n">3</div><div class="gd__step-body"><h4>Responda &#224;s perguntas sequenciais</h4><p>Algumas etapas s&#227;o cliques em op&#231;&#245;es, outras s&#227;o campos de texto livre.</p><div class="gd__tip">&#9888; Campos de texto pedem uma informa&#231;&#227;o por vez.</div></div></div>
+          <div class="gd__step"><div class="gd__step-n">4</div><div class="gd__step-body"><h4>O of&#237;cio &#233; gerado automaticamente</h4><p>Documento A4 formatado, pronto para revis&#227;o, edi&#231;&#227;o, c&#243;pia ou download.</p></div></div>
+          <div class="gd__step"><div class="gd__step-n">5</div><div class="gd__step-body"><h4>Use os bot&#245;es de a&#231;&#227;o</h4><p>Copie, baixe .doc/PDF, edite no papel ou gere o of&#237;cio ao Judici&#225;rio.</p></div></div>
         </div></div>
       </div>
-      <div class="gcard" id="gd-modalidades">
-        <div class="gcard-head"><div class="gcard-icon gi-ouro">&#128203;</div><div class="gcard-head-txt"><h2>Modalidades Dispon&#237;veis</h2><p>6 tipos de of&#237;cio, cada um com fluxo e texto espec&#237;ficos</p></div></div>
-        <div class="gcard-body"><div class="gmod-grid">
-          <div class="gmod-card" style="--stripe:#c0392b;--chip-bg:#f8dada;--chip-cor:#8b1a1a;"><div class="gmod-head"><span>&#128680;</span><h3>Emergencial</h3><span class="gmod-art" style="background:#f8dada;color:#8b1a1a;">Art. 21, I</span></div><p>Transfer&#234;ncia urgente por risco &#224; integridade ou seguran&#231;a, com ou sem PAD.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Situa&#231;&#227;o: com PAD (falta grave) ou sem PAD (risco)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o do(s) reeducando(s)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Descri&#231;&#227;o detalhada da situa&#231;&#227;o concreta</span></div><div class="gmc"><div class="gmc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
-          <div class="gmod-card" style="--stripe:#174b8a;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span>&#127963;</span><h3>Mandado de Comarca Diversa</h3><span class="gmod-art">Art. 21, III</span></div><p>Transfer&#234;ncia para unidade do ju&#237;zo expedidor do mandado.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Ju&#237;zo expedidor do Mandado de Pris&#227;o</span></div><div class="gmc"><div class="gmc-dot"></div><span>Sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
-          <div class="gmod-card" style="--stripe:#2563b0;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gmod-head"><span>&#9875;</span><h3>Adequa&#231;&#227;o da Capacidade</h3><span class="gmod-art">Art. 21, III</span></div><p>3 submodalidades: Larga Escala, Pontual e Altera&#231;&#227;o de Regime.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da transfer&#234;ncia e crit&#233;rio de indica&#231;&#227;o</span></div></div></div>
-          <div class="gmod-card" style="--stripe:#1a7a40;--chip-bg:#d4edda;--chip-cor:#1a7a40;"><div class="gmod-head"><span>&#128260;</span><h3>Permuta entre Unidades</h3><span class="gmod-art" style="background:#d4edda;color:#1a7a40;">Art. 21, III</span></div><p>Troca de reeducandos com crit&#233;rio de escolha obrigat&#243;rio.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gmc"><div class="gmc-dot"></div><span>Motivo da permuta e crit&#233;rio de escolha</span></div></div></div>
-          <div class="gmod-card" style="--stripe:#7d3c98;--chip-bg:#ead9f5;--chip-cor:#7d3c98;"><div class="gmod-head"><span>&#9878;</span><h3>Pris&#227;o Civil</h3><span class="gmod-art" style="background:#ead9f5;color:#7d3c98;">Especializada</span></div><p>Preso civil para unidade adequada. N&#227;o solicita regime ou aloca&#231;&#227;o.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome e IPEN do(s) preso(s) civil(is)</span></div><div class="gmc"><div class="gmc-dot"></div><span>Sa&#250;de, origem, destino, c&#243;pia da decis&#227;o judicial</span></div></div></div>
-          <div class="gmod-card" style="--stripe:#c8930a;--chip-bg:#fdf0d0;--chip-cor:#7a5000;"><div class="gmod-head"><span>&#128232;</span><h3>Of&#237;cios de Comunica&#231;&#227;o</h3><span class="gmod-art" style="background:#fdf0d0;color:#7a5000;">Art. 16</span></div><p>Comunica ao Ju&#237;zo transfer&#234;ncia j&#225; realizada. Submodalidades: Sa&#237;da e Entrada.</p><div class="gmod-campos"><div class="gmc"><div class="gmc-dot"></div><span>Nome, IPEN, data, motivo, origem/destino</span></div><div class="gmc"><div class="gmc-dot"></div><span>Nome do(a) Ju&#237;z(a), Vara e Cidade/UF</span></div></div></div>
+      <div class="gd__card" id="gd-modalidades">
+        <div class="gd__card-head"><div class="gd__card-icon gd__ic-ouro">&#128203;</div><div class="gd__card-head-txt"><h2>Modalidades Dispon&#237;veis</h2><p>6 tipos de of&#237;cio, cada um com fluxo e texto espec&#237;ficos</p></div></div>
+        <div class="gd__card-body"><div class="gd__mod-grid">
+          <div class="gd__mod-card" style="--stripe:#c0392b;--chip-bg:#f8dada;--chip-cor:#8b1a1a;"><div class="gd__mod-head"><span>&#128680;</span><h3>Emergencial</h3><span class="gd__mod-art" style="background:#f8dada;color:#8b1a1a;">Art. 21, I</span></div><p>Transfer&#234;ncia urgente por risco &#224; integridade ou seguran&#231;a, com ou sem PAD.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Situa&#231;&#227;o: com PAD (falta grave) ou sem PAD (risco)</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o do(s) reeducando(s)</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Descri&#231;&#227;o detalhada da situa&#231;&#227;o concreta</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Informa&#231;&#227;o referente &#224; sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
+          <div class="gd__mod-card" style="--stripe:#174b8a;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gd__mod-head"><span>&#127963;</span><h3>Mandado de Comarca Diversa</h3><span class="gd__mod-art">Art. 21, III</span></div><p>Transfer&#234;ncia para unidade do ju&#237;zo expedidor do mandado.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Ju&#237;zo expedidor do Mandado de Pris&#227;o</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Sa&#250;de, origem, destino, BPI, assinaturas</span></div></div></div>
+          <div class="gd__mod-card" style="--stripe:#2563b0;--chip-bg:#dde8f8;--chip-cor:#174b8a;"><div class="gd__mod-head"><span>&#9875;</span><h3>Adequa&#231;&#227;o da Capacidade</h3><span class="gd__mod-art">Art. 21, III</span></div><p>3 submodalidades: Larga Escala, Pontual e Altera&#231;&#227;o de Regime.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Motivo da transfer&#234;ncia e crit&#233;rio de indica&#231;&#227;o</span></div></div></div>
+          <div class="gd__mod-card" style="--stripe:#1a7a40;--chip-bg:#d4edda;--chip-cor:#1a7a40;"><div class="gd__mod-head"><span>&#128260;</span><h3>Permuta entre Unidades</h3><span class="gd__mod-art" style="background:#d4edda;color:#1a7a40;">Art. 21, III</span></div><p>Troca de reeducandos com crit&#233;rio de escolha obrigat&#243;rio.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome, IPEN, regime e aloca&#231;&#227;o de cada reeducando</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Motivo da permuta e crit&#233;rio de escolha</span></div></div></div>
+          <div class="gd__mod-card" style="--stripe:#7d3c98;--chip-bg:#ead9f5;--chip-cor:#7d3c98;"><div class="gd__mod-head"><span>&#9878;</span><h3>Pris&#227;o Civil</h3><span class="gd__mod-art" style="background:#ead9f5;color:#7d3c98;">Especializada</span></div><p>Preso civil para unidade adequada. N&#227;o solicita regime ou aloca&#231;&#227;o.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome e IPEN do(s) preso(s) civil(is)</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Sa&#250;de, origem, destino, c&#243;pia da decis&#227;o judicial</span></div></div></div>
+          <div class="gd__mod-card" style="--stripe:#c8930a;--chip-bg:#fdf0d0;--chip-cor:#7a5000;"><div class="gd__mod-head"><span>&#128232;</span><h3>Of&#237;cios de Comunica&#231;&#227;o</h3><span class="gd__mod-art" style="background:#fdf0d0;color:#7a5000;">Art. 16</span></div><p>Comunica ao Ju&#237;zo transfer&#234;ncia j&#225; realizada. Submodalidades: Sa&#237;da e Entrada.</p><div class="gd__mod-campos"><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome, IPEN, data, motivo, origem/destino</span></div><div class="gd__mc"><div class="gd__mc-dot"></div><span>Nome do(a) Ju&#237;z(a), Vara e Cidade/UF</span></div></div></div>
         </div>
-        <div class="gcallout gca-azul" style="margin-top:16px"><span class="gca-icon">&#8505;</span><span>Com <strong>m&#250;ltiplos reeducandos</strong>, o sistema gera automaticamente uma tabela <strong>Anexo I</strong>.</span></div>
-        </div>
-      </div>
-      <div class="gcard" id="gd-checklist">
-        <div class="gcard-head-verde"><div class="gi-inv">&#9745;</div><div><h2>Checklist de Documentos</h2><p>Documenta&#231;&#227;o exigida por modalidade</p></div></div>
-        <div class="gcard-body">
-          <div class="gcl-tabs">
-            <button class="gcl-tab active" onclick="gdClTab(this,'gd-cl-emerg')">&#128680; Emergencial</button>
-            <button class="gcl-tab" onclick="gdClTab(this,'gd-cl-adequacao')">&#9878; Adequa&#231;&#227;o</button>
-            <button class="gcl-tab" onclick="gdClTab(this,'gd-cl-mandado')">&#127963; Mandado</button>
-            <button class="gcl-tab" onclick="gdClTab(this,'gd-cl-pernoite')">&#127769; Pernoite</button>
-            <button class="gcl-tab" onclick="gdClTab(this,'gd-cl-segmax')">&#128274; Seg. M&#225;xima</button>
-          </div>
-          <div class="gcl-panel active" id="gd-cl-emerg">
-            <div class="gcl-group"><div class="gcl-gtitle">Com PAD &#8212; falta grave (Art. 50/52 LEP)</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo A, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
-            <div class="gcl-group"><div class="gcl-gtitle">Sem PAD &#8212; risco &#224; integridade</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo B, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
-            <div class="gcallout gca-verm"><span class="gca-icon">&#9888;</span><span>A mera alega&#231;&#227;o gen&#233;rica de urg&#234;ncia <strong>n&#227;o &#233; suficiente</strong>. Pedidos gen&#233;ricos ser&#227;o indeferidos.</span></div>
-          </div>
-          <div class="gcl-panel" id="gd-cl-adequacao">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio</strong> da Dire&#231;&#227;o / SR / DPP / CRV</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Lista dos presos indicados</strong> &#8212; nome, IPEN, regime, perfil</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem + Diretor Destino<br><small style="color:#4a6080">Regionais diferentes: SR Destino tamb&#233;m assina.</small></span></div></div>
-            <div class="gcallout gca-azul"><span class="gca-icon">&#128203;</span><span><strong>Mesmo Complexo:</strong> basta cadastro no i-PEN com men&#231;&#227;o ao contato pr&#233;vio com Diretor de Destino.</span></div>
-          </div>
-          <div class="gcl-panel" id="gd-cl-mandado">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; Art. 21, III e Art. 24 PN 2189/2025</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio da Dire&#231;&#227;o</strong></span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>C&#243;pia do Mandado de Pris&#227;o</strong></span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino</span></div></div>
-          </div>
-          <div class="gcl-panel" id="gd-cl-pernoite">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Pedido no i-PEN</strong> com fundamenta&#231;&#227;o do motivo</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Men&#231;&#227;o expressa</strong> ao contato pr&#233;vio com Diretor de Destino</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Documentos eventuais</strong> &#8212; Decis&#227;o Judicial, se houver</span></div></div>
-            <div class="gcallout gca-azul"><span class="gca-icon">&#8505;</span><span>N&#227;o &#233; exigida anu&#234;ncia dos SRs nem of&#237;cio via SGPe.</span></div>
-          </div>
-          <div class="gcl-panel" id="gd-cl-segmax">
-            <div class="gcl-group"><div class="gcl-gtitle">Documentos exigidos &#8212; RDD / Seguran&#231;a M&#225;xima</div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Autoriza&#231;&#227;o do DPP</strong> via Comiss&#227;o Deliberativa da USM</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Of&#237;cio de solicita&#231;&#227;o de RDD</strong> ao ju&#237;zo competente</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Decis&#227;o judicial</strong> de inclus&#227;o em RDD</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>BO, PAD, Relat&#243;rios</strong> e demais documentos</span></div><div class="gcl-item"><div class="gcl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem</span></div></div>
-            <div class="gcallout gca-ouro"><span class="gca-icon">&#128274;</span><span><strong>Sigilo no SGPe:</strong> alterar controle de acesso para <em>"Usu&#225;rios em setor de tramita&#231;&#227;o, Interessado e Setor de Compet&#234;ncia"</em>.</span></div>
-          </div>
+        <div class="gd__callout gd__ca-azul" style="margin-top:16px"><span class="gd__ca-icon">&#8505;</span><span>Com <strong>m&#250;ltiplos reeducandos</strong>, o sistema gera automaticamente uma tabela <strong>Anexo I</strong>.</span></div>
         </div>
       </div>
-      <div class="gcard" id="gd-edicao">
-        <div class="gcard-head"><div class="gcard-icon gi-ouro">&#9999;</div><div class="gcard-head-txt"><h2>Edi&#231;&#227;o Ap&#243;s o Of&#237;cio Gerado</h2><p>Ajuste qualquer texto diretamente no documento</p></div></div>
-        <div class="gcard-body"><div class="gsteps">
-          <div class="gstep"><div class="gstep-n">1</div><div class="gstep-body"><h4>Clique em Editar</h4><p>Banner amarelo: <em>"Modo edi&#231;&#227;o ativado &#8212; clique nos textos para editar."</em></p></div></div>
-          <div class="gstep"><div class="gstep-n">2</div><div class="gstep-body"><h4>Campos com fundo amarelo s&#227;o edit&#225;veis</h4><p>Clique sobre qualquer campo destacado para editar inline.</p><div class="gedit-demo"><span class="gedit-label">Exemplo</span><div class="gedit-row">Florian&#243;polis/SC, <span class="ghl">15 de julho de 2025</span></div><div class="gedit-row">Of&#237;cio n&#186; <span class="ghl">042/2026/DPP</span></div><div class="gedit-row" style="margin-top:6px">Senhor(a) <span class="ghl">Coordenador(a)</span>,</div></div></div></div>
-          <div class="gstep"><div class="gstep-n">3</div><div class="gstep-body"><h4>Clique em Finalizar Edi&#231;&#227;o</h4><p>Visual normal restaurado. Downloads refletem o conte&#250;do editado.</p></div></div>
-        </div>
-        <div class="gtags" style="margin-top:16px"><span class="gtag">Par&#225;grafos</span><span class="gtag">Sauda&#231;&#227;o</span><span class="gtag">Fechamento</span><span class="gtag">Assinante</span><span class="gtag">Destinat&#225;rio</span><span class="gtag">Data e n&#250;mero</span><span class="gtag">Cabe&#231;alho</span><span class="gtag">Rodap&#233;</span></div>
+      <div class="gd__card" id="gd-checklist">
+        <div class="gd__card-head-verde"><div class="gd__ic-inv">&#9745;</div><div><h2>Checklist de Documentos</h2><p>Documenta&#231;&#227;o exigida por modalidade</p></div></div>
+        <div class="gd__card-body">
+          <div class="gd__cl-tabs">
+            <button class="gd__cl-tab active" onclick="gdClTab(this,'gd-cl-emerg')">&#128680; Emergencial</button>
+            <button class="gd__cl-tab" onclick="gdClTab(this,'gd-cl-adequacao')">&#9878; Adequa&#231;&#227;o</button>
+            <button class="gd__cl-tab" onclick="gdClTab(this,'gd-cl-mandado')">&#127963; Mandado</button>
+            <button class="gd__cl-tab" onclick="gdClTab(this,'gd-cl-pernoite')">&#127769; Pernoite</button>
+            <button class="gd__cl-tab" onclick="gdClTab(this,'gd-cl-segmax')">&#128274; Seg. M&#225;xima</button>
+          </div>
+          <div class="gd__cl-panel active" id="gd-cl-emerg">
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Com PAD &#8212; falta grave (Art. 50/52 LEP)</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo A, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Sem PAD &#8212; risco &#224; integridade</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Of&#237;cio</strong> &#8212; Modelo B, Art. 21, I da Res. n&#186; 1/2026</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino + SR(s)</span></div></div>
+            <div class="gd__callout gd__ca-verm"><span class="gd__ca-icon">&#9888;</span><span>A mera alega&#231;&#227;o gen&#233;rica de urg&#234;ncia <strong>n&#227;o &#233; suficiente</strong>. Pedidos gen&#233;ricos ser&#227;o indeferidos.</span></div>
+          </div>
+          <div class="gd__cl-panel" id="gd-cl-adequacao">
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Documentos exigidos &#8212; Art. 21, III</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Of&#237;cio</strong> da Dire&#231;&#227;o / SR / DPP / CRV</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Lista dos presos indicados</strong> &#8212; nome, IPEN, regime, perfil</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem + Diretor Destino<br><small style="color:#4a6080">Regionais diferentes: SR Destino tamb&#233;m assina.</small></span></div></div>
+            <div class="gd__callout gd__ca-azul"><span class="gd__ca-icon">&#128203;</span><span><strong>Mesmo Complexo:</strong> basta cadastro no i-PEN com men&#231;&#227;o ao contato pr&#233;vio com Diretor de Destino.</span></div>
+          </div>
+          <div class="gd__cl-panel" id="gd-cl-mandado">
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Documentos exigidos &#8212; Art. 21, III e Art. 24 PN 2189/2025</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Of&#237;cio da Dire&#231;&#227;o</strong></span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>C&#243;pia do Mandado de Pris&#227;o</strong></span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + Diretor Destino</span></div></div>
+          </div>
+          <div class="gd__cl-panel" id="gd-cl-pernoite">
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Documentos exigidos</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Pedido no i-PEN</strong> com fundamenta&#231;&#227;o do motivo</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Men&#231;&#227;o expressa</strong> ao contato pr&#233;vio com Diretor de Destino</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Documentos eventuais</strong> &#8212; Decis&#227;o Judicial, se houver</span></div></div>
+            <div class="gd__callout gd__ca-azul"><span class="gd__ca-icon">&#8505;</span><span>N&#227;o &#233; exigida anu&#234;ncia dos SRs nem of&#237;cio via SGPe.</span></div>
+          </div>
+          <div class="gd__cl-panel" id="gd-cl-segmax">
+            <div class="gd__cl-group"><div class="gd__cl-gtitle">Documentos exigidos &#8212; RDD / Seguran&#231;a M&#225;xima</div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Autoriza&#231;&#227;o do DPP</strong> via Comiss&#227;o Deliberativa da USM</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Of&#237;cio de solicita&#231;&#227;o de RDD</strong> ao ju&#237;zo competente</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Decis&#227;o judicial</strong> de inclus&#227;o em RDD</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>BO, PAD, Relat&#243;rios</strong> e demais documentos</span></div><div class="gd__cl-item"><div class="gd__cl-dot"></div><span><strong>Assinaturas:</strong> Diretor Origem + SR Origem</span></div></div>
+            <div class="gd__callout gd__ca-ouro"><span class="gd__ca-icon">&#128274;</span><span><strong>Sigilo no SGPe:</strong> alterar controle de acesso para <em>"Usu&#225;rios em setor de tramita&#231;&#227;o, Interessado e Setor de Compet&#234;ncia"</em>.</span></div>
+          </div>
         </div>
       </div>
-      <div class="gcard" id="gd-judiciario">
-        <div class="gcard-head"><div class="gcard-icon gi-verde">&#128140;</div><div class="gcard-head-txt"><h2>Comunica&#231;&#227;o ao Poder Judici&#225;rio</h2><p>Gera of&#237;cio judicial a partir do of&#237;cio principal j&#225; criado</p></div></div>
-        <div class="gcard-body">
+      <div class="gd__card" id="gd-edicao">
+        <div class="gd__card-head"><div class="gd__card-icon gd__ic-ouro">&#9999;</div><div class="gd__card-head-txt"><h2>Edi&#231;&#227;o Ap&#243;s o Of&#237;cio Gerado</h2><p>Ajuste qualquer texto diretamente no documento</p></div></div>
+        <div class="gd__card-body"><div class="gd__steps">
+          <div class="gd__step"><div class="gd__step-n">1</div><div class="gd__step-body"><h4>Clique em Editar</h4><p>Banner amarelo: <em>"Modo edi&#231;&#227;o ativado &#8212; clique nos textos para editar."</em></p></div></div>
+          <div class="gd__step"><div class="gd__step-n">2</div><div class="gd__step-body"><h4>Campos com fundo amarelo s&#227;o edit&#225;veis</h4><p>Clique sobre qualquer campo destacado para editar inline.</p><div class="gd__edit-demo"><span class="gd__edit-label">Exemplo</span><div class="gd__edit-row">Florian&#243;polis/SC, <span class="gd__hl">15 de julho de 2025</span></div><div class="gd__edit-row">Of&#237;cio n&#186; <span class="gd__hl">042/2026/DPP</span></div><div class="gd__edit-row" style="margin-top:6px">Senhor(a) <span class="gd__hl">Coordenador(a)</span>,</div></div></div></div>
+          <div class="gd__step"><div class="gd__step-n">3</div><div class="gd__step-body"><h4>Clique em Finalizar Edi&#231;&#227;o</h4><p>Visual normal restaurado. Downloads refletem o conte&#250;do editado.</p></div></div>
+        </div>
+        <div class="gd__tags" style="margin-top:16px"><span class="gd__tag">Par&#225;grafos</span><span class="gd__tag">Sauda&#231;&#227;o</span><span class="gd__tag">Fechamento</span><span class="gd__tag">Assinante</span><span class="gd__tag">Destinat&#225;rio</span><span class="gd__tag">Data e n&#250;mero</span><span class="gd__tag">Cabe&#231;alho</span><span class="gd__tag">Rodap&#233;</span></div>
+        </div>
+      </div>
+      <div class="gd__card" id="gd-judiciario">
+        <div class="gd__card-head"><div class="gd__card-icon gd__ic-verde">&#128140;</div><div class="gd__card-head-txt"><h2>Comunica&#231;&#227;o ao Poder Judici&#225;rio</h2><p>Gera of&#237;cio judicial a partir do of&#237;cio principal j&#225; criado</p></div></div>
+        <div class="gd__card-body">
           <p style="font-size:.85rem;color:#4a6080;margin-bottom:6px">Bot&#227;o <strong>Comunicar Judici&#225;rio</strong> aparece automaticamente nas modalidades:</p>
-          <div class="gmbadges"><span class="gmbadge">&#128680; Emergencial</span><span class="gmbadge">&#127963; Mandado</span><span class="gmbadge">&#9875; Adequa&#231;&#227;o</span><span class="gmbadge">&#128260; Permuta</span><span class="gmbadge">&#9878; Pris&#227;o Civil</span></div>
-          <div class="gcj-flow" style="margin-top:16px">
-            <div class="gcj-step"><span class="gcj-icon">&#128196;</span><h4>Of&#237;cio gerado</h4><p>Na tela</p></div><div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128140;</span><h4>Bot&#227;o</h4><p>Comunicar</p></div><div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128221;</span><h4>Preencha</h4><p>Ju&#237;z, Vara</p></div><div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128065;</span><h4>Visualize</h4><p>Preview</p></div><div class="gcj-arr">&#8250;</div>
-            <div class="gcj-step"><span class="gcj-icon">&#128229;</span><h4>Baixe PDF</h4><p>Por ju&#237;zo</p></div>
+          <div class="gd__mbadges"><span class="gd__mbadge">&#128680; Emergencial</span><span class="gd__mbadge">&#127963; Mandado</span><span class="gd__mbadge">&#9875; Adequa&#231;&#227;o</span><span class="gd__mbadge">&#128260; Permuta</span><span class="gd__mbadge">&#9878; Pris&#227;o Civil</span></div>
+          <div class="gd__cj-flow" style="margin-top:16px">
+            <div class="gd__cj-step"><span class="gd__cj-icon">&#128196;</span><h4>Of&#237;cio gerado</h4><p>Na tela</p></div><div class="gd__cj-arr">&#8250;</div>
+            <div class="gd__cj-step"><span class="gd__cj-icon">&#128140;</span><h4>Bot&#227;o</h4><p>Comunicar</p></div><div class="gd__cj-arr">&#8250;</div>
+            <div class="gd__cj-step"><span class="gd__cj-icon">&#128221;</span><h4>Preencha</h4><p>Ju&#237;z, Vara</p></div><div class="gd__cj-arr">&#8250;</div>
+            <div class="gd__cj-step"><span class="gd__cj-icon">&#128065;</span><h4>Visualize</h4><p>Preview</p></div><div class="gd__cj-arr">&#8250;</div>
+            <div class="gd__cj-step"><span class="gd__cj-icon">&#128229;</span><h4>Baixe PDF</h4><p>Por ju&#237;zo</p></div>
           </div>
-          <div class="gcallout gca-ouro" style="margin-top:12px"><span class="gca-icon">&#128101;</span><div><strong>M&#250;ltiplos presos:</strong> o sistema agrupa os que t&#234;m o mesmo ju&#237;zo e gera of&#237;cios separados para ju&#237;zes diferentes.</div></div>
+          <div class="gd__callout gd__ca-ouro" style="margin-top:12px"><span class="gd__ca-icon">&#128101;</span><div><strong>M&#250;ltiplos presos:</strong> o sistema agrupa os que t&#234;m o mesmo ju&#237;zo e gera of&#237;cios separados para ju&#237;zes diferentes.</div></div>
         </div>
       </div>
-      <div class="gcard" id="gd-botoes">
-        <div class="gcard-head"><div class="gcard-icon gi-azul">&#128432;</div><div class="gcard-head-txt"><h2>Bot&#245;es de A&#231;&#227;o</h2><p>Dispon&#237;veis na barra superior ap&#243;s a gera&#231;&#227;o do of&#237;cio</p></div></div>
-        <div class="gcard-body"><table class="gbtable">
+      <div class="gd__card" id="gd-botoes">
+        <div class="gd__card-head"><div class="gd__card-icon gd__ic-azul">&#128432;</div><div class="gd__card-head-txt"><h2>Bot&#245;es de A&#231;&#227;o</h2><p>Dispon&#237;veis na barra superior ap&#243;s a gera&#231;&#227;o do of&#237;cio</p></div></div>
+        <div class="gd__card-body"><table class="gd__btable">
           <thead><tr><th>Bot&#227;o</th><th>O que faz</th></tr></thead>
           <tbody>
-            <tr><td><span class="gblbl">&#128203; Copiar</span></td><td>Copia o of&#237;cio com formata&#231;&#227;o</td></tr>
-            <tr><td><span class="gblbl">&#128190; Baixar .doc</span></td><td>Download no formato Word</td></tr>
-            <tr><td><span class="gblbl">&#128196; Baixar PDF</span></td><td>Janela de impress&#227;o (A4)</td></tr>
-            <tr><td><span class="gblbl">&#128202; Resumo Sint&#233;tico</span></td><td>Par&#225;grafo resumido &#8212; copiavel ou download .txt</td></tr>
-            <tr><td><span class="gblbl">&#9999; Editar</span><span class="gbadge gbg-ouro">toggle</span></td><td>Modo de edi&#231;&#227;o inline</td></tr>
-            <tr><td><span class="gblbl">&#128140; Comunicar Judici&#225;rio</span><span class="gbadge gbg-verde">condicional</span></td><td>Gera of&#237;cio ao Ju&#237;zo competente</td></tr>
-            <tr><td><span class="gblbl">&#8617; Voltar ao chat</span></td><td>Retorna ao assistente sem apagar dados</td></tr>
-            <tr><td><span class="gblbl">&#128260; Novo Of&#237;cio</span><span class="gbadge gbg-verm">reinicia</span></td><td>Apaga tudo e reinicia do zero</td></tr>
+            <tr><td><span class="gd__blbl">&#128203; Copiar</span></td><td>Copia o of&#237;cio com formata&#231;&#227;o</td></tr>
+            <tr><td><span class="gd__blbl">&#128190; Baixar .doc</span></td><td>Download no formato Word</td></tr>
+            <tr><td><span class="gd__blbl">&#128196; Baixar PDF</span></td><td>Janela de impress&#227;o (A4)</td></tr>
+            <tr><td><span class="gd__blbl">&#128202; Resumo Sint&#233;tico</span></td><td>Par&#225;grafo resumido &#8212; copiavel ou download .txt</td></tr>
+            <tr><td><span class="gd__blbl">&#9999; Editar</span><span class="gd__badge gd__bg-ouro">toggle</span></td><td>Modo de edi&#231;&#227;o inline</td></tr>
+            <tr><td><span class="gd__blbl">&#128140; Comunicar Judici&#225;rio</span><span class="gd__badge gd__bg-verde">condicional</span></td><td>Gera of&#237;cio ao Ju&#237;zo competente</td></tr>
+            <tr><td><span class="gd__blbl">&#8617; Voltar ao chat</span></td><td>Retorna ao assistente sem apagar dados</td></tr>
+            <tr><td><span class="gd__blbl">&#128260; Novo Of&#237;cio</span><span class="gd__badge gd__bg-verm">reinicia</span></td><td>Apaga tudo e reinicia do zero</td></tr>
           </tbody>
         </table></div>
       </div>
