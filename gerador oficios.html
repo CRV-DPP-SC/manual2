@@ -236,6 +236,7 @@ html,body{height:100%;font-family:"Segoe UI",Calibri,sans-serif;background:var(-
     <div class="modal-sint-body"><p id="modalSintTexto"></p></div>
     <div class="modal-sint-foot">
       <button class="msf-copy" onclick="copiarResumo()">&#128203; Copiar texto</button>
+      <button class="msf-copy" style="background:#1a5e20;" onclick="baixarResumo()">&#128229; Baixar .txt</button>
       <button class="msf-close" onclick="document.getElementById('modalSintBg').classList.remove('open')">Fechar</button>
     </div>
   </div>
@@ -1790,9 +1791,22 @@ function abrirResumoSintetico(){
 
 function copiarResumo(){
   var txt=document.getElementById('modalSintTexto').textContent;
-  navigator.clipboard.writeText(txt).then(()=>toast('&#10003; Resumo copiado!')).catch(()=>{
-    var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('&#10003; Resumo copiado!');
+  navigator.clipboard.writeText(txt).then(()=>toast('✓ Resumo copiado!')).catch(()=>{
+    var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('✓ Resumo copiado!');
   });
+}
+function baixarResumo(){
+  var txt=gerarTextoResumo();
+  var blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='resumo_sintetico.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('📥 Resumo baixado!');
 }
 
 /* ══════════════════════════════════════════════════════
