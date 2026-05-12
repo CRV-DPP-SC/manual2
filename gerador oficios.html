@@ -1800,7 +1800,7 @@ function copiarResumo(){
    ══════════════════════════════════════════════════════ */
 
 /* Modalidades que geram o botão "Comunicar Judiciário" */
-var MODS_COM_JUD=['emergencial','mandado','pernoite','adequacao','permuta','prisaocivil'];
+var MODS_COM_JUD=['emergencial','mandado','adequacao','permuta','prisaocivil'];
 
 /* Estado interno do modal CJ */
 var CJ={
@@ -2178,7 +2178,6 @@ async function iniciar(){
   var v=await cpsP([
     {l:'&#128680; Emergencial<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, I</small>',v:'emergencial'},
     {l:'&#127963;&#65039; Mandado de Comarca Diversa<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'mandado'},
-    {l:'&#127769; Pernoite',v:'pernoite'},
     {l:'&#9878;&#65039; Adequação da Capacidade<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'adequacao'},
     {l:'&#128257; Permuta entre Unidades<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'permuta'},
     {l:'&#9878;&#65039; Prisão Civil<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Transferência especializada</small>',v:'prisaocivil'},
