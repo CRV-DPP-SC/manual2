@@ -7,6 +7,33 @@
   <title>Procedimentos Operacionais CRV — Polícia Penal SC</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/app.js" charset="utf-8"></script>
+<script>
+window.gdAbrir=function(){
+  document.getElementById('gd-overlay').classList.add('open');
+  document.getElementById('gd-drawer').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+window.gdFechar=function(){
+  document.getElementById('gd-overlay').classList.remove('open');
+  document.getElementById('gd-drawer').classList.remove('open');
+  document.body.style.overflow='';
+};
+window.gdNavClick=function(e,a){
+  e.preventDefault();
+  var id=a.getAttribute('href').replace('#','');
+  var el=document.getElementById(id);
+  if(el){var b=document.getElementById('gd-main');b.scrollTo({top:el.offsetTop-16,behavior:'smooth'});}
+};
+window.gdClTab=function(btn,panelId){
+  var body=btn.closest('.gcard-body');
+  body.querySelectorAll('.gcl-tab').forEach(function(b){b.classList.remove('active');});
+  body.querySelectorAll('.gcl-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  var p=document.getElementById(panelId);
+  if(p)p.classList.add('active');
+};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')window.gdFechar();});
+</script>
   <script>
   function abrirAreaRestrita() {
     var m = document.getElementById('modal-login');
@@ -222,7 +249,7 @@
   <div class="main-wrapper">
 
     <!-- ══ GUIA CARD ══ -->
-<div class="guia-card fade-up fade-up-delay-1" onclick="gdAbrir()" role="button" tabindex="0">
+<div class="guia-card fade-up fade-up-delay-1" onclick="window.gdAbrir()" role="button" tabindex="0">
   <div class="guia-card-inner">
     <div class="guia-card-icon">&#128196;</div>
     <div class="guia-card-body">
@@ -5841,32 +5868,6 @@ function cxkToast(msg, tipo='sucesso') {
   setTimeout(()=>d.remove(),4000);
 }
 
-/* == DRAWER GUIA == */
-function gdAbrir(){
-  document.getElementById('gd-overlay').classList.add('open');
-  document.getElementById('gd-drawer').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function gdFechar(){
-  document.getElementById('gd-overlay').classList.remove('open');
-  document.getElementById('gd-drawer').classList.remove('open');
-  document.body.style.overflow='';
-}
-function gdNavClick(e,a){
-  e.preventDefault();
-  var id=a.getAttribute('href').replace('#','');
-  var el=document.getElementById(id);
-  if(el){var b=document.getElementById('gd-main');b.scrollTo({top:el.offsetTop-16,behavior:'smooth'});}
-}
-function gdClTab(btn,panelId){
-  var body=btn.closest('.gcard-body');
-  body.querySelectorAll('.gcl-tab').forEach(function(b){b.classList.remove('active');});
-  body.querySelectorAll('.gcl-panel').forEach(function(p){p.classList.remove('active');});
-  btn.classList.add('active');
-  var p=document.getElementById(panelId);
-  if(p)p.classList.add('active');
-}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')gdFechar();});
 
 </script>
 <!-- ══ DRAWER GUIA ══ -->
