@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Uso — Gerador de Ofícios CRV/DPP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:  #0d2b55;
+  --azul2: #174b8a;
+  --azul3: #2563b0;
+  --ouro:  #c8930a;
+  --ouro2: #f0c040;
+  --cinza: #f0f4fa;
+  --texto: #1a2740;
+  --sub:   #4a6080;
+  --borda: #c8d6ec;
+  --verde: #1a7a40;
+  --verm:  #8b1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--cinza);
+  color: var(--texto);
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #081828 0%, var(--azul) 60%, var(--azul2) 100%);
+  color: white;
+  padding: 52px 60px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 20%, rgba(200,147,10,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(37,99,176,.25) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.hero-inner { max-width: 860px; position: relative; z-index: 1; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 900; line-height: 1.12; margin-bottom: 12px;
+}
+.hero h1 em { font-style: normal; color: var(--ouro2); }
+.hero p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.6; }
+
+/* ── PAGE LAYOUT ── */
+.page-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 36px 32px 80px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+  align-self: flex-start;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(13,43,85,.10);
+  overflow: hidden;
+}
+
+.main-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar {
+
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(13,43,85,.10);
+  overflow: hidden;
+}
+.sidebar-head {
+  background: var(--azul); color: white;
+  padding: 12px 16px;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.nav-a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  font-size: .86rem; font-weight: 600; color: var(--sub);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--cinza);
+  transition: background .15s, border-color .15s, color .15s;
+}
+.nav-a:last-child { border-bottom: none; }
+.nav-a:hover { background: #f0f5ff; color: var(--azul2); border-left-color: var(--azul3); }
+.nav-cl { background: #f0f7ee; }
+.nav-cl .cl-lbl {
+  font-size: .71rem; font-weight: 800;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--verde);
+}
+
+/* conteúdo principal com margem esquerda equivalente à sidebar */
+.main-wrap {
+  max-width: 820px;
+  margin: 0 auto 0 calc(max(16px, calc(50vw - 540px + 16px)) + 224px);
+
+}
+
+/* ── CARD ── */
+.card { background: white; border-radius: 16px; box-shadow: 0 2px 18px rgba(13,43,85,.07); overflow: hidden; }
+.card-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 22px 28px 18px; border-bottom: 1px solid var(--borda);
+}
+.card-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; flex-shrink: 0;
+}
+.ic-azul  { background: #dde8f8; }
+.ic-ouro  { background: #fdf0d0; }
+.ic-verde { background: #d4edda; }
+.card-head-txt h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem; color: var(--azul); line-height: 1.25; }
+.card-head-txt p  { font-size: .83rem; color: var(--sub); margin-top: 3px; line-height: 1.5; }
+.card-body { padding: 22px 24px; }
+
+/* cabeçalho verde checklist */
+.card-head-verde {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 22px 28px 18px;
+  background: linear-gradient(135deg, #14532d, var(--verde));
+}
+.card-head-verde h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem; color: white; }
+.card-head-verde p  { font-size: .83rem; color: rgba(255,255,255,.75); margin-top: 3px; }
+.ic-inv { width: 44px; height: 44px; border-radius: 11px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; flex-shrink: 0; }
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; position: relative; }
+.steps::before {
+  content: ''; position: absolute;
+  left: 20px; top: 22px; bottom: 22px;
+  width: 2px; background: linear-gradient(to bottom, var(--azul3), var(--borda));
+}
+.step { display: flex; gap: 16px; padding-bottom: 20px; position: relative; }
+.step:last-child { padding-bottom: 0; }
+.step-n {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--azul); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+  flex-shrink: 0; position: relative; z-index: 1;
+  box-shadow: 0 0 0 4px var(--cinza);
+}
+.step-body { padding-top: 8px; }
+.step-body h4 { font-size: .98rem; font-weight: 700; color: var(--azul); margin-bottom: 4px; }
+.step-body p  { font-size: .88rem; color: var(--sub); line-height: 1.65; }
+.tip {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 8px; background: #fff8e1; border: 1px solid #f0c040;
+  border-radius: 8px; padding: 5px 12px; font-size: .78rem; color: #7a5000;
+}
+
+/* ── MOD GRID ── */
+.mod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.mod-card {
+  border: 1.5px solid var(--borda); border-radius: 14px; padding: 18px;
+  position: relative; overflow: hidden;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.mod-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--stripe); transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.mod-card:hover { border-color: var(--stripe); box-shadow: 0 4px 14px rgba(13,43,85,.1); transform: translateY(-2px); }
+.mod-card:hover::after { transform: scaleX(1); }
+.mod-head { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+.mod-emoji { font-size: 1.3rem; }
+.mod-card h3 { font-size: .9rem; font-weight: 700; color: var(--azul); }
+.mod-art { margin-left: auto; font-size: .67rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--chip-bg); color: var(--chip-cor); white-space: nowrap; }
+.mod-card > p { font-size: .85rem; color: var(--sub); line-height: 1.6; margin-bottom: 12px; }
+.mod-campos { display: flex; flex-direction: column; gap: 5px; }
+.mc { display: flex; align-items: flex-start; gap: 7px; font-size: .82rem; color: var(--texto); line-height: 1.45; }
+.mc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--stripe); margin-top: 5px; flex-shrink: 0; }
+
+/* ── CALLOUT ── */
+.callout { display: flex; gap: 10px; padding: 13px 18px; border-radius: 10px; font-size: .88rem; line-height: 1.65; }
+.ca-azul  { background: #eaf2ff; border-left: 4px solid var(--azul3); }
+.ca-ouro  { background: #fff8e1; border-left: 4px solid var(--ouro); }
+.ca-verde { background: #eafaf1; border-left: 4px solid var(--verde); }
+.ca-verm  { background: #fef2f2; border-left: 4px solid #dc2626; }
+.ca-icon  { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ── EDIT DEMO ── */
+.edit-demo {
+  background: #f8fafb; border: 1.5px dashed var(--borda);
+  border-radius: 10px; padding: 18px 16px 14px; font-size: .83rem;
+  margin-top: 14px; position: relative;
+}
+.edit-demo-label {
+  position: absolute; top: -10px; left: 14px;
+  background: var(--ouro); color: white; font-size: .66rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: .08em;
+}
+.hl { background: rgba(255,200,0,.3); border-radius: 3px; padding: 1px 4px; border-bottom: 1.5px dashed var(--ouro); }
+.edit-row { margin-bottom: 6px; color: var(--sub); }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.tag { background: #f0f5ff; border: 1px solid var(--borda); border-radius: 8px; padding: 4px 11px; font-size: .77rem; color: var(--sub); }
+
+/* ── CJ FLOW ── */
+.cj-flow { display: flex; align-items: stretch; }
+.cj-step { flex: 1; min-width: 90px; padding: 14px 8px; background: #f5f8ff; border: 1.5px solid var(--borda); text-align: center; }
+.cj-step:first-child { border-radius: 12px 0 0 12px; }
+.cj-step:last-child  { border-radius: 0 12px 12px 0; }
+.cj-step + .cj-step  { border-left: none; }
+.cj-icon { font-size: 1.4rem; display: block; margin-bottom: 5px; }
+.cj-step h4 { font-size: .74rem; font-weight: 700; color: var(--azul); margin-bottom: 3px; }
+.cj-step p  { font-size: .7rem; color: var(--sub); line-height: 1.35; }
+.cj-arr { display: flex; align-items: center; background: white; border-top: 1.5px solid var(--borda); border-bottom: 1.5px solid var(--borda); padding: 0 3px; color: var(--azul3); font-size: 1rem; }
+
+/* ── BADGES ── */
+.mbadges { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+.mbadge { padding: 5px 12px; border-radius: 20px; font-size: .77rem; font-weight: 700; border: 1.5px solid var(--azul3); color: var(--azul2); background: #eaf0fb; }
+
+/* ── TABELA ── */
+.btn-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.btn-table th { background: var(--azul); color: white; text-align: left; padding: 10px 14px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.btn-table th:first-child { border-radius: 10px 0 0 0; }
+.btn-table th:last-child  { border-radius: 0 10px 0 0; }
+.btn-table td { padding: 10px 14px; border-bottom: 1px solid var(--borda); vertical-align: top; line-height: 1.5; }
+.btn-table tr:hover td { background: #f5f8ff; }
+.btn-table tr:last-child td { border-bottom: none; }
+.btn-lbl { font-weight: 700; color: var(--azul); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: .68rem; font-weight: 700; margin-left: 5px; }
+.bg-verde { background: #d4edda; color: var(--verde); }
+.bg-verm  { background: #f8dada; color: var(--verm); }
+.bg-ouro  { background: #fdf0d0; color: #7a5000; }
+
+/* ── CHECKLIST ── */
+.cl-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.cl-tab {
+  padding: 7px 15px; border-radius: 20px; border: 1.5px solid var(--borda);
+  background: white; font-size: .79rem; font-weight: 700; color: var(--sub);
+  cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: all .18s;
+}
+.cl-tab:hover { border-color: var(--verde); color: var(--verde); background: #f0f7ee; }
+.cl-tab.active { background: var(--verde); color: white; border-color: var(--verde); }
+.cl-panel { display: none; }
+.cl-panel.active { display: block; }
+.cl-group { margin-bottom: 16px; }
+.cl-group-title {
+  font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--sub); margin-bottom: 7px; padding-bottom: 5px; border-bottom: 1px solid var(--borda);
+}
+.cl-item { display: flex; align-items: flex-start; gap: 9px; padding: 9px 12px; border-radius: 8px; font-size: .88rem; line-height: 1.55; margin-bottom: 5px; }
+.cl-item:hover { background: #f5f9f4; }
+.cl-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--verde); margin-top: 6px; flex-shrink: 0; }
+
+/* ── RESPONSIVO ── */
+@media (max-width: 780px) {
+  .page-layout { flex-direction: column; }
+  .sidebar { position: static; width: 100%; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .cj-flow { flex-direction: column; }
+  .cj-step { border-radius: 0 !important; border-left: 1.5px solid var(--borda) !important; }
+  .cj-step:first-child { border-radius: 12px 12px 0 0 !important; }
+  .cj-step:last-child  { border-radius: 0 0 12px 12px !important; }
+  .cj-arr { display: none; }
+}
+  .main-wrap { margin-left: 0; padding: 20px 16px 60px; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .cj-flow { flex-direction: column; }
+  .cj-step { border-radius: 0 !important; border-left: 1.5px solid var(--borda) !important; }
+  .cj-step:first-child { border-radius: 12px 12px 0 0 !important; }
+  .cj-step:last-child  { border-radius: 0 0 12px 12px !important; }
+  .cj-arr { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <h1>Guia de Uso<br><em>Gerador de Ofícios</em></h1>
+    <p>Central de Regulação de Vagas — CRV/DPP · Departamento de Polícia Penal de Santa Catarina</p>
+  </div>
+</div>
+
+<div class="page-layout">
+<nav class="sidebar">
+  <div class="sidebar-head">Índice</div>
+  <a class="nav-a" href="#passos">🚀 Passo a Passo</a>
+  <a class="nav-a" href="#modalidades">📋 Modalidades</a>
+  <a class="nav-a nav-cl" href="#checklist"><span class="cl-lbl">☑️ Checklist</span></a>
+  <a class="nav-a" href="#edicao">✏️ Edição</a>
+  <a class="nav-a" href="#judiciario">📬 Com. Judicial</a>
+  <a class="nav-a" href="#botoes">🖱️ Botões</a>
+</nav>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="main-wrap">
+
+  <!-- PASSO A PASSO -->
+  <div class="card" id="passos">
+    <div class="card-head">
+      <div class="card-icon ic-azul">🚀</div>
+      <div class="card-head-txt">
+        <h2>Passo a Passo Geral</h2>
+        <p>Como utilizar o Gerador de Ofícios do início ao fim</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">
+            <h4>Acesse o Gerador de Ofícios no site da CRV</h4>
+            <p>Dentro do site da CRV, localize e clique em <strong>Gerador de Ofícios</strong>. A ferramenta abrirá diretamente no navegador, sem necessidade de instalação.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">
+            <h4>Escolha a modalidade</h4>
+            <p>O assistente exibe os tipos de ofício disponíveis. Clique no botão correspondente à sua necessidade.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">
+            <h4>Responda às perguntas sequenciais</h4>
+            <p>O fluxo avança automaticamente. Algumas etapas são cliques em opções, outras são campos de texto livre.</p>
+            <div class="tip">⚠️ Campos de texto pedem uma informação por vez — aguarde a próxima pergunta aparecer.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-body">
+            <h4>O ofício é gerado automaticamente</h4>
+            <p>Ao finalizar todas as etapas, o documento A4 aparece formatado na tela, pronto para revisão, edição, cópia ou download.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-body">
+            <h4>Use os botões de ação</h4>
+            <p>Copie, baixe como .doc, exporte em PDF, edite diretamente no papel ou gere o ofício ao Poder Judiciário com um clique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALIDADES -->
+  <div class="card" id="modalidades">
+    <div class="card-head">
+      <div class="card-icon ic-ouro">📋</div>
+      <div class="card-head-txt">
+        <h2>Modalidades Disponíveis</h2>
+        <p>6 tipos de ofício, cada um com fluxo e texto específicos</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="mod-grid">
+
+        <div class="mod-card" style="--stripe:#c0392b;--chip-bg:#f8dada;--chip-cor:#8b1a1a;">
+          <div class="mod-head"><span class="mod-emoji">🚨</span><h3>Emergencial</h3><span class="mod-art" style="background:#f8dada;color:#8b1a1a;">Art. 21, I</span></div>
+          <p>Transferência urgente por risco à integridade ou à segurança, com ou sem PAD instaurado.</p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Situação: com PAD (falta grave) ou sem PAD (risco)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Nome, IPEN, regime e alocação do(s) reeducando(s)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Descrição detalhada da situação concreta</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>PAD e inciso da LEP (quando há falta grave)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Informação referente à saúde, origem, destino, informações sobre o BPI</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Saudação, fechamento, número do ofício, assinaturas</span></div>
+          </div>
+        </div>
+
+        <div class="mod-card" style="--stripe:#174b8a;--chip-bg:#dde8f8;--chip-cor:#174b8a;">
+          <div class="mod-head"><span class="mod-emoji">🏛️</span><h3>Mandado de Comarca Diversa</h3><span class="mod-art">Art. 21, III</span></div>
+          <p>Transferência para a unidade responsável pela circunscrição do juízo expedidor do mandado.</p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Nome, IPEN, regime e alocação do(s) reeducando(s)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Juízo expedidor do Mandado de Prisão</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Informação referente à saúde, origem, destino, informações sobre o BPI</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Saudação, fechamento, número do ofício, assinaturas</span></div>
+          </div>
+        </div>
+
+        <div class="mod-card" style="--stripe:#2563b0;--chip-bg:#dde8f8;--chip-cor:#174b8a;">
+          <div class="mod-head"><span class="mod-emoji">⚓</span><h3>Adequação da Capacidade</h3><span class="mod-art">Art. 21, III</span></div>
+          <p>3 submodalidades: <strong>Larga Escala</strong> (coletiva), <strong>Pontual</strong> (individual/múltiplos) e <strong>Alteração de Regime</strong>.</p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Nome, IPEN, regime e alocação de cada reeducando</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Motivo da transferência e critério de indicação</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Informação referente à saúde, origem, destino, informações sobre o BPI, assinaturas</span></div>
+          </div>
+        </div>
+
+        <div class="mod-card" style="--stripe:#1a7a40;--chip-bg:#d4edda;--chip-cor:#1a7a40;">
+          <div class="mod-head"><span class="mod-emoji">🔄</span><h3>Permuta entre Unidades</h3><span class="mod-art" style="background:#d4edda;color:#1a7a40;">Art. 21, III</span></div>
+          <p>Troca de reeducandos entre duas unidades prisionais, com critério de escolha obrigatório.</p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Nome, IPEN, regime e alocação de cada reeducando</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Motivo da permuta e critério de escolha/indicação</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Informação referente à saúde, origem, destino, informações sobre o BPI, assinaturas</span></div>
+          </div>
+        </div>
+
+        <div class="mod-card" style="--stripe:#7d3c98;--chip-bg:#ead9f5;--chip-cor:#7d3c98;">
+          <div class="mod-head"><span class="mod-emoji">⚖️</span><h3>Prisão Civil</h3><span class="mod-art" style="background:#ead9f5;color:#7d3c98;">Especializada</span></div>
+          <p>Transferência de preso civil para unidade com estrutura adequada. <strong>Não solicita regime ou alocação.</strong></p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Nome e IPEN do(s) preso(s) civil(is)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Informação referente à saúde, origem, destino</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Encaminha cópia da decisão judicial junto ao BPI</span></div>
+          </div>
+        </div>
+
+        <div class="mod-card" style="--stripe:#c8930a;--chip-bg:#fdf0d0;--chip-cor:#7a5000;">
+          <div class="mod-head"><span class="mod-emoji">📨</span><h3>Ofícios de Comunicação</h3><span class="mod-art" style="background:#fdf0d0;color:#7a5000;">Art. 16</span></div>
+          <p>Comunica ao Juízo transferência já realizada. Submodalidades: <strong>Saída</strong> e <strong>Entrada</strong>.</p>
+          <div class="mod-campos">
+            <div class="mc"><div class="mc-dot"></div><span>Nome e IPEN do(s) custodiado(s)</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Data da transferência, motivo, unidade origem/destino</span></div>
+            <div class="mc"><div class="mc-dot"></div><span>Nome do(a) Juiz(a), Vara e Cidade/UF — destinatário fixo</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="callout ca-azul" style="margin-top:16px">
+        <span class="ca-icon">ℹ️</span>
+        <span>Em todas as modalidades com <strong>múltiplos reeducandos</strong>, o sistema gera automaticamente uma tabela em folha <strong>Anexo I</strong>, mantendo o corpo do ofício limpo e padronizado.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="card" id="checklist">
+    <div class="card-head-verde">
+      <div class="ic-inv">☑️</div>
+      <div>
+        <h2>Checklist de Documentos</h2>
+        <p>Documentação exigida por modalidade · Pedidos incompletos serão devolvidos</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="cl-tabs">
+        <button class="cl-tab active" onclick="clTab(this,'cl-emerg')">🚨 Emergencial</button>
+        <button class="cl-tab" onclick="clTab(this,'cl-adequacao')">⚖️ Adequação</button>
+        <button class="cl-tab" onclick="clTab(this,'cl-mandado')">🏛️ Mandado</button>
+        <button class="cl-tab" onclick="clTab(this,'cl-pernoite')">🌙 Pernoite</button>
+        <button class="cl-tab" onclick="clTab(this,'cl-segmax')">🔒 Seg. Máxima</button>
+      </div>
+
+      <div class="cl-panel active" id="cl-emerg">
+        <div class="cl-group">
+          <div class="cl-group-title">Com PAD — falta grave (Art. 50/52 LEP)</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Ofício</strong> — Modelo A (Com PAD), fundamentado no Art. 21, I da Res. nº 1/2026</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino + Superintendente(s) Regional(is)<br><small style="color:var(--sub)">Não é necessário tramitar no SGPe — bastam as assinaturas (anuência) no ofício inicial.</small></span></div>
+        </div>
+        <div class="cl-group">
+          <div class="cl-group-title">Sem PAD — risco à integridade / segurança</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Ofício</strong> — Modelo B (Sem PAD), fundamentado no Art. 21, I da Res. nº 1/2026</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino + Superintendente(s) Regional(is)<br><small style="color:var(--sub)">Não é necessário tramitar no SGPe — bastam as assinaturas (anuência) no ofício inicial.</small></span></div>
+        </div>
+        <div class="callout ca-verm">
+          <span class="ca-icon">⚠️</span>
+          <span>A mera alegação genérica de urgência <strong>não é suficiente</strong>. A unidade deve fundamentar o pedido de forma consistente e robusta. Pedidos genéricos serão indeferidos de plano.</span>
+        </div>
+      </div>
+
+      <div class="cl-panel" id="cl-adequacao">
+        <div class="cl-group">
+          <div class="cl-group-title">Documentos exigidos — Art. 21, III</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Ofício da Direção / SR / DPP / CRV</strong> — fundamento no Art. 21, III da Res. nº 1/2026</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Lista dos presos indicados</strong> — nome, IPEN, regime, perfil</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Superintendente Regional de Origem + Diretor de Destino<br><small style="color:var(--sub)">Quando origem e destino pertencerem a Regionais diferentes, o SR de Destino também deve assinar. Não é necessário tramitar no SGPe — bastam as assinaturas (anuência) no ofício inicial.</small></span></div>
+        </div>
+        <div class="callout ca-azul">
+          <span class="ca-icon">📋</span>
+          <span><strong>Mesmo Complexo Prisional:</strong> não é necessário ofício via SGPe — basta o cadastro no i-PEN com menção, no campo "observações", ao contato prévio com o Diretor ou Chefe de Segurança da unidade de destino e à sua anuência.</span>
+        </div>
+      </div>
+
+      <div class="cl-panel" id="cl-mandado">
+        <div class="cl-group">
+          <div class="cl-group-title">Documentos exigidos — Art. 21, III · Art. 24 PN 2189/2025</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Ofício da Direção</strong> — fundamentado no Art. 21, III da Res. nº 1/2026 e Art. 24 da PN 2189/2025</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Cópia do Mandado de Prisão</strong> — expedido pela Vara competente</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Diretor de Destino<br><small style="color:var(--sub)">Não é necessário tramitar no SGPe — bastam as assinaturas (anuência) no ofício inicial.</small></span></div>
+        </div>
+      </div>
+
+      <div class="cl-panel" id="cl-pernoite">
+        <div class="cl-group">
+          <div class="cl-group-title">Documentos exigidos</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Pedido cadastrado no i-PEN</strong> — com fundamentação do motivo do pernoite</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Menção expressa</strong> de que houve contato prévio com o Diretor da unidade de destino</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Documentos eventuais</strong> — Despacho/Decisão Judicial, se houver</span></div>
+        </div>
+        <div class="callout ca-azul">
+          <span class="ca-icon">ℹ️</span>
+          <span>Não é exigida anuência dos Superintendentes Regionais nem envio de ofício via SGPe. Basta o cadastro no i-PEN com menção ao contato prévio com o Diretor ou Chefe de Segurança da unidade de destino.</span>
+        </div>
+      </div>
+
+      <div class="cl-panel" id="cl-segmax">
+        <div class="cl-group">
+          <div class="cl-group-title">Documentos exigidos — RDD / Segurança Máxima</div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Autorização expressa do DPP</strong> — via Comissão Deliberativa da USM (antes de qualquer pedido ao Judiciário)</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Ofício de solicitação de RDD</strong> — encaminhado ao juízo competente</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Decisão judicial</strong> — que determina a inclusão em RDD</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Boletim de Ocorrência, PAD, Relatórios</strong> — e demais documentos pertinentes</span></div>
+          <div class="cl-item"><div class="cl-dot"></div><span><strong>Assinaturas:</strong> Diretor de Origem + Superintendente Regional de Origem<br><small style="color:var(--sub)">Destinatários: Comissão Deliberativa USM/DPP e CRV</small></span></div>
+        </div>
+        <div class="callout ca-ouro">
+          <span class="ca-icon">🔒</span>
+          <span><strong>Sigilo no SGPe:</strong> ao cadastrar o processo, é <strong>obrigatório alterar o controle de acesso</strong> para: <em>"Usuários em setor de tramitação do Processo, Interessado e Setor de Competência"</em>.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EDIÇÃO -->
+  <div class="card" id="edicao">
+    <div class="card-head">
+      <div class="card-icon ic-ouro">✏️</div>
+      <div class="card-head-txt">
+        <h2>Edição Após o Ofício Gerado</h2>
+        <p>Ajuste qualquer texto diretamente no documento, sem precisar reiniciar o fluxo</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">
+            <h4>Clique em ✏️ Editar</h4>
+            <p>Um banner amarelo aparece no topo: <em>"Modo edição ativado — clique nos textos para editar."</em></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">
+            <h4>Elementos editáveis ficam destacados em amarelo</h4>
+            <p>Clique sobre qualquer campo destacado para editar inline.</p>
+            <div class="edit-demo">
+              <span class="edit-demo-label">Exemplo visual</span>
+              <div class="edit-row">Florianópolis/SC, <span class="hl">15 de julho de 2025</span></div>
+              <div class="edit-row">Ofício nº <span class="hl">042/2026/DPP</span></div>
+              <div class="edit-row" style="margin-top:6px">Senhor(a) <span class="hl">Coordenador(a)</span>,</div>
+              <div class="edit-row" style="margin-top:6px">Encaminho pedido de transferência de <span class="hl">João da Silva Santos</span>, IPEN Nº <span class="hl">123456</span>…</div>
+              <div class="edit-row" style="margin-top:8px;margin-left:80px"><span class="hl">Atenciosamente</span>,</div>
+              <div class="edit-row" style="margin-left:80px;font-weight:700;font-size:.82rem"><span class="hl">NOME DO DIRETOR</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">
+            <h4>Clique em ✓ Finalizar Edição</h4>
+            <p>O documento volta ao visual normal com as alterações incorporadas. Download e cópia refletirão o conteúdo editado.</p>
+            <div class="tip">⚠️ Não há "desfazer" automático. Use 🔄 Novo Ofício para recomeçar do zero.</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:.84rem;font-weight:700;color:var(--azul);margin:18px 0 8px">Campos editáveis incluem:</p>
+      <div class="tags">
+        <span class="tag">Parágrafos do corpo</span>
+        <span class="tag">Saudação</span>
+        <span class="tag">Fechamento</span>
+        <span class="tag">Nome e cargo do assinante</span>
+        <span class="tag">Destinatário</span>
+        <span class="tag">Número e data do ofício</span>
+        <span class="tag">Cabeçalho (4 linhas)</span>
+        <span class="tag">Dados do rodapé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMUNICAÇÃO JUDICIAL -->
+  <div class="card" id="judiciario">
+    <div class="card-head">
+      <div class="card-icon ic-verde">📬</div>
+      <div class="card-head-txt">
+        <h2>Comunicação ao Poder Judiciário</h2>
+        <p>Gera ofício de comunicação judicial a partir do ofício principal já criado</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:.85rem;color:var(--sub);margin-bottom:4px">O botão <strong>📬 Comunicar Judiciário</strong> aparece automaticamente nas modalidades:</p>
+      <div class="mbadges">
+        <span class="mbadge">🚨 Emergencial</span>
+        <span class="mbadge">🏛️ Mandado de Comarca Diversa</span>
+        <span class="mbadge">⚓ Adequação da Capacidade</span>
+        <span class="mbadge">🔄 Permuta</span>
+        <span class="mbadge">⚖️ Prisão Civil</span>
+      </div>
+      <p style="font-size:.84rem;font-weight:700;color:var(--azul);margin:20px 0 12px">Fluxo de uso:</p>
+      <div class="cj-flow">
+        <div class="cj-step"><span class="cj-icon">📄</span><h4>Ofício gerado</h4><p>Principal já na tela</p></div>
+        <div class="cj-arr">›</div>
+        <div class="cj-step"><span class="cj-icon">📬</span><h4>Clique no botão</h4><p>Comunicar Judiciário</p></div>
+        <div class="cj-arr">›</div>
+        <div class="cj-step"><span class="cj-icon">📝</span><h4>Preencha</h4><p>Data, Juiz(a), Vara, Cidade</p></div>
+        <div class="cj-arr">›</div>
+        <div class="cj-step"><span class="cj-icon">👁️</span><h4>Visualize</h4><p>Navegue entre ofícios se múltiplos</p></div>
+        <div class="cj-arr">›</div>
+        <div class="cj-step"><span class="cj-icon">📥</span><h4>Baixe o PDF</h4><p>Um ofício por juízo</p></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+        <div class="callout ca-azul">
+          <span class="ca-icon">👤</span>
+          <div><strong>Preso único:</strong> preencha diretamente o nome do(a) Juiz(a), Vara e Cidade/UF. O motivo é pré-preenchido automaticamente com base na modalidade e pode ser editado.</div>
+        </div>
+        <div class="callout ca-ouro">
+          <span class="ca-icon">👥</span>
+          <div><strong>Múltiplos presos:</strong> todos aparecem pré-selecionados. Para cada preso, informe o(a) Juiz(a) competente — o sistema <strong>agrupa automaticamente</strong> os que têm o mesmo juízo num único ofício e gera ofícios separados para juízes diferentes.</div>
+        </div>
+        <div class="callout ca-verde">
+          <span class="ca-icon">↩️</span>
+          <div>No preview, o botão <em>◀ Editar dados</em> retorna ao formulário para correções antes do download final.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="card" id="botoes">
+    <div class="card-head">
+      <div class="card-icon ic-azul">🖱️</div>
+      <div class="card-head-txt">
+        <h2>Botões de Ação</h2>
+        <p>Disponíveis na barra superior após a geração do ofício</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="btn-table">
+        <thead><tr><th>Botão</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><span class="btn-lbl">📋 Copiar</span></td><td>Copia o ofício com formatação para a área de transferência (para colar no Word, e-mail etc.)</td></tr>
+          <tr><td><span class="btn-lbl">💾 Baixar .doc</span></td><td>Download do ofício no formato Word (.doc), com cabeçalho e rodapé fixos em cada página impressa</td></tr>
+          <tr><td><span class="btn-lbl">📄 Baixar PDF</span></td><td>Abre a janela de impressão do navegador para salvar como PDF, com margens e fontes padronizadas (A4)</td></tr>
+          <tr><td><span class="btn-lbl">📊 Resumo Sintético</span></td><td>Exibe um parágrafo resumido do pedido (modalidade, reeducando, origem, destino, motivo) — pode ser copiado para e-mails ou sistemas</td></tr>
+          <tr><td><span class="btn-lbl">✏️ Editar</span> <span class="badge bg-ouro">toggle</span></td><td>Ativa/desativa o modo de edição inline — textos ficam com fundo amarelo e são clicáveis para alteração direta</td></tr>
+          <tr><td><span class="btn-lbl">📬 Comunicar Judiciário</span> <span class="badge bg-verde">condicional</span></td><td>Abre o modal para gerar o ofício de comunicação ao Juízo competente (não aparece nos Ofícios de Comunicação)</td></tr>
+          <tr><td><span class="btn-lbl">↩️ Voltar ao chat</span></td><td>Retorna à tela do assistente sem apagar os dados — permite consultar o histórico da conversa</td></tr>
+          <tr><td><span class="btn-lbl">🔄 Novo Ofício</span> <span class="badge bg-verm">reinicia</span></td><td>Apaga todos os dados e reinicia completamente o assistente para um novo ofício do zero</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+</div><!-- /page-layout -->
+
+<script>
+function clTab(btn, panelId) {
+  document.querySelectorAll('.cl-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.cl-panel').forEach(function(p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  var panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+</script>
+
+</body>
+</html>
