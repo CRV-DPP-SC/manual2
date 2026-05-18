@@ -14,6 +14,8 @@ html,body{height:100%;font-family:"Segoe UI",Calibri,sans-serif;background:var(-
 .topo h1{font-size:.95rem;font-weight:700}
 .topo p{font-size:.72rem;opacity:.72;margin-top:1px}
 .topo-badge{margin-left:auto;background:var(--ouro);color:#fff;font-size:.65rem;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.topo-resumo-btn{margin-left:auto;background:rgba(255,255,255,0.18);color:#fff;font-size:.72rem;font-weight:700;padding:5px 13px;border-radius:20px;border:1.5px solid rgba(255,255,255,0.45);cursor:pointer;white-space:nowrap;transition:background .2s;}
+.topo-resumo-btn:hover{background:rgba(255,255,255,0.32);}
 .layout{display:flex;flex-direction:column;height:calc(100vh - 74px);overflow:hidden}.layout.collapsed{height:0;overflow:hidden}
 .chat-area{flex:1;overflow-y:auto;padding:22px 0;scroll-behavior:smooth}
 .chat-inner{max-width:820px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column;gap:14px}
@@ -133,6 +135,8 @@ html,body{height:100%;font-family:"Segoe UI",Calibri,sans-serif;background:var(-
 .modal-sint-foot{padding:12px 20px;border-top:1px solid var(--borda);display:flex;gap:8px;justify-content:flex-end}
 .modal-sint-foot button{padding:9px 18px;border-radius:8px;font-size:.84rem;font-weight:700;cursor:pointer;border:none;font-family:inherit}
 .msf-copy{background:var(--azul);color:#fff}.msf-copy:hover{background:var(--azul3)}
+.msf-edit{background:#f57c00;color:#fff}.msf-edit:hover{background:#e65100}
+.msf-edit.ativo{background:#2e7d32;color:#fff}.msf-edit.ativo:hover{background:#1b5e20}
 .msf-close{background:#fff;border:2px solid var(--borda)!important;color:var(--azul)}.msf-close:hover{background:#f0f0f0}
 @media(max-width:600px){#oficio{padding:1cm}.balao{max-width:90%}.ofc-desp,.ass-bloco{margin-left:3cm}}
 
@@ -233,11 +237,12 @@ html,body{height:100%;font-family:"Segoe UI",Calibri,sans-serif;background:var(-
       <h3>&#128196; Resumo Sintético</h3>
       <button onclick="document.getElementById('modalSintBg').classList.remove('open')">&#10005;</button>
     </div>
-    <div class="modal-sint-body"><p id="modalSintTexto"></p></div>
+    <div class="modal-sint-body"><p id="modalSintTexto"></p><textarea id="modalSintEdit" style="display:none;width:100%;min-height:130px;font-size:.92rem;line-height:1.7;color:var(--texto);border:1.5px solid var(--borda);border-radius:8px;padding:10px;font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea></div>
     <div class="modal-sint-foot">
       <button class="msf-copy" onclick="copiarResumo()">&#128203; Copiar texto</button>
       <button class="msf-copy" style="background:#1a5e20;" onclick="baixarResumo()">&#128229; Baixar .txt</button>
-      <button class="msf-close" onclick="document.getElementById('modalSintBg').classList.remove('open')">Fechar</button>
+      <button class="msf-edit" id="btnEditarResumo" onclick="toggleEditarResumo()">&#9998; Editar</button>
+      <button class="msf-close" onclick="document.getElementById('modalSintBg').classList.remove('open');sairEdicaoResumo()">Fechar</button>
     </div>
   </div>
 </div>
@@ -424,6 +429,7 @@ function rE(){Object.assign(E,{
   nomeFam:'',grauFam:'',tipoFam:'',dataFam:'',motFam:'',
   nomeAdv:'',oab:'',dataAdv:'',motAdv:'',
   razPernoite:'',dataTrans:'',motComun:'',motPermuta:'',motIndicacao:'',motTransf:'',motTransfPermuta:'',
+  permutaDes:[],  /* presos indicados pela unidade de destino na permuta */
   nomejuiz:'',vara:'',cidJuizo:'',
   regime:'',alocacao:'',bpi:'',bpiMotivo:'',
   dd:false,sro:false,srd:false,_mcb:null,_srf:'TODOS',
@@ -859,6 +865,7 @@ async function pSitPenal(idx){
     {l:'&#128101; Convívio',v:'Convívio'},
     {l:'&#128737;&#65039; Seguro',v:'Seguro'},
     {l:'&#128737;&#65039; SEGURO',v:'SEGURO',cl:'perigo'},
+    {l:'&#10067; Não informado — Ingressou recentemente',v:'Não informado'},
   ]);
   return {regime:regime,alocacao:aloc};
 }
@@ -997,6 +1004,74 @@ async function flPermuta(){
     await mBot('Qual foi o <strong>critério utilizado para a escolha/indicação</strong> destes reeducandos?<span class="sub">Ex.: Penas mais altas, crimes cometidos, idade avançada, perfil de risco</span>');
     E.motPermuta=await inpP('Ex.: Presos com maiores penas e perfil de alta periculosidade',true);
   }
+
+  /* ── Presos da unidade de DESTINO ── */
+  await mBot('A <strong>unidade de destino</strong> indicou ou vai indicar preso(s) em contrapartida?');
+  var temDesPerm=await cpsP([
+    {l:'&#10003; Sim — indicou/vai indicar preso(s)',v:'sim'},
+    {l:'&#10005; Não',v:'nao'},
+  ]);
+  E.permutaDes=[];
+  if(temDesPerm==='sim'){
+    await mBot('Quantos presos a <strong>unidade de destino</strong> vai indicar?');
+    var qtdDes=await cpsP([
+      {l:'1 preso',v:'1'},
+      {l:'2 ou mais presos',v:'P'},
+    ]);
+    if(qtdDes==='1'){
+      /* Preso único da unidade de destino */
+      await mBot('Qual é o <strong>nome completo</strong> do(a) reeducando(a) indicado(a) pela unidade de destino?');
+      var nDes=await inpP('Ex.: Maria da Silva Santos');
+      await mBot('Qual é o <strong>número IPEN</strong> deste(a) reeducando(a)?');
+      var iDes=await inpP('Ex.: 654321');
+      await mBot('Qual é a <strong>Situação Penal (Regime)</strong> do(a) reeducando(a) indicado(a)?');
+      var regDes=await cpsP([
+        {l:'&#9878;&#65039; Provisório',v:'Provisório'},
+        {l:'&#128274; Fechado',v:'Fechado'},
+        {l:'&#128275; Semiaberto',v:'Semiaberto'},
+      ]);
+      await mBot('Qual é a <strong>Característica de Alocação</strong>?<span class="sub">SEGURO em vermelho = situação diferenciada.</span>');
+      var alocDes=await cpsP([
+        {l:'&#128101; Convívio',v:'Convívio'},
+        {l:'&#128737;&#65039; Seguro',v:'Seguro'},
+        {l:'&#128737;&#65039; SEGURO',v:'SEGURO',cl:'perigo'},
+        {l:'&#10067; Não informado — Ingressou recentemente',v:'Não informado'},
+      ]);
+      E.permutaDes=[{nome:nDes,ipen:iDes,regime:regDes,alocacao:alocDes}];
+    } else {
+      /* Múltiplos presos da unidade de destino */
+      await mBot('&#9432; Serão coletados os dados de cada reeducando indicado pela <strong>unidade de destino</strong>.');
+      var listaDesPerm=[];
+      var continuar=true;
+      var idx=1;
+      while(continuar){
+        await mBot('&#128100; <strong>'+idx+'º reeducando</strong> da unidade de destino — Nome completo:');
+        var nX=await inpP('Ex.: Maria da Silva Santos');
+        await mBot('IPEN do(a) '+idx+'º reeducando(a):');
+        var iX=await inpP('Ex.: 654321');
+        await mBot('Situação Penal do(a) '+idx+'º reeducando(a):');
+        var rX=await cpsP([
+          {l:'&#9878;&#65039; Provisório',v:'Provisório'},
+          {l:'&#128274; Fechado',v:'Fechado'},
+          {l:'&#128275; Semiaberto',v:'Semiaberto'},
+        ]);
+        await mBot('Característica de Alocação do(a) '+idx+'º reeducando(a):');
+        var aX=await cpsP([
+          {l:'&#128101; Convívio',v:'Convívio'},
+          {l:'&#128737;&#65039; Seguro',v:'Seguro'},
+          {l:'&#128737;&#65039; SEGURO',v:'SEGURO',cl:'perigo'},
+          {l:'&#10067; Não informado — Ingressou recentemente',v:'Não informado'},
+        ]);
+        listaDesPerm.push({nome:nX,ipen:iX,regime:rX,alocacao:aX});
+        idx++;
+        await mBot('Adicionar mais um reeducando da unidade de destino?');
+        var mais=await cpsP([{l:'&#43; Sim, adicionar mais',v:'sim'},{l:'&#10003; Não, finalizar',v:'nao'}]);
+        if(mais==='nao')continuar=false;
+      }
+      E.permutaDes=listaDesPerm;
+    }
+  }
+
   await pSau();await pDesp();await pNumOficio();await pAss();await pBPI();gerar();}
 
 async function flComun(){
@@ -1017,7 +1092,8 @@ async function desp(){
   if(E.mod==='adequacao')   await flAdequacao();
   if(E.mod==='permuta')     await flPermuta();
   if(E.mod==='prisaocivil') await flPrisaoCivil();
-  if(E.mod==='comunicacao') await flComun();}
+  if(E.mod==='comunicacao') await flComun();
+  if(E.mod==='resumo_ipen') await flResumoIPEN();}
 
 /* ══════════════ GERAR OFÍCIO ══════════════ */
 async function gerar(){
@@ -1171,25 +1247,40 @@ async function gerar(){
   ];}
     else if(E.mod==='permuta'||E.mod==='adequacao'&&E.sub==='permuta'){
     var isMultiPerm=(E.numero==='P'&&E.reed&&E.reed.length>0);
+    var temDesPresos=(E.permutaDes&&E.permutaDes.length>0);
+    var desUnico=(temDesPresos&&E.permutaDes.length===1);
+    var desMulti=(temDesPresos&&E.permutaDes.length>1);
+    var numAnexoDes=(isMultiPerm&&desMulti)?'II':'I';
+
+    /* Parágrafo descrevendo o preso único de destino (só quando é 1) */
+    var pDesUnico='';
+    if(desUnico){
+      var pd=E.permutaDes[0];
+      pDesUnico='Em contrapartida, a '+fld(d.n)+' encaminhará o(a) reeducando(a) '+fld(pd.nome.toUpperCase())+', IPEN nº '+fld(pd.ipen)+', situação penal: '+fld(pd.regime)+', característica de alocação: '+fld(pd.alocacao)+', pelo mesmo motivo: '+fld(E.motTransfPermuta||'equalização da ocupação entre as unidades prisionais')+'.';
+    } else if(desMulti){
+      pDesUnico='Em contrapartida, a '+fld(d.n)+' encaminhará os(as) reeducandos(as) relacionados(as) no <strong>Anexo '+numAnexoDes+'</strong> deste ofício, pelo mesmo motivo: '+fld(E.motTransfPermuta||'equalização da ocupação entre as unidades prisionais')+'.';
+    }
+
     if(isMultiPerm){
       ps=[
         'Encaminho para análise dessa Central de Regulação de Vagas pedido de permuta entre a '+fld(o.n)+' e a '+fld(d.n)+', envolvendo os(as) reeducandos(as) relacionados(as) no Anexo I deste ofício, nos termos do art. 21, inciso III, da Resolução Conjunta Interinstitucional n. 01/2026.',
         'A medida visa à '+fld(E.motTransfPermuta||'equalização da ocupação entre as unidades prisionais')+'.',
         'O critério utilizado para a escolha dos(as) reeducandos(as) para a presente permuta foi: '+fld(E.motPermuta)+'.',
-        textoBPI(),
-        'Efetivada a remoção, o Juízo competente será comunicado no prazo legal de até 24 horas.',
-        'Foram realizados contatos prévios com o(a) Diretor(a) da unidade de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.',
-        'Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da permuta.',
       ];
+      if(pDesUnico)ps.push(pDesUnico);
+      ps.push(textoBPI());
+      ps.push('Efetivada a remoção, o Juízo competente será comunicado no prazo legal de até 24 horas.');
+      ps.push('Foram realizados contatos prévios com o(a) Diretor(a) da unidade de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.');
     } else {
       ps=[
         'Encaminho para análise dessa Central de Regulação de Vagas pedido de permuta entre a '+fld(o.n)+' e a '+fld(d.n)+', envolvendo '+reedFld(E.nome,E.ipen)+', nos termos do art. 21, inciso III, da Resolução Conjunta Interinstitucional n. 01/2026.',
         'A medida visa à '+fld(E.motTransfPermuta||'equalização da ocupação entre as unidades prisionais')+'.',
         'O critério utilizado para a escolha '+doA()+' '+gng('reeducando','reeducanda','reeducandos','reeducandas')+' para a presente permuta foi: '+fld(E.motPermuta)+'.',
-        textoBPI(),
-        'Efetivada a remoção, o Juízo competente será comunicado no prazo legal de até 24 horas.',
-        'Foram realizados contatos prévios com o(a) Diretor(a) da unidade de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.',
       ];
+      if(pDesUnico)ps.push(pDesUnico);
+      ps.push(textoBPI());
+      ps.push('Efetivada a remoção, o Juízo competente será comunicado no prazo legal de até 24 horas.');
+      ps.push('Foram realizados contatos prévios com o(a) Diretor(a) da unidade de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que anuem ao presente expediente.');
     }
   
   /* injeta saúde para permuta */
@@ -1272,18 +1363,19 @@ async function gerar(){
   var corpo=ps.map(t=>p(t)).join(lb(1));
 
   /* Gera anexo com tabela de reeducandos (larga escala) */
-  function gerarAnexoTabela(reed){
+  function gerarAnexoTabela(reed, numAnexo, tituloExtra){
+    numAnexo=numAnexo||'I';
     /* Detecta se há dados de regime/alocação (larga escala) ou só nome/ipen (simples) */
     var temRegime=reed.some(function(r){return r.regime&&r.regime.length>0;});
-    /* Agrupamento automático: Convívio → Seguro → SEGURO (só quando há alocação) */
-    var ordemAloc={'Convívio':1,'Seguro':2,'SEGURO':3};
+    /* Agrupamento automático: Convívio → Seguro → SEGURO → Não informado (só quando há alocação) */
+    var ordemAloc={'Convívio':1,'Seguro':2,'SEGURO':3,'Não informado':4};
     var reedOrdenado=temRegime?reed.slice().sort(function(a,b){
       var oa=ordemAloc[a.alocacao]||99, ob=ordemAloc[b.alocacao]||99;
       return oa-ob;
     }):reed.slice();
     var tdBase='padding:5pt 7pt;border:0.5pt solid #aab;font-size:9.5pt;font-family:Arial,sans-serif;';
     var thBase='padding:6pt 7pt;border:0.5pt solid #aab;font-size:9.5pt;font-family:Arial,sans-serif;';
-    var mostrarSaude=(E.saudeOpcao==='individual'&&temRegime);
+    var mostrarSaude=(E.saudeOpcao==='individual'&&temRegime&&numAnexo==='I');
     var linhas=reedOrdenado.map(function(r,i){
       var bg=i%2===0?'#f5f8ff':'#ffffff';
       var colsRegime='';
@@ -1318,12 +1410,12 @@ async function gerar(){
         '<th style="'+thBase+'white-space:nowrap;text-align:center;">IPEN</th>'+
         thColsRegime+thColsSaude+
       '</tr>';
-    var subtitulo=temRegime
+    var subtitulo=tituloExtra||(temRegime
       ? (mostrarSaude?'Relação de Reeducandos — Situação Penal e Informações de Saúde':'Relação de Reeducandos — Situação Penal')
-      : 'Relação de Custodiados';
+      : 'Relação de Custodiados');
     return '<div class="anexo-wrapper" style="font-family:Arial,sans-serif;">'+
       '<div style="padding:8pt 0 10pt 0;text-align:center;">'+
-        '<div style="font-size:12pt;font-weight:bold;text-transform:uppercase;font-family:Arial,sans-serif;letter-spacing:1pt;">ANEXO I</div>'+
+        '<div style="font-size:12pt;font-weight:bold;text-transform:uppercase;font-family:Arial,sans-serif;letter-spacing:1pt;">ANEXO '+numAnexo+'</div>'+
         '<div style="font-size:10pt;font-family:Arial,sans-serif;margin-top:4pt;">'+subtitulo+'</div>'+
       '</div>'+
       '<table class="anexo-tabela">'+
@@ -1333,10 +1425,27 @@ async function gerar(){
     '</div>';
   }
 
-  /* Gera Anexo I para qualquer modalidade com múltiplos presos */
+  /* Gera Anexo I (e Anexo II para permuta com múltiplos presos de destino) */
   var isLargaFinal=(E.mod==='adequacao'&&E.sub==='coletiva'&&E.reed&&E.reed.length>0);
   var isQualquerMultiFinal=(E.numero==='P'&&E.reed&&E.reed.length>0);
-  var anexoHTML=(isLargaFinal||isQualquerMultiFinal)?gerarAnexoTabela(E.reed):'';
+  var isPermutaDesMulti=(E.mod==='permuta'&&E.permutaDes&&E.permutaDes.length>1);
+  var isPermutaOriMulti=(E.mod==='permuta'&&isQualquerMultiFinal);
+
+  var anexoHTML='';
+  if(isLargaFinal||isQualquerMultiFinal){
+    /* Quando origem tem múltiplos: Anexo I = origem (com subtítulo se for permuta) */
+    var tituloAnexoI=isPermutaOriMulti
+      ? 'Relação de Reeducandos — '+(o?o.n:'Unidade de Origem')+' (Unidade de Origem)'
+      : null;
+    anexoHTML=gerarAnexoTabela(E.reed,'I',tituloAnexoI);
+  }
+  if(isPermutaDesMulti){
+    /* Se origem também tem múltiplos → Anexo II; senão é o único anexo → Anexo I */
+    var numDesAnexo=isPermutaOriMulti?'II':'I';
+    var tituloDesAnexo='Relação de Reeducandos — '+(d?d.n:'Unidade de Destino')+' (Em Contrapartida)';
+    var quebra=isPermutaOriMulti?'<div style="page-break-before:always;"></div>':'';
+    anexoHTML+=quebra+gerarAnexoTabela(E.permutaDes,numDesAnexo,tituloDesAnexo);
+  }
 
   G('oficio').innerHTML=
     cab()+lb(1)+
@@ -1629,8 +1738,8 @@ function baixarPDF(){
   /* ── ANEXO I: tabela de reeducandos (quando há lista coletiva) ── */
   var isLarga=(E.reed&&E.reed.length>0);
   if(isLarga){
-    /* Ordena: Convívio → Seguro → SEGURO */
-    var ordemAloc={'Convívio':1,'Seguro':2,'SEGURO':3};
+    /* Ordena: Convívio → Seguro → SEGURO → Não informado */
+    var ordemAloc={'Convívio':1,'Seguro':2,'SEGURO':3,'Não informado':4};
     var reedOrd=E.reed.slice().sort(function(a,b){
       return (ordemAloc[a.alocacao]||99)-(ordemAloc[b.alocacao]||99);
     });
@@ -1773,13 +1882,23 @@ function gerarTextoResumo(){
     criterio=motivo;
     artMod='transferência por pedido voluntário, amparada no art. 21, inciso II';
   }
-  var nome=E.nome||'[nome]';
-  var ipen=E.ipen||'[ipen]';
+  var isMultiReed=(E.reed&&E.reed.length>1);
   var ori=E.ori?E.ori.n:'[origem]';
   var des=E.des?E.des.n:'[destino]';
-  var sit=E.regime?(' Situação penal: '+E.regime+'.'):'';
-  var aloc=E.alocacao?(' Característica de alocação: '+E.alocacao+'.'):'';
-  var txt='Trata-se de pedido de '+artMod+', envolvendo '+nome+' (IPEN nº '+ipen+'), custodiado(a) no(a) '+ori+', com transferência solicitada para o(a) '+des+'.'+sit+aloc+' O motivo da transferência é: '+motivo+'. O critério de escolha/indicação do(a) apenado(a) foi: '+criterio+'.';
+  var sit='';
+  var aloc='';
+  var nomeRef='';
+  if(isMultiReed){
+    /* Larga escala: texto genérico, sem citar nome/IPEN individual */
+    nomeRef='reeducando(a)';
+  } else {
+    var nome=E.nome||'[nome]';
+    var ipen=E.ipen||'[ipen]';
+    nomeRef=nome+' (IPEN nº '+ipen+')';
+    sit=E.regime?(' Situação penal: '+E.regime+'.'):'';
+    aloc=E.alocacao?(' Característica de alocação: '+E.alocacao+'.'):'';
+  }
+  var txt='Trata-se de pedido de '+artMod+', envolvendo '+nomeRef+', custodiado(a) no(a) '+ori+', com transferência solicitada para o(a) '+des+'.'+sit+aloc+' O motivo da transferência é: '+motivo+'. O critério de escolha/indicação do(a) apenado(a) foi: '+criterio+'.';
   return txt;
 }
 
@@ -1789,14 +1908,114 @@ function abrirResumoSintetico(){
   document.getElementById('modalSintBg').classList.add('open');
 }
 
+function abrirResumoIPEN(){
+  /* Stub mantido para compatibilidade — o fluxo real está em flResumoIPEN */
+  var txt=gerarTextoResumo();
+  document.getElementById('modalSintTexto').textContent=txt;
+  document.getElementById('modalSintBg').classList.add('open');
+}
+
+async function flResumoIPEN(){
+  rE();
+  /* ── Gênero ── */
+  await pGenero();
+
+  /* ── Nome e IPEN ── */
+  await mBot('Qual é o <strong>nome completo</strong> do(a) reeducando(a)?');
+  E.nome=await inpP('Ex.: João da Silva Santos');
+  await mBot('Qual é o <strong>número IPEN</strong>?');
+  E.ipen=await inpP('Ex.: 123456');
+
+  /* ── Situação Penal + Alocação ── */
+  var sit=await pSitPenal(0);
+  E.regime=sit.regime;E.alocacao=sit.alocacao;
+
+  /* ── Origem e Destino ── */
+  await pOri();await pDes();
+
+  /* ── Motivo ── */
+  await mBot('Qual é o <strong>motivo da transferência</strong>?');
+  E.motResumo=await inpP('Ex.: Necessidade de ajuste de vagas, PAD instaurado...',true);
+
+  /* ── Critério de indicação ── */
+  await mBot('Qual foi o <strong>critério de escolha/indicação</strong> do(a) reeducando(a)?<span class="sub">Ex.: Pena mais alta, perfil de risco, determinação judicial</span>');
+  E.motIndicacao=await inpP('Ex.: Pena mais alta dentre os custodiados (15 anos), art. 157 CP',true);
+
+  /* ── Modalidade (para o artigo correto no resumo) ── */
+  await mBot('Qual é a <strong>modalidade de transferência</strong>?<span class="sub">Selecione para que o resumo cite o fundamento legal correto.</span>');
+  E.mod=await cpsP([
+    {l:'&#128680; Emergencial<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, I</small>',v:'emergencial'},
+    {l:'&#127963;&#65039; Mandado de Comarca Diversa<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'mandado'},
+    {l:'&#9878;&#65039; Adequação da Capacidade<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'adequacao'},
+    {l:'&#128257; Permuta entre Unidades<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'permuta'},
+    {l:'&#9878;&#65039; Prisão Civil<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Transferência especializada</small>',v:'prisaocivil'},
+    {l:'&#128233; Comunicação de Transferência<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 16</small>',v:'comunicacao'},
+  ]);
+
+  /* ── Preenche campos de motivo conforme modalidade ── */
+  if(E.mod==='emergencial'){E.sit=E.motResumo;}
+  else if(E.mod==='mandado'){E.juizo=E.motResumo;}
+  else if(E.mod==='pernoite'){E.razPernoite=E.motResumo;}
+  else if(E.mod==='adequacao'){E.motTransf=E.motResumo;E.sub='pontual';}
+  else if(E.mod==='permuta'){E.motTransfPermuta=E.motResumo;E.motPermuta=E.motIndicacao;}
+  else if(E.mod==='comunicacao'){E.motComun=E.motResumo;}
+
+  /* ── Exibe o Resumo Sintético ── */
+  var txt=gerarTextoResumo();
+  await mBot('&#10003; <strong>Resumo Sintético gerado!</strong> Confira abaixo e copie ou baixe.');
+  document.getElementById('modalSintTexto').textContent=txt;
+  document.getElementById('modalSintBg').classList.add('open');
+}
+
+function _textoAtualResumo(){
+  /* Retorna o texto atual — do textarea se em modo edição, senão do parágrafo */
+  var ta=document.getElementById('modalSintEdit');
+  var p=document.getElementById('modalSintTexto');
+  return (ta.style.display!=='none')?ta.value:p.textContent;
+}
+function toggleEditarResumo(){
+  var p=document.getElementById('modalSintTexto');
+  var ta=document.getElementById('modalSintEdit');
+  var btn=document.getElementById('btnEditarResumo');
+  var editando=(ta.style.display!=='none');
+  if(!editando){
+    /* Entrar no modo edição */
+    ta.value=p.textContent;
+    ta.style.display='block';
+    p.style.display='none';
+    btn.textContent='✓ Salvar edição';
+    btn.classList.add('ativo');
+    ta.focus();
+  } else {
+    /* Salvar e sair */
+    p.textContent=ta.value;
+    ta.style.display='none';
+    p.style.display='';
+    btn.innerHTML='&#9998; Editar';
+    btn.classList.remove('ativo');
+    toast('✓ Edição salva!');
+  }
+}
+function sairEdicaoResumo(){
+  var p=document.getElementById('modalSintTexto');
+  var ta=document.getElementById('modalSintEdit');
+  var btn=document.getElementById('btnEditarResumo');
+  if(ta&&ta.style.display!=='none'){
+    p.textContent=ta.value;
+    ta.style.display='none';
+    p.style.display='';
+    btn.innerHTML='&#9998; Editar';
+    btn.classList.remove('ativo');
+  }
+}
 function copiarResumo(){
-  var txt=document.getElementById('modalSintTexto').textContent;
+  var txt=_textoAtualResumo();
   navigator.clipboard.writeText(txt).then(()=>toast('✓ Resumo copiado!')).catch(()=>{
     var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('✓ Resumo copiado!');
   });
 }
 function baixarResumo(){
-  var txt=gerarTextoResumo();
+  var txt=_textoAtualResumo();
   var blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
@@ -2196,6 +2415,7 @@ async function iniciar(){
     {l:'&#128257; Permuta entre Unidades<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 21, III</small>',v:'permuta'},
     {l:'&#9878;&#65039; Prisão Civil<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Transferência especializada</small>',v:'prisaocivil'},
     {l:'&#128233; Ofícios de Comunicação<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Art. 16</small>',v:'comunicacao'},
+    {l:'&#128196; Resumo Sintético — IPEN<small style="display:block;font-size:.72rem;opacity:.75;font-weight:400">Apenas o resumo, sem gerar ofício</small>',v:'resumo_ipen'},
   ]);
   E.mod=v;desp();
 }
